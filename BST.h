@@ -22,7 +22,7 @@ private:
 
     void EmptyCheckPrivate(node* Ptr);
 
-    void FindByKeyPrivate(int key, node* Ptr);
+    void FindByKeyPrivate(node* Ptr);
 
     void AddLeafPrivate(int key, node* Ptr);
 
@@ -56,7 +56,7 @@ public:
 
     void EmptyCheck();
 
-    void FindByKey(int key);
+    void FindByKey();
 
     void AddLeaf(int key);
 

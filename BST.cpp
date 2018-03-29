@@ -60,14 +60,7 @@ void BST::ShowMenu()
         break;
 
     case 6:
-        cout << "Search: ";
-
-        int SearchKey;
-        cin >> SearchKey;
-        cout << endl;
-
-        FindByKey(SearchKey);
-
+        FindByKeyPrivate(root);
 
         break;
 
@@ -215,35 +208,140 @@ void BST::EmptyCheckPrivate(node* Ptr)
     cout << endl;
 }
 
-void BST::FindByKey(int key)
+void BST::FindByKey()
 {
-    FindByKeyPrivate(key, root);
+    FindByKeyPrivate(root);
 }
 
-void BST::FindByKeyPrivate(int key, node* Ptr)
+void BST::FindByKeyPrivate(node* Ptr)
 {
+    int SearchKey;
+
+    cout << "Search: ";
+    cin >> SearchKey;
+    cout << endl;
+
+    stack<node*> m;
+
+    int SearchCount = 0;
+    //m.push(NULL);
+    Ptr = root;
+
     if(root != NULL)
     {
-        stack<node*> s;
-        s.push(root);
 
 
-
-        if(!s.empty())
+        while(SearchCount == 0)
         {
-            node* x = s.top();
-            cout << "Top: " << x->key << "\nRoot: " << root->key << "\nPtr: " << Ptr->key << endl;
-            system("pause");
+            if(Ptr != NULL)
+            {
+                m.push(Ptr);
+                Ptr = Ptr->left;
+                cout << Ptr->left->key;
+                system("pause");
+            }
+            else
+            {
+                if(m.top()->key == SearchKey)
+                {
+                    SearchCount++;
+                }
+                else
+                {
+                    Ptr = m.top();
+                    m.pop();
+                    Ptr = Ptr->right;
 
-            while(Ptr != NULL)
+                }
+            }
+        }
+
+
+        if(SearchCount == 0)
+        {
+            cout << "\nThe key " << SearchKey << " does NOT exist in the tree.\n";
+        }
+        else
+        {
+            cout << "\nThe key " << SearchKey << " DO exist in the tree.\n";
+        }
+    }
+    else
+    {
+        cout << "The tree is empty.\n";
+    }
+}
+
+
+    /*do
+    {
+        if(Ptr != NULL)
+        {
+            if(Ptr->key != SearchKey)
+            {
+                s.push(Ptr);
+                Ptr = Ptr->left;
+            }
+            else
+            {
+                cout << "\nThe key " << SearchKey << " DO exist in the tree.\n";
+                break;
+            }
+
+        }
+        else
+        {
+            if(s.top() == NULL)
+            {
+                cout << "\nThe key " << SearchKey << " does NOT exist in the tree.\n";
+                break;
+            }
+
+            Ptr = s.top();
+            s.pop();
+            Ptr = Ptr->right;
+        }
+    }
+    while(true);*/
+
+
+
+
+
+
+    /*if(Ptr != NULL)
+    {
+        stack<node*> s;
+        s.push(Ptr);
+
+        while(!s.empty())
+        {
+            while(Ptr->left != NULL)
             {
                 Ptr = Ptr->left;
-                cout << Ptr->key;
                 s.push(Ptr);
+
+                cout << Ptr->key << endl;
+
+                cout << s.top()->key << endl;
+
+                if(Ptr->right != NULL)
+                {
+                    Ptr = Ptr->right;
+                    s.push(Ptr);
+                }
+
+
+
 
             }
 
-            if(Ptr->right == NULL)
+
+        }*/
+
+
+
+            /*if(Ptr->right == NULL)
             {
                 if(Ptr->key == key)
                 {
@@ -260,17 +358,13 @@ void BST::FindByKeyPrivate(int key, node* Ptr)
                 s.push(Ptr->right);
                 Ptr = Ptr->right;
             }
+
         }
-        else
-        {
-            cout << "The element " << key << " does NOT exist in the tree.\n";
-        }
-    }
-    else
-    {
-        cout << "The tree is empty.\n";
-    }
-}
+
+        cout << "The element " << key << " does NOT exist in the tree.\n";*/
+
+  //  }
+
 
 BST::node* BST::CreateLeaf(int key)
 {
