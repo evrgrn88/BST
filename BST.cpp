@@ -11,10 +11,13 @@ using namespace std;
 BST::BST()
 {
     root = NULL;
+    
 }
 
 void BST::ShowMenu()
 {
+    int TreeSize = 0;
+    
     system("cls");
 
     short choice;
@@ -91,11 +94,11 @@ void BST::ShowMenu()
     ShowMenu();
 }
 
-void BST::FillTree()
+void BST::FillTree(TreeSize)
 {
     ClearTreePrivate(root);
 
-    int TreeSize = 0;
+    TreeSize = 0;
     cout << "\nEnter tree size: \n";
     cin >> TreeSize;
     cout << endl;
@@ -429,6 +432,9 @@ void BST::PrintInOrder()
 
 void BST::PrintInOrderPrivate(node* Ptr)
 {
+	int i = 0;
+	int a[TreeSize];
+	
     if(root != NULL)
     {
         //1 - Go Left
@@ -438,6 +444,9 @@ void BST::PrintInOrderPrivate(node* Ptr)
         }
 
         //2 - Process Node, in this case print
+        
+        a[i]=Ptr->key;
+        i++;
         cout << Ptr->key << "  ";
 
         //3 - Go Right

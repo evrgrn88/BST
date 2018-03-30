@@ -14,7 +14,7 @@ private:
 
     node* root;
 
-    void FillTree();
+    void FillTree(int key);
 
     int ShowSizePrivate(node* Ptr);
 
