@@ -32,7 +32,7 @@ private:
 
     void SortTreeArray();
 
-    void FindByKeyPrivate(node* Ptr);
+    void FindByKey(int key);
 
     void AddLeafPrivate(int key, node* Ptr);
 
@@ -66,7 +66,7 @@ public:
 
     void EmptyCheck();
 
-    void FindByKey();
+    //void FindByKey();
 
     void AddLeaf(int key);
 

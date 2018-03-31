@@ -20,12 +20,12 @@ void BST::ShowMenu()
     short choice;
     cout << endl <<
             "1. Create a new tree.\n" <<
-            "2. Print the tree (in-order).\n" <<
+            "2. Print the tree in order.\n" <<
             "3. Show tree size.\n" <<
             "4. Clear the tree.\n" <<
             "5. Check if the tree is empty.\n" <<
             "6. Search element.\n" <<
-            "7. sortttAdd new element.\n" <<
+            "7. Add new element.\n" <<
             "8. Delete element.\n" <<
             "9. Use the operation iterator.\n" <<
             "10. Traverse the tree (Lt -> Rt -> t).\n" <<
@@ -52,6 +52,7 @@ void BST::ShowMenu()
 
     case 4:
         ClearTree();
+        cout << "\nThe tree was cleared.\n";
         break;
 
     case 5:
@@ -59,12 +60,17 @@ void BST::ShowMenu()
         break;
 
     case 6:
-        FindByKey();
+        int search;
+
+        cout << "\nSearch: ";
+        cin >> search;
+        cout << endl;
+
+        FindByKey(search);
 
         break;
 
     case 7:
-        SortTreeArray();
         cout << "Add new element!";
         break;
 
@@ -179,10 +185,10 @@ void BST::ClearTreePrivate(node* Ptr)
             root = NULL;
         }
     }
-    else
-    {
-        cout << "\nThe tree is empty.\n";
-    }
+//    else
+//    {
+//        cout << "\nThe tree is empty.\n";
+//    }
 
 
 
@@ -211,6 +217,7 @@ void BST::EmptyCheckPrivate(node* Ptr)
     cout << endl;
 }
 
+// Пузырьковая сортировка
 void BST::SortTreeArray()
 {
     int temp;
@@ -234,163 +241,35 @@ void BST::SortTreeArray()
     }
 }
 
-void BST::FindByKey()
+//void BST::FindByKey()
+//{
+//    FindByKeyPrivate(root);
+//}
+
+void BST::FindByKey(int key)
 {
-    FindByKeyPrivate(root);
-}
+    SortTreeArray();
 
-void BST::FindByKeyPrivate(node* Ptr)
-{
-    int SearchKey;
+    int average_index = 0;// переменная для хранения индекса среднего элемента массива
+    int first_index = 0; // индекс первого элемента в массиве
+    int last_index = TreeKeys->arraySize - 1; // индекс последнего элемента в массиве
 
-    cout << "Search: ";
-    cin >> SearchKey;
-    cout << endl;
+    if(last_index == -1)
+        cout << "\nThe tree is empty" << endl; // массив пуст
 
-    stack<node*> m;
-
-    int SearchCount = 0;
-    //m.push(NULL);
-    Ptr = root;
-
-    if(root != NULL)
+    while(first_index < last_index)
     {
-
-
-        while(SearchCount == 0)
-        {
-            if(Ptr != NULL)
-            {
-                m.push(Ptr);
-                Ptr = Ptr->left;
-                cout << Ptr->left->key;
-                system("pause");
-            }
-            else
-            {
-                if(m.top()->key == SearchKey)
-                {
-                    SearchCount++;
-                }
-                else
-                {
-                    Ptr = m.top();
-                    m.pop();
-                    Ptr = Ptr->right;
-
-                }
-            }
-        }
-
-
-        if(SearchCount == 0)
-        {
-            cout << "\nThe key " << SearchKey << " does NOT exist in the tree.\n";
-        }
-        else
-        {
-            cout << "\nThe key " << SearchKey << " DO exist in the tree.\n";
-        }
+        average_index = first_index + (last_index - first_index) / 2; // меняем индекс среднего значения
+        key <= TreeKeys->a[average_index] ?
+                    last_index = average_index :
+                    first_index = average_index + 1;    // найден ключевой элемент или нет
     }
+
+    if(TreeKeys->a[last_index] == key)
+        cout << "\nElement is found\n";
     else
-    {
-        cout << "The tree is empty.\n";
-    }
+        cout << "\nElement is not found" << endl;
 }
-
-
-    /*do
-    {
-        if(Ptr != NULL)
-        {
-            if(Ptr->key != SearchKey)
-            {
-                s.push(Ptr);
-                Ptr = Ptr->left;
-            }
-            else
-            {
-                cout << "\nThe key " << SearchKey << " DO exist in the tree.\n";
-                break;
-            }
-
-        }
-        else
-        {
-            if(s.top() == NULL)
-            {
-                cout << "\nThe key " << SearchKey << " does NOT exist in the tree.\n";
-                break;
-            }
-
-            Ptr = s.top();
-            s.pop();
-            Ptr = Ptr->right;
-        }
-    }
-    while(true);*/
-
-
-
-
-
-
-    /*if(Ptr != NULL)
-    {
-        stack<node*> s;
-        s.push(Ptr);
-
-        while(!s.empty())
-        {
-            while(Ptr->left != NULL)
-            {
-                Ptr = Ptr->left;
-                s.push(Ptr);
-
-                cout << Ptr->key << endl;
-
-                cout << s.top()->key << endl;
-
-                if(Ptr->right != NULL)
-                {
-                    Ptr = Ptr->right;
-                    s.push(Ptr);
-                }
-
-
-
-
-            }
-
-
-        }*/
-
-
-
-            /*if(Ptr->right == NULL)
-            {
-                if(Ptr->key == key)
-                {
-                    cout << "The element " << key << " exists in the tree.\n";
-                }
-                else
-                {
-                    s.pop();
-                    Ptr = s.top();
-                }
-            }
-            else
-            {
-                s.push(Ptr->right);
-                Ptr = Ptr->right;
-            }
-
-        }
-
-        cout << "The element " << key << " does NOT exist in the tree.\n";*/
-
-  //  }
-
 
 BST::node* BST::CreateLeaf(int key)
 {
