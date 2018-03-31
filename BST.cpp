@@ -7,8 +7,6 @@
 
 using namespace std;
 
-int TreeSize = 0;
-
 BST::BST()
 {
     root = NULL;
@@ -21,13 +19,13 @@ void BST::ShowMenu()
 
     short choice;
     cout << endl <<
-            "!1. Create a new tree.\n" <<
+            "1. Create a new tree.\n" <<
             "2. Print the tree (in-order).\n" <<
             "3. Show tree size.\n" <<
             "4. Clear the tree.\n" <<
             "5. Check if the tree is empty.\n" <<
             "6. Search element.\n" <<
-            "7. Add new element.\n" <<
+            "7. sortttAdd new element.\n" <<
             "8. Delete element.\n" <<
             "9. Use the operation iterator.\n" <<
             "10. Traverse the tree (Lt -> Rt -> t).\n" <<
@@ -54,7 +52,6 @@ void BST::ShowMenu()
 
     case 4:
         ClearTree();
-        cout << "The tree is cleared.\n";
         break;
 
     case 5:
@@ -62,11 +59,12 @@ void BST::ShowMenu()
         break;
 
     case 6:
-        FindByKeyPrivate(root);
+        FindByKey();
 
         break;
 
     case 7:
+        SortTreeArray();
         cout << "Add new element!";
         break;
 
@@ -96,18 +94,14 @@ void BST::ShowMenu()
 void BST::FillTree()
 {
     ClearTreePrivate(root);
-    nodeArray* TreeKeys = new nodeArray;
 
-    int TreeSize = 0;
     cout << "\nEnter tree size: \n";
-    cin >> TreeSize;
+    cin >> TreeKeys->arraySize;
     cout << endl;
-
-    //int TreeKeys[TreeSize];
 
     int i = 0;
 
-    while(i < TreeSize)
+    while(i < TreeKeys->arraySize)
     {
         cout << "\nEnter an element: \n";
         cin >> TreeKeys->a[i];
@@ -154,12 +148,12 @@ int BST::ShowSizePrivate(node* Ptr)
     return count;
 }
 
-int BST::ClearTree()
+void BST::ClearTree()
 {
-    return ClearTreePrivate(root);
+    ClearTreePrivate(root);
 }
 
-int BST::ClearTreePrivate(node* Ptr)
+void BST::ClearTreePrivate(node* Ptr)
 {
     if(root != NULL)
     {
@@ -185,10 +179,14 @@ int BST::ClearTreePrivate(node* Ptr)
             root = NULL;
         }
     }
+    else
+    {
+        cout << "\nThe tree is empty.\n";
+    }
 
 
 
-    return -1;
+//    return -1;
 
 
 
@@ -211,6 +209,29 @@ void BST::EmptyCheckPrivate(node* Ptr)
     }
 
     cout << endl;
+}
+
+void BST::SortTreeArray()
+{
+    int temp;
+
+    for (int i = 0; i < TreeKeys->arraySize - 1; i++)
+    {
+        for (int j = 0; j < TreeKeys->arraySize - i - 1; j++)
+        {
+            if (TreeKeys->a[j] > TreeKeys->a[j + 1])
+            {
+                temp = TreeKeys->a[j];
+                TreeKeys->a[j] = TreeKeys->a[j + 1];
+                TreeKeys->a[j + 1] = temp;
+            }
+        }
+    }
+
+    for(int i = 0; i < TreeKeys->arraySize; i++)
+    {
+        cout << TreeKeys->a[i] << " ";
+    }
 }
 
 void BST::FindByKey()

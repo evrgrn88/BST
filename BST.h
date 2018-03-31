@@ -14,10 +14,11 @@ private:
 
     struct nodeArray
     {
+        int arraySize = 0;
         int a[];
     };
 
-    nodeArray* treeArray;
+    nodeArray* TreeKeys = new nodeArray;
 
     node* root;
 
@@ -25,9 +26,11 @@ private:
 
     int ShowSizePrivate(node* Ptr);
 
-    int ClearTreePrivate(node* Ptr);
+    void ClearTreePrivate(node* Ptr);
 
     void EmptyCheckPrivate(node* Ptr);
+
+    void SortTreeArray();
 
     void FindByKeyPrivate(node* Ptr);
 
@@ -59,7 +62,7 @@ public:
 
     int ShowSize();
 
-    int ClearTree();
+    void ClearTree();
 
     void EmptyCheck();
 
