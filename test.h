@@ -1,5 +1,5 @@
-//#ifndef TEST_H
-//#define TEST_H
+#ifndef TEST_H
+#define TEST_H
 
 class TEST
 {
@@ -25,4 +25,4 @@ public:
 
 
 
-//#endif // TEST_H
+#endif // TEST_H

@@ -7,6 +7,7 @@
 
 using namespace std;
 
+int TreeSize = 0;
 
 BST::BST()
 {
@@ -15,9 +16,7 @@ BST::BST()
 }
 
 void BST::ShowMenu()
-{
-    int TreeSize = 0;
-    
+{  
     system("cls");
 
     short choice;
@@ -94,24 +93,25 @@ void BST::ShowMenu()
     ShowMenu();
 }
 
-void BST::FillTree(TreeSize)
+void BST::FillTree()
 {
     ClearTreePrivate(root);
+    nodeArray* TreeKeys = new nodeArray;
 
-    TreeSize = 0;
+    int TreeSize = 0;
     cout << "\nEnter tree size: \n";
     cin >> TreeSize;
     cout << endl;
 
-    int TreeKeys[TreeSize];
+    //int TreeKeys[TreeSize];
 
     int i = 0;
 
     while(i < TreeSize)
     {
         cout << "\nEnter an element: \n";
-        cin >> TreeKeys[i];
-        AddLeafPrivate(TreeKeys[i], root);
+        cin >> TreeKeys->a[i];
+        AddLeafPrivate(TreeKeys->a[i], root);
         cout << endl;
         i++;
     }
@@ -185,6 +185,8 @@ int BST::ClearTreePrivate(node* Ptr)
             root = NULL;
         }
     }
+
+
 
     return -1;
 
@@ -433,8 +435,7 @@ void BST::PrintInOrder()
 void BST::PrintInOrderPrivate(node* Ptr)
 {
 	int i = 0;
-	int a[TreeSize];
-	
+
     if(root != NULL)
     {
         //1 - Go Left
@@ -445,7 +446,6 @@ void BST::PrintInOrderPrivate(node* Ptr)
 
         //2 - Process Node, in this case print
         
-        a[i]=Ptr->key;
         i++;
         cout << Ptr->key << "  ";
 

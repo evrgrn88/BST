@@ -1,5 +1,5 @@
-//#ifndef BST_H
-//#define BST_H
+#ifndef BST_H
+#define BST_H
 
 
 class BST
@@ -12,9 +12,16 @@ private:
         node* right;
     };
 
+    struct nodeArray
+    {
+        int a[];
+    };
+
+    nodeArray* treeArray;
+
     node* root;
 
-    void FillTree(int key);
+    void FillTree();
 
     int ShowSizePrivate(node* Ptr);
 
@@ -74,4 +81,4 @@ public:
 
 };
 
-//#endif // BST_H
+#endif // BST_H
