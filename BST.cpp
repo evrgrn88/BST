@@ -241,11 +241,6 @@ void BST::SortTreeArray()
     }
 }
 
-//void BST::FindByKey()
-//{
-//    FindByKeyPrivate(root);
-//}
-
 void BST::FindByKey(int key)
 {
     SortTreeArray();
@@ -278,14 +273,15 @@ BST::node* BST::CreateLeaf(int key)
     n->key = key;
     n->left = NULL;
     n->right = NULL;
+    n->parent = NULL;
 
     return n;
 }
 
-void BST::AddLeaf(int key)
-{
-    AddLeafPrivate(key, root);
-}
+//void BST::AddLeaf(int key)
+//{
+//    AddLeafPrivate(key, root);
+//}
 
 void BST::AddLeafPrivate(int key, node* Ptr)
 {
@@ -295,37 +291,88 @@ void BST::AddLeafPrivate(int key, node* Ptr)
     }
     else
     {
-        if(key < Ptr->key)
+        // x — корень поддерева, z — вставляемый элемент
+
+        while(Ptr != NULL)
         {
-            if(Ptr->left != NULL)
+            if(key == Ptr->key)
             {
-                AddLeafPrivate(key, Ptr->left);
+                cout << "\nThe value already exists!";
+                break;
             }
             else
             {
-                Ptr->left = CreateLeaf(key);
-            }
-        }
-        else
-        {
-            if(key > Ptr->key)
-            {
-                if(Ptr->right != NULL)
+                if(key > Ptr->key)
                 {
-                    AddLeafPrivate(key, Ptr->right);
+                    if(Ptr->right != NULL)
+                    {
+                        Ptr = Ptr->right;
+                    }
+                    else
+                    {
+                        Ptr->right = CreateLeaf(key);
+                        Ptr->right->parent = Ptr;
+                        break;
+                    }
                 }
-                else
+                else if(key < Ptr->key)
                 {
-                    Ptr->right = CreateLeaf(key);
+                    if(Ptr->left != NULL)
+                    {
+                        Ptr = Ptr->left;
+                    }
+                    else
+                    {
+                        Ptr->left = CreateLeaf(key);
+                        Ptr->left->parent = Ptr;
+                        break;
+                    }
                 }
-            }
-            else
-            {
-                cout << "The key " << key << " has already been added to the tree\n";
             }
         }
     }
+
+
+
 }
+
+//    if(root == NULL)
+//    {
+//        root = CreateLeaf(key);
+//    }
+//    else
+//    {
+//        if(key < Ptr->key)
+//        {
+//            if(Ptr->left != NULL)
+//            {
+//                AddLeafPrivate(key, Ptr->left);
+//            }
+//            else
+//            {
+//                Ptr->left = CreateLeaf(key);
+//            }
+//        }
+//        else
+//        {
+//            if(key > Ptr->key)
+//            {
+//                if(Ptr->right != NULL)
+//                {
+//                    AddLeafPrivate(key, Ptr->right);
+//                }
+//                else
+//                {
+//                    Ptr->right = CreateLeaf(key);
+//                }
+//            }
+//            else
+//            {
+//                cout << "The key " << key << " has already been added to the tree\n";
+//            }
+//        }
+//    }
+
 
 void BST::PrintInOrder()
 {

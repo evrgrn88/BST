@@ -10,6 +10,7 @@ private:
         int key;
         node* left;
         node* right;
+        node* parent;
     };
 
     struct nodeArray
@@ -68,7 +69,7 @@ public:
 
     //void FindByKey();
 
-    void AddLeaf(int key);
+//    void AddLeaf(int key);
 
     void PrintInOrder();
 
