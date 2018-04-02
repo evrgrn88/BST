@@ -22,7 +22,7 @@ void BST::ShowMenu()
 
     short choice;
     cout << endl <<
-            "q1. Create a new tree.\n" <<
+            "1. Create a new tree.\n" <<
             "2. Print the tree in order.\n" <<
             "3. Show tree size.\n" <<
             "4. Clear the tree.\n" <<
