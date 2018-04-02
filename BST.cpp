@@ -1,3 +1,6 @@
+// *add array clearing
+
+
 #include <iostream>
 #include <cstdlib>
 #include <stack>
