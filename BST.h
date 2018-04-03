@@ -21,23 +21,31 @@ private:
 
     nodeArray* TreeKeys = new nodeArray;
 
+    nodeArray* InOrderKeys = new nodeArray;
+
+    nodeArray* PostOrderKeys = new nodeArray;
+
     node* root;
 
     void FillTree();
 
     int ShowSizePrivate(node* Ptr);
 
-    void ClearTreePrivate(node* Ptr);
+    void ClearTree(node* Ptr);//Private(node* Ptr);
+
+    void ClearArray(nodeArray* Arr);
 
     void EmptyCheckPrivate(node* Ptr);
 
-    void SortTreeArray();
+    //void SortTreeArray();
 
     void FindByKey(int key);
 
     void AddLeafPrivate(int key, node* Ptr);
 
-    void PrintInOrderPrivate(node* Ptr);
+    void SortInOrder(node* Ptr);
+
+    void PrintInOrder();//Private(node* Ptr);
 
     node* ReturnNodePrivate(int key, node* Ptr);
 
@@ -63,15 +71,15 @@ public:
 
     int ShowSize();
 
-    void ClearTree();
+//    void ClearTree();
 
     void EmptyCheck();
 
-    //void FindByKey();
+//    void FindByKey();
 
 //    void AddLeaf(int key);
 
-    void PrintInOrder();
+//    void PrintInOrder();
 
     int ReturnRootKey();
 
