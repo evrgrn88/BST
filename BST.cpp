@@ -29,7 +29,8 @@ void BST::ShowMenu()
             "8. Delete element.\n" <<
             "9. Use the operation iterator.\n" <<
             "10. Traverse the tree (Lt -> Rt -> t).\n" <<
-            "11. Merge two subtrees recursively.\n" <<
+            "11. Print tree array.\n" <<
+            //"11. Merge two subtrees recursively.\n" <<
             "\n\nChoose your operation: ";
 
     cin >> choice;
@@ -87,7 +88,12 @@ void BST::ShowMenu()
         break;
 
     case 11:
-        cout << "Merge two subtrees recursively!";
+        for(int i = 0; i < TreeKeys->arraySize; i++)
+        {
+            cout << TreeKeys->a[i];
+        }
+
+        //cout << "Merge two subtrees recursively!";
         break;
     }
 
@@ -185,10 +191,10 @@ void BST::ClearTreePrivate(node* Ptr)
             root = NULL;
         }
     }
-//    else
-//    {
-//        cout << "\nThe tree is empty.\n";
-//    }
+    else
+    {
+        cout << "\nThe tree is empty.\n";
+    }
 
 
 
