@@ -41,6 +41,8 @@ private:
 
     void AddLeafPrivate(int key, int pos, node* Ptr);
 
+    void AddNewLeaf();
+
     void SortInOrder(node* Ptr);
 
     void PrintInOrder();//Private(node* Ptr);
@@ -69,15 +71,7 @@ public:
 
     int ShowSize();
 
-//    void ClearTree();
-
     void EmptyCheck();
-
-//    void FindByKey();
-
-//    void AddLeaf(int key);
-
-//    void PrintInOrder();
 
     int ReturnRootKey();
 

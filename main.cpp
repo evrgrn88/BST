@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 #include "BST.cpp"
-#include "TEST.cpp"
 
 using namespace std;
 

@@ -1,5 +1,12 @@
-// *add array clearing
-//*remove parent pointer if possible
+/*
+TODO:
+Решить проблему с массивом InOrderKeys после добавления нового элемента
+(вылетает)
+
+
+*/
+
+
 
 #include <iostream>
 #include <cstdlib>
@@ -74,7 +81,7 @@ void BST::ShowMenu()
         break;
 
     case 7:
-        cout << "Add new element!";
+        AddNewLeaf();
         break;
 
     case 8:
@@ -337,10 +344,18 @@ void BST::AddLeafPrivate(int key, int pos, node* Ptr)
             }
         }
     }
-
-
-
 }
+
+void BST::AddNewLeaf()
+{
+    TreeKeys->arraySize++;
+    int newPos = TreeKeys->arraySize;
+    cout << "\nEnter an element: \n";
+    cin >> TreeKeys->a[newPos];
+    AddLeafPrivate(TreeKeys->a[newPos], newPos, root);
+    cout << endl;
+}
+
 
 //    if(root == NULL)
 //    {
@@ -383,6 +398,7 @@ void BST::SortInOrder(node* Ptr)
 {
     if(Ptr != NULL)
     {
+        ClearArray(InOrderKeys);
         InOrderKeys->arraySize = TreeKeys->arraySize;
 
         int i = 0;
