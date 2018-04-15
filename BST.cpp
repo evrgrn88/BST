@@ -113,15 +113,12 @@ void BST::FillTree()
     cin >> TreeKeys->arraySize;
     cout << endl;
 
-    int i = 0;
-
-    while(i < TreeKeys->arraySize)
+    for(int i = 0; i < TreeKeys->arraySize; i++)
     {
         cout << "\nEnter an element: \n";
         cin >> TreeKeys->a[i];
-        AddLeafPrivate(TreeKeys->a[i], root);
+        AddLeafPrivate(TreeKeys->a[i], i, root);
         cout << endl;
-        i++;
     }
 }
 
@@ -203,12 +200,15 @@ void BST::ClearTree(node* Ptr)//Private(node* Ptr)
 
 void BST::ClearArray(nodeArray *Arr)
 {
-    for(int i = 0; i < Arr->arraySize; i++)
+    if(Arr->arraySize != 0)
     {
-        Arr->a[i] = 0;
-    }
+        for(int i = 0; i < Arr->arraySize; i++)
+        {
+            Arr->a[i] = 0;
+        }
 
-    Arr->arraySize = 0;
+        Arr->arraySize = 0;
+    }
 }
 
 void BST::EmptyCheck()
@@ -287,17 +287,11 @@ BST::node* BST::CreateLeaf(int key)
     n->key = key;
     n->left = NULL;
     n->right = NULL;
-    n->parent = NULL;
 
     return n;
 }
 
-//void BST::AddLeaf(int key)
-//{
-//    AddLeafPrivate(key, root);
-//}
-
-void BST::AddLeafPrivate(int key, node* Ptr)
+void BST::AddLeafPrivate(int key, int pos, node* Ptr)
 {
     if(root == NULL)
     {
@@ -309,8 +303,10 @@ void BST::AddLeafPrivate(int key, node* Ptr)
         {
             if(key == Ptr->key)
             {
-                cout << "\nThe value already exists!";
-                break;
+                Ptr = root;
+                cout << "\nThe value already exists!\nType the new value: ";
+                cin >> key;
+                TreeKeys->a[pos] = key;
             }
             else
             {
@@ -323,7 +319,6 @@ void BST::AddLeafPrivate(int key, node* Ptr)
                     else
                     {
                         Ptr->right = CreateLeaf(key);
-                        Ptr->right->parent = Ptr;
                         break;
                     }
                 }
@@ -336,7 +331,6 @@ void BST::AddLeafPrivate(int key, node* Ptr)
                     else
                     {
                         Ptr->left = CreateLeaf(key);
-                        Ptr->left->parent = Ptr;
                         break;
                     }
                 }
@@ -389,7 +383,6 @@ void BST::SortInOrder(node* Ptr)
 {
     if(Ptr != NULL)
     {
-        ClearArray(InOrderKeys);
         InOrderKeys->arraySize = TreeKeys->arraySize;
 
         int i = 0;
