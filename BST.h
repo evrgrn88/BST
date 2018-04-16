@@ -10,7 +10,6 @@ private:
         int key;
         node* left;
         node* right;
-        //node* parent;
     };
 
     struct nodeArray
@@ -20,7 +19,6 @@ private:
     };
 
     nodeArray* TreeKeys = new nodeArray;
-    nodeArray* InOrderKeys = new nodeArray;
     nodeArray* PostOrderKeys = new nodeArray;
 
     node* root;
@@ -29,13 +27,11 @@ private:
 
     int ShowSizePrivate(node* Ptr);
 
-    void ClearTree(node* Ptr);//Private(node* Ptr);
+    void ClearTree(node* Ptr);
 
     void ClearArray(nodeArray* Arr);
 
     void EmptyCheckPrivate(node* Ptr);
-
-    //void SortTreeArray();
 
     void FindByKey(int key);
 
@@ -43,9 +39,9 @@ private:
 
     void AddNewLeaf();
 
-    void SortInOrder(node* Ptr);
+    nodeArray* SortInOrder(node* Ptr);
 
-    void PrintInOrder();//Private(node* Ptr);
+    void PrintInOrder();
 
     node* ReturnNodePrivate(int key, node* Ptr);
 

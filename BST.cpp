@@ -12,6 +12,7 @@ TODO:
 #include <cstdlib>
 #include <stack>
 #include <queue>
+//#include <vector>
 
 #include "BST.h"
 
@@ -97,10 +98,12 @@ void BST::ShowMenu()
         break;
 
     case 11:
-        for(int i = 0; i < TreeKeys->arraySize; i++)
+        cout << TreeKeys->arraySize;
+
+        /*for(int i = 0; i < TreeKeys->arraySize; i++)
         {
             cout << TreeKeys->a[i];
-        }
+        }*/
 
         //cout << "Merge two subtrees recursively!";
         break;
@@ -166,12 +169,7 @@ int BST::ShowSizePrivate(node* Ptr)
     return count;
 }
 
-//void BST::ClearTree()
-//{
-//    ClearTreePrivate(root);
-//}
-
-void BST::ClearTree(node* Ptr)//Private(node* Ptr)
+void BST::ClearTree(node* Ptr)
 {
     if(Ptr != NULL)
     {
@@ -198,8 +196,8 @@ void BST::ClearTree(node* Ptr)//Private(node* Ptr)
         root = NULL;
 
         ClearArray(TreeKeys);
-        ClearArray(InOrderKeys);
-        ClearArray(PostOrderKeys);
+        //ClearArray(InOrderKeys);
+        //ClearArray(PostOrderKeys);
 
         cout << "\nThe tree was cleared.\n";
     }
@@ -237,38 +235,13 @@ void BST::EmptyCheckPrivate(node* Ptr)
     cout << endl;
 }
 
-// Пузырьковая сортировка
-//void BST::SortTreeArray()
-//{
-//    int temp;
-
-//    for (int i = 0; i < TreeKeys->arraySize - 1; i++)
-//    {
-//        for (int j = 0; j < TreeKeys->arraySize - i - 1; j++)
-//        {
-//            if (TreeKeys->a[j] > TreeKeys->a[j + 1])
-//            {
-//                temp = TreeKeys->a[j];
-//                TreeKeys->a[j] = TreeKeys->a[j + 1];
-//                TreeKeys->a[j + 1] = temp;
-//            }
-//        }
-//    }
-
-//    for(int i = 0; i < TreeKeys->arraySize; i++)
-//    {
-//        cout << TreeKeys->a[i] << " ";
-//    }
-//}
-
 void BST::FindByKey(int key)
 {
-    //SortTreeArray();
-    SortInOrder(root);
+    nodeArray* SortedKeysToFind = SortInOrder(root);
 
     int average_index = 0;// переменная для хранения индекса среднего элемента массива
     int first_index = 0; // индекс первого элемента в массиве
-    int last_index = InOrderKeys->arraySize - 1; // индекс последнего элемента в массиве
+    int last_index = SortedKeysToFind->arraySize - 1; // индекс последнего элемента в массиве
 
     if(last_index == -1)
         cout << "\nThe tree is empty" << endl; // массив пуст
@@ -276,12 +249,12 @@ void BST::FindByKey(int key)
     while(first_index < last_index)
     {
         average_index = first_index + (last_index - first_index) / 2; // меняем индекс среднего значения
-        key <= InOrderKeys->a[average_index] ?
+        key <= SortedKeysToFind->a[average_index] ?
                     last_index = average_index :
                     first_index = average_index + 1;    // найден ключевой элемент или нет
     }
 
-    if(InOrderKeys->a[last_index] == key)
+    if(SortedKeysToFind->a[last_index] == key)
         cout << "\nElement is found\n";
     else
         cout << "\nElement is not found" << endl;
@@ -310,10 +283,10 @@ void BST::AddLeafPrivate(int key, int pos, node* Ptr)
         {
             if(key == Ptr->key)
             {
-                Ptr = root;
                 cout << "\nThe value already exists!\nType the new value: ";
                 cin >> key;
                 TreeKeys->a[pos] = key;
+                Ptr = root;
             }
             else
             {
@@ -349,56 +322,20 @@ void BST::AddLeafPrivate(int key, int pos, node* Ptr)
 void BST::AddNewLeaf()
 {
     TreeKeys->arraySize++;
+    int newKey;
     int newPos = TreeKeys->arraySize;
     cout << "\nEnter an element: \n";
-    cin >> TreeKeys->a[newPos];
-    AddLeafPrivate(TreeKeys->a[newPos], newPos, root);
+    cin >> newKey;
+    AddLeafPrivate(newKey, newPos, root);
     cout << endl;
 }
 
-
-//    if(root == NULL)
-//    {
-//        root = CreateLeaf(key);
-//    }
-//    else
-//    {
-//        if(key < Ptr->key)
-//        {
-//            if(Ptr->left != NULL)
-//            {
-//                AddLeafPrivate(key, Ptr->left);
-//            }
-//            else
-//            {
-//                Ptr->left = CreateLeaf(key);
-//            }
-//        }
-//        else
-//        {
-//            if(key > Ptr->key)
-//            {
-//                if(Ptr->right != NULL)
-//                {
-//                    AddLeafPrivate(key, Ptr->right);
-//                }
-//                else
-//                {
-//                    Ptr->right = CreateLeaf(key);
-//                }
-//            }
-//            else
-//            {
-//                cout << "The key " << key << " has already been added to the tree\n";
-//            }
-//        }
-//    }
-
-void BST::SortInOrder(node* Ptr)
+BST::nodeArray* BST::SortInOrder(node* Ptr)
 {
     if(Ptr != NULL)
     {
-        ClearArray(InOrderKeys);
+        nodeArray* InOrderKeys = new nodeArray;
+
         InOrderKeys->arraySize = TreeKeys->arraySize;
 
         int i = 0;
@@ -417,7 +354,7 @@ void BST::SortInOrder(node* Ptr)
             {
                 if(s.top() == NULL)
                 {
-                    break;
+                    return InOrderKeys;
                 }
 
                 Ptr = s.top();
@@ -432,25 +369,21 @@ void BST::SortInOrder(node* Ptr)
     else
     {
         cout << "\nThe tree is empty.\n";
+        return 0;
     }
 }
 
-//void BST::PrintInOrder()
-//{
-//    PrintInOrderPrivate(root);
-//}
-
-void BST::PrintInOrder()//Private(node* Ptr)
+void BST::PrintInOrder()
 {
     if(root != NULL)
     {
-        SortInOrder(root);
+        nodeArray* PrintedInOrderKeys = SortInOrder(root);
 
         cout << "Printing keys in order: \n";
 
-        for(int i = 0; i < InOrderKeys->arraySize; i++)
+        for(int i = 0; i < PrintedInOrderKeys->arraySize; i++)
         {
-            cout << InOrderKeys->a[i] << " ";
+            cout << PrintedInOrderKeys->a[i] << " ";
         }
     }
     else
@@ -458,33 +391,6 @@ void BST::PrintInOrder()//Private(node* Ptr)
         cout << "\nThe tree is empty.\n";
     }
 }
-
-//    int i = 0;
-
-//    if(root != NULL)
-//    {
-//        //1 - Go Left
-//        if(Ptr->left != NULL)
-//        {
-//            PrintInOrderPrivate(Ptr->left);
-//        }
-
-//        //2 - Process Node, in this case print
-        
-//        i++;
-//        cout << Ptr->key << "  ";
-
-//        //3 - Go Right
-//        if(Ptr->right != NULL)
-//        {
-//            PrintInOrderPrivate(Ptr->right);
-//        }
-//    }
-//    else
-//    {
-//        cout << "The tree is empty.\n";
-//    }
-//}
 
 BST::node* BST::ReturnNode(int key)
 {
@@ -722,12 +628,9 @@ void BST::RemoveMatch(node* parent, node* match, bool left)
     }
 }
 
-
-
-
 BST::~BST()
 {
-    //RemoveSubtree(root);
+
 }
 
 // Post-order traversal
