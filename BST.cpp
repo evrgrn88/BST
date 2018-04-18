@@ -1,7 +1,25 @@
 /*
 TODO:
 
+Удаление элемента
 
+Итератор:
+Установка на корень
+Проверка конца
+Доступ к данным текущего элемента
+Переход к следующему по значению ключа элементу
+Переход к предыдущему по значению ключа элементу
+
+Обход Post-Order
+
+Объединение двух поддеревьев (рекурсивно)
+
+Вывод структуры на экран
+
+Опрос числа просмотренных нод (в каждую операцию?)
+
+!Перевести текст на русский!
+Перейти на unicode
 */
 
 
@@ -28,7 +46,7 @@ void BST::ShowMenu()
 
     short choice;
     cout << endl <<
-            "1. Create a new tree.\n" <<
+            "1. Ыть!Create a new tree.\n" <<
             "2. Print the tree in order.\n" <<
             "3. Show tree size.\n" <<
             "4. Clear the tree.\n" <<
@@ -96,12 +114,10 @@ void BST::ShowMenu()
         break;
 
     case 11:
-        //cout << TreeKeys->arraySize;
-
-        /*for(int i = 0; i < TreeKeys->arraySize; i++)
+        for(int i = 0; i < TreeKeys.size(); i++)
         {
-            cout << TreeKeys->a[i];
-        }*/
+            cout << TreeKeys.at(i) << " ";
+        }
 
         //cout << "Merge two subtrees recursively!";
         break;
