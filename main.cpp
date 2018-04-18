@@ -10,20 +10,12 @@ int main()
 
     myTree.ShowMenu();
 
-
-
-
-
-
-
-
+/*
     //int input = 0;
 
 
    //
 
-
-/*
     cout << "Printing the tree in order\nBefore adding numbers\n";
 
     myTree.PrintInOrder();
@@ -39,9 +31,9 @@ int main()
 
     myTree.PrintInOrder();
 
-    cout << endl;*/
+    cout << endl;
 
-    /*for(int i =0; i < 16; i++)
+    for(int i =0; i < 16; i++)
     {
         myTree.PrintChildren(TreeKeys[i]);
         cout << endl;

@@ -117,7 +117,6 @@ void BST::FillTree()
 {
     ClearTree(root);
     int treeSize;
-    //int element;
 
     cout << "\nEnter tree size: \n";
     cin >> treeSize;
@@ -126,65 +125,13 @@ void BST::FillTree()
     for(int i = 0; i < treeSize; i++)
     {
         AddNewLeaf();
-//        cout << "\nEnter an element: \n";
-//        cin >> element;
-//        TreeKeys.push_back(element);
-//        AddLeafPrivate(TreeKeys.back(), root);
-//        cout << endl;
     }
-
-//    ClearTree(root);
-
-//    cout << "\nEnter tree size: \n";
-//    cin >> TreeKeys->arraySize;
-//    cout << endl;
-
-//    for(int i = 0; i < TreeKeys->arraySize; i++)
-//    {
-//        cout << "\nEnter an element: \n";
-//        cin >> TreeKeys->a[i];
-//        AddLeafPrivate(TreeKeys->a[i], i, root);
-//        cout << endl;
-//    }
 }
 
 int BST::ShowSize()
 {
     return TreeKeys.size();
-//    return ShowSizePrivate(root);
 }
-
-//int BST::ShowSizePrivate(node* Ptr)
-//{
-//    int count = 0;
-
-//    stack<node*> s;
-//    s.push(NULL);
-
-//    do
-//    {
-//        if(Ptr != NULL)
-//        {
-//            s.push(Ptr);
-//            count++;
-//            Ptr = Ptr->left;
-//        }
-//        else
-//        {
-//            if(s.top() == NULL)
-//            {
-//                break;
-//            }
-
-//            Ptr = s.top();
-//            s.pop();
-//            Ptr = Ptr->right;
-//        }
-//    }
-//    while(true);
-
-//    return count;
-//}
 
 void BST::ClearTree(node* Ptr)
 {
@@ -215,34 +162,11 @@ void BST::ClearTree(node* Ptr)
         TreeKeys.clear();
         TreeKeys.shrink_to_fit();
 
-        //ClearArray(TreeKeys);
-        //ClearArray(InOrderKeys);
-        //ClearArray(PostOrderKeys);
-
         cout << "\nThe tree was cleared.\n";
     }
 }
 
-//void BST::ClearArray(nodeArray *Arr)
-//{
-//    if(Arr->arraySize != 0)
-//    {
-//        for(int i = 0; i < Arr->arraySize; i++)
-//        {
-//            Arr->a[i] = 0;
-//        }
-
-//        Arr->arraySize = 0;
-//    }
-//}
-
-//void BST::EmptyCheck()
-//{
-//    return EmptyCheckPrivate(root);
-//}
-
 void BST::EmptyCheck(node* Ptr)
-//void BST::EmptyCheckPrivate(node* Ptr)
 {
     if(Ptr == NULL)
     {
@@ -282,30 +206,6 @@ void BST::FindByKey(int key)
     }
 }
 
-//{
-//    nodeArray* SortedKeysToFind = SortInOrder(root);
-
-//    int average_index = 0;// переменная для хранения индекса среднего элемента массива
-//    int first_index = 0; // индекс первого элемента в массиве
-//    int last_index = SortedKeysToFind->arraySize - 1; // индекс последнего элемента в массиве
-
-//    if(last_index == -1)
-//        cout << "\nThe tree is empty" << endl; // массив пуст
-
-//    while(first_index < last_index)
-//    {
-//        average_index = first_index + (last_index - first_index) / 2; // меняем индекс среднего значения
-//        key <= SortedKeysToFind->a[average_index] ?
-//                    last_index = average_index :
-//                    first_index = average_index + 1;    // найден ключевой элемент или нет
-//    }
-
-//    if(SortedKeysToFind->a[last_index] == key)
-//        cout << "\nElement is found\n";
-//    else
-//        cout << "\nElement is not found" << endl;
-//}
-
 BST::node* BST::CreateLeaf(int key)
 {
     node* n = new node;
@@ -318,7 +218,6 @@ BST::node* BST::CreateLeaf(int key)
 }
 
 void BST::AddLeaf(int key, node* Ptr)
-//void BST::AddLeafPrivate(int key, int pos, node* Ptr)
 {
     if(root == NULL)
     {
@@ -370,7 +269,6 @@ void BST::AddLeaf(int key, node* Ptr)
 void BST::AddNewLeaf()
 {
     int newKey;
-//    int newPos = TreeKeys->arraySize;
     cout << "\nEnter an element: \n";
     cin >> newKey;
     TreeKeys.push_back(newKey);
@@ -384,9 +282,6 @@ vector<int> BST::SortInOrder(node* Ptr)
 
     if(Ptr != NULL)
     {
-        //InOrderKeys->arraySize = TreeKeys->arraySize;
-
-        //int i = 0;
         stack<node*> s;
         s.push(NULL);
 
@@ -419,49 +314,6 @@ vector<int> BST::SortInOrder(node* Ptr)
     }
 }
 
-//BST::nodeArray* BST::SortInOrder(node* Ptr)
-//{
-//    if(Ptr != NULL)
-//    {
-//        nodeArray* InOrderKeys = new nodeArray;
-
-//        InOrderKeys->arraySize = TreeKeys->arraySize;
-
-//        int i = 0;
-//        stack<node*> s;
-//        s.push(NULL);
-
-//        do
-//        {
-//            if(Ptr != NULL)
-//            {
-//                s.push(Ptr);
-
-//                Ptr = Ptr->left;
-//            }
-//            else
-//            {
-//                if(s.top() == NULL)
-//                {
-//                    return InOrderKeys;
-//                }
-
-//                Ptr = s.top();
-//                InOrderKeys->a[i] = Ptr->key;
-//                i++;
-//                s.pop();
-//                Ptr = Ptr->right;
-//            }
-//        }
-//        while(true);
-//    }
-//    else
-//    {
-//        cout << "\nThe tree is empty.\n";
-//        return 0;
-//    }
-//}
-
 void BST::PrintInOrder()
 {
     if(root != NULL)
@@ -482,25 +334,7 @@ void BST::PrintInOrder()
     }
 }
 
-//void BST::PrintInOrder()
-//{
-//    if(root != NULL)
-//    {
-//        nodeArray* PrintedInOrderKeys = SortInOrder(root);
-
-//        cout << "Printing keys in order: \n";
-
-//        for(int i = 0; i < PrintedInOrderKeys->arraySize; i++)
-//        {
-//            cout << PrintedInOrderKeys->a[i] << " ";
-//        }
-//    }
-//    else
-//    {
-//        cout << "\nThe tree is empty.\n";
-//    }
-//}
-
+/*
 BST::node* BST::ReturnNode(int key)
 {
     return ReturnNodePrivate(key, root);
@@ -737,11 +571,6 @@ void BST::RemoveMatch(node* parent, node* match, bool left)
     }
 }
 
-BST::~BST()
-{
-
-}
-
 // Post-order traversal
 void BST::RemoveSubtree(node* Ptr)
 {
@@ -758,4 +587,10 @@ void BST::RemoveSubtree(node* Ptr)
         cout << "Deleting the node containing key " << Ptr->key << endl;
         delete Ptr;
     }
+}
+*/
+
+BST::~BST()
+{
+
 }
