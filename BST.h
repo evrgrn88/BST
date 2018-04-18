@@ -1,6 +1,7 @@
 #ifndef BST_H
 #define BST_H
 
+using namespace std;
 
 class BST
 {
@@ -18,28 +19,35 @@ private:
         int a[];
     };
 
-    nodeArray* TreeKeys = new nodeArray;
-    nodeArray* PostOrderKeys = new nodeArray;
+    vector<int> TreeKeys;
+
+//    nodeArray* TreeKeys = new nodeArray;
+//    nodeArray* PostOrderKeys = new nodeArray;
 
     node* root;
 
+//    void CreateTree();
+
     void FillTree();
 
-    int ShowSizePrivate(node* Ptr);
+//    int ShowSizePrivate(node* Ptr);
 
     void ClearTree(node* Ptr);
 
-    void ClearArray(nodeArray* Arr);
+//    void ClearArray(nodeArray* Arr);
 
-    void EmptyCheckPrivate(node* Ptr);
+    void EmptyCheck(node* Ptr);
+//    void EmptyCheckPrivate(node* Ptr);
 
     void FindByKey(int key);
 
-    void AddLeafPrivate(int key, int pos, node* Ptr);
+    void AddLeaf(int key, node* Ptr);
+//    void AddLeafPrivate(int key, int pos, node* Ptr);
 
     void AddNewLeaf();
 
-    nodeArray* SortInOrder(node* Ptr);
+    vector<int> SortInOrder(node* Ptr);
+//    nodeArray* SortInOrder(node* Ptr);
 
     void PrintInOrder();
 
@@ -67,7 +75,7 @@ public:
 
     int ShowSize();
 
-    void EmptyCheck();
+//    void EmptyCheck();
 
     int ReturnRootKey();
 
