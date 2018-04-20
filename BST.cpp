@@ -204,7 +204,7 @@ void BST::FindByKey(int key, node* Ptr)
     {
         bool found = false;
 
-        do
+        while(Ptr != NULL)
         {
             if(Ptr->key == key)
             {
@@ -224,8 +224,6 @@ void BST::FindByKey(int key, node* Ptr)
                 }
             }
         }
-        while(Ptr != NULL);
-
 
         if(found == false)
         {
