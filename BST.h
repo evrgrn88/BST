@@ -29,7 +29,9 @@ private:
 
     void EmptyCheck(node* Ptr);
 
-    void FindByKey(int key);
+    void FindByKey(int key, node* Ptr);
+
+//    void FindByKey(int key);
 
     node* CreateLeaf(int key);
 

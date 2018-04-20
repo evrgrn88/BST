@@ -1,6 +1,8 @@
 /*
 TODO:
 
+!Переписать FindByKey на поиск по дереву, вместо поиска по массиву
+
 Удаление элемента
 
 Итератор:
@@ -46,7 +48,7 @@ void BST::ShowMenu()
 
     short choice;
     cout << endl <<
-            "1. Ыть!Create a new tree.\n" <<
+            "1. Create a new tree.\n" <<
             "2. Print the tree in order.\n" <<
             "3. Show tree size.\n" <<
             "4. Clear the tree.\n" <<
@@ -93,7 +95,7 @@ void BST::ShowMenu()
         cin >> search;
         cout << endl;
 
-        FindByKey(search);
+        FindByKey(search, root);
 
         break;
 
@@ -196,31 +198,72 @@ void BST::EmptyCheck(node* Ptr)
     cout << endl;
 }
 
-void BST::FindByKey(int key)
+void BST::FindByKey(int key, node* Ptr)
 {
-    vector<int> InOrderKeys = SortInOrder(root);
-
-    if(!InOrderKeys.empty())
+    if(root != NULL)
     {
-        int vectorSize = InOrderKeys.size();
-        int average_index = 0;// переменная для хранения индекса среднего элемента массива
-        int first_index = 0; // индекс первого элемента в массиве
-        int last_index = vectorSize - 1; // индекс последнего элемента в массиве
+        bool found = false;
 
-        while(first_index < last_index)
+        do
         {
-            average_index = first_index + (last_index - first_index) / 2; // меняем индекс среднего значения
-            key <= InOrderKeys.at(average_index) ?
-                        last_index = average_index :
-                        first_index = average_index + 1;    // найден ключевой элемент или нет
+            if(Ptr->key == key)
+            {
+                cout << "\nElement is found\n";
+                found = true;
+                Ptr = NULL;
+            }
+            else
+            {
+                if(Ptr->key < key)
+                {
+                    Ptr = Ptr->left;
+                }
+                else if(Ptr->key > key)
+                {
+                    Ptr = Ptr->right;
+                }
+            }
+        }
+        while(Ptr != NULL);
+
+
+        if(found == false)
+        {
+            cout << "\nElement is NOT found\n";
         }
 
-        if(InOrderKeys.at(last_index) == key)
-            cout << "\nElement is found\n";
-        else
-            cout << "\nElement is not found" << endl;
+    }
+    else
+    {
+        cout << "\nThe tree is empty.\n";
     }
 }
+
+//void BST::FindByKey(int key)
+//{
+//    vector<int> InOrderKeys = SortInOrder(root);
+
+//    if(!InOrderKeys.empty())
+//    {
+//        int vectorSize = InOrderKeys.size();
+//        int middle_index = 0;// переменная для хранения индекса среднего элемента массива
+//        int first_index = 0; // индекс первого элемента в массиве
+//        int last_index = vectorSize - 1; // индекс последнего элемента в массиве
+
+//        while(first_index < last_index)
+//        {
+//            middle_index = first_index + (last_index - first_index) / 2; // меняем индекс среднего значения
+//            key <= InOrderKeys.at(middle_index) ?
+//                        last_index = middle_index :
+//                        first_index = middle_index + 1;    // найден ключевой элемент или нет
+//        }
+
+//        if(InOrderKeys.at(last_index) == key)
+//            cout << "\nElement is found\n";
+//        else
+//            cout << "\nElement is not found" << endl;
+//    }
+//}
 
 BST::node* BST::CreateLeaf(int key)
 {
