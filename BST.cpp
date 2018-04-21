@@ -1,8 +1,6 @@
 /*
 TODO:
 
-!Переписать FindByKey на поиск по дереву, вместо поиска по массиву
-
 Удаление элемента
 
 Итератор:
@@ -43,92 +41,101 @@ BST::BST()
 }
 
 void BST::ShowMenu()
-{  
-    system("cls");
-
-    short choice;
-    cout << endl <<
-            "1. Create a new tree.\n" <<
-            "2. Print the tree in order.\n" <<
-            "3. Show tree size.\n" <<
-            "4. Clear the tree.\n" <<
-            "5. Check if the tree is empty.\n" <<
-            "6. Search element.\n" <<
-            "7. Add new element.\n" <<
-            "8. Delete element.\n" <<
-            "9. Use the operation iterator.\n" <<
-            "10. Traverse the tree (Lt -> Rt -> t).\n" <<
-            "11. Print tree array.\n" <<
-            //"11. Merge two subtrees recursively.\n" <<
-            "\n\nChoose your operation: ";
-
-    cin >> choice;
-    cout << endl;
-
-    switch (choice)
+{
+    while(true)
     {
-    case 1:
-        FillTree();
-        break;
+        system("cls");
 
-    case 2:
-        PrintInOrder();
-        break;
+        short choice;
+        cout << endl <<
+                "1. Create a new tree.\n" <<
+                "2. Print the tree in order.\n" <<
+                "3. Show tree size.\n" <<
+                "4. Clear the tree.\n" <<
+                "5. Check if the tree is empty.\n" <<
+                "6. Search element.\n" <<
+                "7. Add new element.\n" <<
+                "8. Delete element.\n" <<
+                "9. Use the operation iterator.\n" <<
+                "10. Traverse the tree (Lt -> Rt -> t).\n" <<
+                "11. Print tree array.\n" <<
+                //"11. Merge two subtrees recursively.\n" <<
+                "\n\nChoose your operation: ";
 
-    case 3:
-        cout << "The tree consists of " <<
-                ShowSize() << " elements.\n";
-        break;
-
-    case 4:
-        ClearTree(root);
-        break;
-
-    case 5:
-        EmptyCheck(root);
-        break;
-
-    case 6:
-        int search;
-
-        cout << "\nSearch: ";
-        cin >> search;
+        cin >> choice;
         cout << endl;
 
-        FindByKey(search, root);
-
-        break;
-
-    case 7:
-        AddNewLeaf();
-        break;
-
-    case 8:
-        cout << "Delete element!";
-        break;
-
-    case 9:
-        cout << "Use the operation iterator!";
-        break;
-
-    case 10:
-        cout << "Traverse the tree (Lt -> Rt -> t)!";
-        break;
-
-    case 11:
-        for(int i = 0; i < TreeKeys.size(); i++)
+        switch (choice)
         {
-            cout << TreeKeys.at(i) << " ";
+        case 1:
+            FillTree();
+            break;
+
+        case 2:
+            PrintInOrder();
+            break;
+
+        case 3:
+            cout << "The tree consists of " <<
+                    ShowSize() << " elements.\n";
+            break;
+
+        case 4:
+            ClearTree(root);
+            break;
+
+        case 5:
+            EmptyCheck(root);
+            break;
+
+        case 6:
+            int search;
+            node* result;
+
+            cout << "\nSearch: ";
+            cin >> search;
+            cout << endl;
+
+            result = FindByKey(search, root);
+
+            break;
+
+        case 7:
+            AddNewLeaf();
+            break;
+
+        case 8:
+            int deleteKey;
+            node* DeletionResult;
+
+            cout << "Enter a key to delete: ";
+            cin >> deleteKey;
+
+            DeletionResult = DeleteLeaf(deleteKey, root);
+
+            break;
+
+        case 9:
+            cout << "Use the operation iterator!";
+            break;
+
+        case 10:
+            cout << "Traverse the tree (Lt -> Rt -> t)!";
+            break;
+
+        case 11:
+            for(int i = 0; i < TreeKeys.size(); i++)
+            {
+                cout << TreeKeys.at(i) << " ";
+            }
+
+            //cout << "Merge two subtrees recursively!";
+            break;
         }
 
-        //cout << "Merge two subtrees recursively!";
-        break;
+        cout << endl << endl;
+        system("pause");
     }
-
-    cout << endl << endl;
-    system("pause");
-
-    ShowMenu();
 }
 
 void BST::FillTree()
@@ -198,70 +205,45 @@ void BST::EmptyCheck(node* Ptr)
     cout << endl;
 }
 
-void BST::FindByKey(int key, node* Ptr)
+BST::node* BST::FindByKey(int key, node* Ptr)
 {
     if(root != NULL)
     {
-        bool found = false;
-
         while(Ptr != NULL)
         {
             if(Ptr->key == key)
             {
-                cout << "\nElement is found\n";
-                found = true;
-                Ptr = NULL;
+                break;
             }
-            else
+
+            if(key > Ptr->key)
             {
-                if(Ptr->key < key)
-                {
-                    Ptr = Ptr->left;
-                }
-                else if(Ptr->key > key)
-                {
-                    Ptr = Ptr->right;
-                }
+                Ptr = Ptr->right;
+            }
+            else if(key < Ptr->key)
+            {
+                Ptr = Ptr->left;
             }
         }
 
-        if(found == false)
+        if(Ptr == NULL)
         {
             cout << "\nElement is NOT found\n";
+            return Ptr;
         }
 
+        if(Ptr->key == key)
+        {
+            cout << "\nElement is found\n";
+            return Ptr;
+        }
     }
     else
     {
         cout << "\nThe tree is empty.\n";
+        return Ptr;
     }
 }
-
-//void BST::FindByKey(int key)
-//{
-//    vector<int> InOrderKeys = SortInOrder(root);
-
-//    if(!InOrderKeys.empty())
-//    {
-//        int vectorSize = InOrderKeys.size();
-//        int middle_index = 0;// переменная для хранения индекса среднего элемента массива
-//        int first_index = 0; // индекс первого элемента в массиве
-//        int last_index = vectorSize - 1; // индекс последнего элемента в массиве
-
-//        while(first_index < last_index)
-//        {
-//            middle_index = first_index + (last_index - first_index) / 2; // меняем индекс среднего значения
-//            key <= InOrderKeys.at(middle_index) ?
-//                        last_index = middle_index :
-//                        first_index = middle_index + 1;    // найден ключевой элемент или нет
-//        }
-
-//        if(InOrderKeys.at(last_index) == key)
-//            cout << "\nElement is found\n";
-//        else
-//            cout << "\nElement is not found" << endl;
-//    }
-//}
 
 BST::node* BST::CreateLeaf(int key)
 {
@@ -331,6 +313,139 @@ void BST::AddNewLeaf()
     TreeKeys.push_back(newKey);
     AddLeaf(TreeKeys.back(), root);
     cout << endl;
+}
+
+BST::node* BST::DeleteLeaf(int key, node* Ptr)
+{
+    if(root != NULL)
+    {
+        node* Parent;
+        node* Child;
+        node* ParentReplacement;
+        node* NodeReplacement;
+
+        int isLeft = 0; // 1 for left. 0 for right
+
+        while(Ptr != NULL)
+        {
+            if(key == Ptr->key)
+            {
+                break;
+            }
+
+            if(key > Ptr->key)
+            {
+                Parent = Ptr;
+                isLeft = 0; // Right
+                Ptr = Ptr->right;
+            }
+            else if(key < Ptr->key)
+            {
+                Parent = Ptr;
+                isLeft = 1; // Left
+                Ptr = Ptr->left;
+            }
+        }
+
+        if(Ptr == NULL)
+        {
+            cout << "\nElement is NOT found\n";
+            return Ptr;
+        }
+
+        if(Ptr->key == key)
+        {
+            cout << "\nElement is found. Deleting... ";
+
+            if(Ptr->left == NULL && Ptr->right == NULL) // 0 children
+            {
+                if(Parent == NULL) // Node is a root
+                {
+                    free(Ptr);
+                    root = NULL;
+
+                    cout << "done.";
+
+                    return Ptr;
+                }
+                else
+                {
+                    free(Ptr);
+                    if(isLeft)
+                    {
+                        Parent->left = NULL;
+                    }
+                    else
+                    {
+                        Parent->right = NULL;
+                    }
+                }
+            }
+
+            if(Ptr->left == NULL || Ptr->right == NULL) // 1 child
+            {
+                if(Ptr->left != NULL)
+                {
+                    Child = Ptr->left;
+                }
+                else
+                {
+                    Child = Ptr->right;
+                }
+
+                if(Parent == NULL) // Root node is being deleted
+                {
+                    root = Child;
+                    free(Ptr);
+                }
+                else // Deleting node, parent adopting node children
+                {
+                    if(isLeft)
+                    {
+                        Parent->left = Child;
+                    }
+                    else
+                    {
+                        Parent->right = Child;
+                    }
+                    free(Ptr);
+                }
+            }
+
+            // 2 children
+            // Finding replacement (highest node less than node to delete)
+            ParentReplacement = Ptr;
+            NodeReplacement = Ptr->left;
+            isLeft = 1; // NodeReplacement is left child of parent
+
+            while(NodeReplacement->right != NULL)
+            {
+                ParentReplacement = NodeReplacement;
+                NodeReplacement = NodeReplacement->right;
+                isLeft = 0; // NodeReplacement is right child of parent
+            }
+
+            Ptr->key = NodeReplacement->key; // Copying data
+
+            if(isLeft) // NodeReplacement is left child of Ptr.
+            {
+                Ptr->left = NodeReplacement->left;
+                free(NodeReplacement);
+            }
+            else // NodeReplacement is right grandchild of Ptr->left
+            {
+                ParentReplacement->right = NodeReplacement->left;
+                free(NodeReplacement);
+            }
+
+            return Ptr;
+        }
+    }
+    else
+    {
+        cout << "\nThe tree is empty.\n";
+        return Ptr;
+    }
 }
 
 vector<int> BST::SortInOrder(node* Ptr)

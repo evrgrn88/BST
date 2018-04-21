@@ -29,7 +29,7 @@ private:
 
     void EmptyCheck(node* Ptr);
 
-    void FindByKey(int key, node* Ptr);
+    node* FindByKey(int key, node* Ptr);
 
 //    void FindByKey(int key);
 
@@ -38,6 +38,8 @@ private:
     void AddLeaf(int key, node* Ptr);
 
     void AddNewLeaf();
+
+    node* DeleteLeaf(int key, node* Ptr);
 
     vector<int> SortInOrder(node* Ptr);
 
