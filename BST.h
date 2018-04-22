@@ -13,25 +13,17 @@ private:
         node* right;
     };
 
-    struct nodeArray
-    {
-        int arraySize = 0;
-        int a[];
-    };
-
-    vector<int> TreeKeys;
-
     node* root;
 
     void FillTree();
 
-    void ClearTree(node* Ptr);
+    void ClearTree();
+
+    void ShowSize();
 
     void EmptyCheck(node* Ptr);
 
-    node* FindByKey(int key, node* Ptr);
-
-//    void FindByKey(int key);
+    void FindByKey(int key, node* Ptr);
 
     node* CreateLeaf(int key);
 
@@ -39,11 +31,11 @@ private:
 
     void AddNewLeaf();
 
-    node* DeleteLeaf(int key, node* Ptr);
+    void DeleteLeaf(int key);
 
-    vector<int> SortInOrder(node* Ptr);
+    void PrintPostOrder(node* Ptr);
 
-    void PrintInOrder();
+    void PrintInOrder(node* Ptr);
 
     /*
     node* ReturnNodePrivate(int key, node* Ptr);
@@ -66,8 +58,6 @@ public:
     ~BST();
 
     void ShowMenu();
-
-    int ShowSize();
 
 /*
     int ReturnRootKey();

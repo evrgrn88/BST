@@ -1,8 +1,6 @@
 /*
 TODO:
 
-Удаление элемента
-
 Итератор:
 Установка на корень
 Проверка конца
@@ -37,7 +35,6 @@ using namespace std;
 BST::BST()
 {
     root = NULL;
-    
 }
 
 void BST::ShowMenu()
@@ -58,8 +55,7 @@ void BST::ShowMenu()
                 "8. Delete element.\n" <<
                 "9. Use the operation iterator.\n" <<
                 "10. Traverse the tree (Lt -> Rt -> t).\n" <<
-                "11. Print tree array.\n" <<
-                //"11. Merge two subtrees recursively.\n" <<
+                "11. Merge two subtrees recursively.\n" <<
                 "\n\nChoose your operation: ";
 
         cin >> choice;
@@ -72,16 +68,15 @@ void BST::ShowMenu()
             break;
 
         case 2:
-            PrintInOrder();
+            PrintInOrder(root);
             break;
 
         case 3:
-            cout << "The tree consists of " <<
-                    ShowSize() << " elements.\n";
+            ShowSize();
             break;
 
         case 4:
-            ClearTree(root);
+            ClearTree();
             break;
 
         case 5:
@@ -90,13 +85,12 @@ void BST::ShowMenu()
 
         case 6:
             int search;
-            node* result;
 
             cout << "\nSearch: ";
             cin >> search;
             cout << endl;
 
-            result = FindByKey(search, root);
+            FindByKey(search, root);
 
             break;
 
@@ -106,30 +100,21 @@ void BST::ShowMenu()
 
         case 8:
             int deleteKey;
-            node* DeletionResult;
 
             cout << "Enter a key to delete: ";
             cin >> deleteKey;
 
-            DeletionResult = DeleteLeaf(deleteKey, root);
+            DeleteLeaf(deleteKey);
 
             break;
 
         case 9:
-            cout << "Use the operation iterator!";
             break;
 
         case 10:
-            cout << "Traverse the tree (Lt -> Rt -> t)!";
             break;
 
         case 11:
-            for(int i = 0; i < TreeKeys.size(); i++)
-            {
-                cout << TreeKeys.at(i) << " ";
-            }
-
-            //cout << "Merge two subtrees recursively!";
             break;
         }
 
@@ -140,7 +125,7 @@ void BST::ShowMenu()
 
 void BST::FillTree()
 {
-    ClearTree(root);
+    ClearTree();
     int treeSize;
 
     cout << "\nEnter tree size: \n";
@@ -153,41 +138,60 @@ void BST::FillTree()
     }
 }
 
-int BST::ShowSize()
+void BST::ShowSize()
 {
-    return TreeKeys.size();
-}
-
-void BST::ClearTree(node* Ptr)
-{
-    if(Ptr != NULL)
+    if(root != NULL)
     {
-        queue<node*> q;
+        stack<node*> s;
+        int i = 0;
+        node* Ptr = root;
+        s.push(NULL);
 
-        q.push(root);
-
-        while(!q.empty())
+        do
         {
-            Ptr = q.front();
-            q.pop();
-
-            if(Ptr->left != NULL)
+            if(Ptr != NULL)
             {
-                q.push(Ptr->left);
+                s.push(Ptr);
+                Ptr = Ptr->left;
             }
-
-            if(Ptr->right != NULL)
+            else
             {
-                q.push(Ptr->right);
+                if(s.top() == NULL)
+                {
+                    break;
+                }
+
+                Ptr = s.top();
+                i++;
+                s.pop();
+                Ptr = Ptr->right;
             }
         }
+        while(true);
 
-        root = NULL;
+        cout << "The tree consists of " << i << " elements.";
+    }
+    else
+    {
+        cout << "\nThe tree is empty.\n";
+    }
+}
 
-        TreeKeys.clear();
-        TreeKeys.shrink_to_fit();
+void BST::ClearTree()
+{
+    if(root != NULL)
+    {
+        while(root != NULL)
+        {
+            cout << "Deleting element " << root->key << endl;
+            DeleteLeaf(root->key);
+        }
 
         cout << "\nThe tree was cleared.\n";
+    }
+    else
+    {
+        cout << "The tree is empty.\n";
     }
 }
 
@@ -205,7 +209,7 @@ void BST::EmptyCheck(node* Ptr)
     cout << endl;
 }
 
-BST::node* BST::FindByKey(int key, node* Ptr)
+void BST::FindByKey(int key, node* Ptr)
 {
     if(root != NULL)
     {
@@ -229,19 +233,17 @@ BST::node* BST::FindByKey(int key, node* Ptr)
         if(Ptr == NULL)
         {
             cout << "\nElement is NOT found\n";
-            return Ptr;
+            return;
         }
 
         if(Ptr->key == key)
         {
             cout << "\nElement is found\n";
-            return Ptr;
         }
     }
     else
     {
         cout << "\nThe tree is empty.\n";
-        return Ptr;
     }
 }
 
@@ -270,8 +272,6 @@ void BST::AddLeaf(int key, node* Ptr)
             {
                 cout << "\nThe value already exists!\nType the new value: ";
                 cin >> key;
-                TreeKeys.pop_back();
-                TreeKeys.push_back(key);
                 Ptr = root;
             }
             else
@@ -310,23 +310,23 @@ void BST::AddNewLeaf()
     int newKey;
     cout << "\nEnter an element: \n";
     cin >> newKey;
-    TreeKeys.push_back(newKey);
-    AddLeaf(TreeKeys.back(), root);
+    AddLeaf(newKey, root);
     cout << endl;
 }
 
-BST::node* BST::DeleteLeaf(int key, node* Ptr)
+void BST::DeleteLeaf(int key)
 {
     if(root != NULL)
     {
-        node* Parent;
-        node* Child;
-        node* ParentReplacement;
-        node* NodeReplacement;
+        node* Ptr = root;
+        node* Parent = NULL;
+        node* Child = NULL;
+        node* ParentReplacement = NULL;
+        node* NodeReplacement = NULL;
 
-        int isLeft = 0; // 1 for left. 0 for right
+        bool isLeft; // 1 for left. 0 for right
 
-        while(Ptr != NULL)
+        while(Ptr != NULL) // Check if the key is present
         {
             if(key == Ptr->key)
             {
@@ -336,13 +336,13 @@ BST::node* BST::DeleteLeaf(int key, node* Ptr)
             if(key > Ptr->key)
             {
                 Parent = Ptr;
-                isLeft = 0; // Right
+                isLeft = false; // Right
                 Ptr = Ptr->right;
             }
             else if(key < Ptr->key)
             {
                 Parent = Ptr;
-                isLeft = 1; // Left
+                isLeft = true; // Left
                 Ptr = Ptr->left;
             }
         }
@@ -350,27 +350,24 @@ BST::node* BST::DeleteLeaf(int key, node* Ptr)
         if(Ptr == NULL)
         {
             cout << "\nElement is NOT found\n";
-            return Ptr;
+            return;
         }
 
         if(Ptr->key == key)
         {
-            cout << "\nElement is found. Deleting... ";
+            //cout << "\nElement is found. Deleting... ";
 
             if(Ptr->left == NULL && Ptr->right == NULL) // 0 children
             {
                 if(Parent == NULL) // Node is a root
                 {
-                    free(Ptr);
+                    delete Ptr;
                     root = NULL;
-
-                    cout << "done.";
-
-                    return Ptr;
                 }
                 else
                 {
-                    free(Ptr);
+                    delete Ptr;
+
                     if(isLeft)
                     {
                         Parent->left = NULL;
@@ -380,6 +377,9 @@ BST::node* BST::DeleteLeaf(int key, node* Ptr)
                         Parent->right = NULL;
                     }
                 }
+
+                cout << "...done.\n\n";
+                return;
             }
 
             if(Ptr->left == NULL || Ptr->right == NULL) // 1 child
@@ -395,8 +395,8 @@ BST::node* BST::DeleteLeaf(int key, node* Ptr)
 
                 if(Parent == NULL) // Root node is being deleted
                 {
+                    delete Ptr;
                     root = Child;
-                    free(Ptr);
                 }
                 else // Deleting node, parent adopting node children
                 {
@@ -408,51 +408,53 @@ BST::node* BST::DeleteLeaf(int key, node* Ptr)
                     {
                         Parent->right = Child;
                     }
-                    free(Ptr);
+
+                    delete Ptr;
                 }
+
+                cout << "...done.\n\n";
+                return;
             }
 
-            // 2 children
-            // Finding replacement (highest node less than node to delete)
-            ParentReplacement = Ptr;
-            NodeReplacement = Ptr->left;
-            isLeft = 1; // NodeReplacement is left child of parent
-
-            while(NodeReplacement->right != NULL)
+            if(Ptr->left != NULL && Ptr->right != NULL) // 2 children
             {
-                ParentReplacement = NodeReplacement;
-                NodeReplacement = NodeReplacement->right;
-                isLeft = 0; // NodeReplacement is right child of parent
-            }
+                // Finding replacement (highest node less than node to delete)
+                ParentReplacement = Ptr;
+                NodeReplacement = Ptr->left;
+                isLeft = true; // NodeReplacement is left child of parent
 
-            Ptr->key = NodeReplacement->key; // Copying data
+                while(NodeReplacement->right != NULL)
+                {
+                    ParentReplacement = NodeReplacement;
+                    NodeReplacement = NodeReplacement->right;
+                    isLeft = 0; // NodeReplacement is right child of parent
+                }
 
-            if(isLeft) // NodeReplacement is left child of Ptr.
-            {
-                Ptr->left = NodeReplacement->left;
-                free(NodeReplacement);
-            }
-            else // NodeReplacement is right grandchild of Ptr->left
-            {
-                ParentReplacement->right = NodeReplacement->left;
-                free(NodeReplacement);
-            }
+                Ptr->key = NodeReplacement->key; // Copying data
 
-            return Ptr;
+                if(isLeft) // NodeReplacement is left child of Ptr.
+                {
+                    Ptr->left = NodeReplacement->left;
+                }
+                else // NodeReplacement is right grandchild of Ptr->left
+                {
+                    ParentReplacement->right = NodeReplacement->left;
+                }
+
+                cout << "...done.\n\n";
+                return;
+            }
         }
     }
     else
     {
         cout << "\nThe tree is empty.\n";
-        return Ptr;
     }
 }
 
-vector<int> BST::SortInOrder(node* Ptr)
+void BST::PrintInOrder(node* Ptr)
 {
-    vector<int> keys;
-
-    if(Ptr != NULL)
+    if(root != NULL)
     {
         stack<node*> s;
         s.push(NULL);
@@ -468,37 +470,16 @@ vector<int> BST::SortInOrder(node* Ptr)
             {
                 if(s.top() == NULL)
                 {
-                    return keys;
+                    return;
                 }
 
                 Ptr = s.top();
-                keys.push_back(Ptr->key);
+                cout << Ptr->key << " ";
                 s.pop();
                 Ptr = Ptr->right;
             }
         }
         while(true);
-    }
-    else
-    {
-        cout << "\nThe tree is empty.\n";
-        return keys;
-    }
-}
-
-void BST::PrintInOrder()
-{
-    if(root != NULL)
-    {
-        vector<int> InOrderKeys = SortInOrder(root);
-        int vectorSize = InOrderKeys.size();
-
-        cout << "Printing keys in order: \n";
-
-        for(int i = 0; i < vectorSize; i++)
-        {
-            cout << InOrderKeys.at(i) << " ";
-        }
     }
     else
     {
