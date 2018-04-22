@@ -25,9 +25,6 @@ TODO:
 #include <iostream>
 #include <cstdlib>
 #include <stack>
-#include <queue>
-#include <vector>
-
 #include "BST.h"
 
 using namespace std;
@@ -477,6 +474,96 @@ void BST::PrintInOrder(node* Ptr)
                 cout << Ptr->key << " ";
                 s.pop();
                 Ptr = Ptr->right;
+            }
+        }
+        while(true);
+    }
+    else
+    {
+        cout << "\nThe tree is empty.\n";
+    }
+}
+
+void BST::PrintPostOrder(node* Ptr)
+{
+    if(root != NULL)
+    {
+        stack<node*> s;
+        s.push(NULL);
+
+        do
+        {
+            if(Ptr->left != NULL)
+            {
+                s.push(Ptr);
+                Ptr = Ptr->left;
+            }
+            else
+            {
+                cout << Ptr->key << " ";
+
+                if(Ptr->right == NULL)
+                {
+                    Ptr = s.top();
+                    //s.pop();
+
+                    if(Ptr->right != NULL)
+                    {
+                        Ptr = Ptr->right;
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    Ptr = Ptr->right;
+                }
+
+
+
+
+            }
+
+
+
+            if(Ptr != NULL)
+            {
+                if(s.top() == NULL)
+                {
+                    return;
+                }
+
+                s.push(Ptr);
+                Ptr = Ptr->left;
+            }
+            else
+            {
+                Ptr = s.top();
+
+                if(Ptr->right != NULL)
+                {
+                    Ptr = Ptr->right;
+                }
+                else
+                {
+                    cout << Ptr->key << " ";
+                    s.pop();
+                    Ptr = NULL;
+                }
+
+
+
+
+
+
+
+                else
+                {
+
+                    s.pop();
+                }
             }
         }
         while(true);
