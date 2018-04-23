@@ -109,6 +109,7 @@ void BST::ShowMenu()
             break;
 
         case 10:
+            PrintPostOrder(root);
             break;
 
         case 11:
@@ -489,84 +490,122 @@ void BST::PrintPostOrder(node* Ptr)
     if(root != NULL)
     {
         stack<node*> s;
-        s.push(NULL);
 
         do
         {
-            if(Ptr->left != NULL)
+            while(Ptr)
             {
+                if(Ptr->right)
+                {
+                    s.push(Ptr->right);
+                }
+
                 s.push(Ptr);
                 Ptr = Ptr->left;
+            }
+
+            Ptr = s.top();
+            s.pop();
+
+            if(Ptr->right && s.top() == Ptr->right)
+            {
+                s.pop();
+                s.push(Ptr);
+                Ptr = Ptr->right;
             }
             else
             {
                 cout << Ptr->key << " ";
-
-                if(Ptr->right == NULL)
-                {
-                    Ptr = s.top();
-                    //s.pop();
-
-                    if(Ptr->right != NULL)
-                    {
-                        Ptr = Ptr->right;
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-                    Ptr = Ptr->right;
-                }
-
-
-
-
-            }
-
-
-
-            if(Ptr != NULL)
-            {
-                if(s.top() == NULL)
-                {
-                    return;
-                }
-
-                s.push(Ptr);
-                Ptr = Ptr->left;
-            }
-            else
-            {
-                Ptr = s.top();
-
-                if(Ptr->right != NULL)
-                {
-                    Ptr = Ptr->right;
-                }
-                else
-                {
-                    cout << Ptr->key << " ";
-                    s.pop();
-                    Ptr = NULL;
-                }
-
-
-
-
-
-
-
-                else
-                {
-
-                    s.pop();
-                }
+                Ptr = NULL;
             }
         }
-        while(true);
+        while(s.empty() != true);
+
+
+
+
+
+
+
+//        stack<node*> s;
+//        s.push(NULL);
+
+//        do
+//        {
+//            if(Ptr->left != NULL)
+//            {
+//                s.push(Ptr);
+//                Ptr = Ptr->left;
+//            }
+//            else
+//            {
+//                cout << Ptr->key << " ";
+
+//                if(Ptr->right == NULL)
+//                {
+//                    Ptr = s.top();
+//                    //s.pop();
+
+//                    if(Ptr->right != NULL)
+//                    {
+//                        Ptr = Ptr->right;
+//                    }
+//                    else
+//                    {
+
+//                    }
+//                }
+//                else
+//                {
+//                    Ptr = Ptr->right;
+//                }
+
+
+
+
+//            }
+
+
+
+//            if(Ptr != NULL)
+//            {
+//                if(s.top() == NULL)
+//                {
+//                    return;
+//                }
+
+//                s.push(Ptr);
+//                Ptr = Ptr->left;
+//            }
+//            else
+//            {
+//                Ptr = s.top();
+
+//                if(Ptr->right != NULL)
+//                {
+//                    Ptr = Ptr->right;
+//                }
+//                else
+//                {
+//                    cout << Ptr->key << " ";
+//                    s.pop();
+//                    Ptr = NULL;
+//                }
+
+
+
+
+
+
+
+//                else
+//                {
+
+//                    s.pop();
+//                }
+//            }
+//        }
+//        while(true);
     }
     else
     {
