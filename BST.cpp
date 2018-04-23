@@ -454,6 +454,8 @@ void BST::PrintInOrder(node* Ptr)
 {
     if(root != NULL)
     {
+        cout << "Printing keys in-order (Lt -> T -> Rt):\n";
+
         stack<node*> s;
         s.push(NULL);
 
@@ -489,13 +491,15 @@ void BST::PrintPostOrder(node* Ptr)
 {
     if(root != NULL)
     {
+        cout << "Printing keys post-order (Lt -> Rt -> T):\n";
+
         stack<node*> s;
 
         do
         {
-            while(Ptr)
+            while(Ptr != NULL)
             {
-                if(Ptr->right)
+                if(Ptr->right != NULL)
                 {
                     s.push(Ptr->right);
                 }
@@ -507,105 +511,26 @@ void BST::PrintPostOrder(node* Ptr)
             Ptr = s.top();
             s.pop();
 
-            if(Ptr->right && s.top() == Ptr->right)
+            if(!s.empty())
             {
-                s.pop();
-                s.push(Ptr);
-                Ptr = Ptr->right;
+                if(Ptr->right != NULL && s.top() == Ptr->right)
+                {
+                    s.pop();
+                    s.push(Ptr);
+                    Ptr = Ptr->right;
+                }
+                else
+                {
+                    cout << Ptr->key << " ";
+                    Ptr = NULL;
+                }
             }
             else
             {
                 cout << Ptr->key << " ";
-                Ptr = NULL;
             }
         }
-        while(s.empty() != true);
-
-
-
-
-
-
-
-//        stack<node*> s;
-//        s.push(NULL);
-
-//        do
-//        {
-//            if(Ptr->left != NULL)
-//            {
-//                s.push(Ptr);
-//                Ptr = Ptr->left;
-//            }
-//            else
-//            {
-//                cout << Ptr->key << " ";
-
-//                if(Ptr->right == NULL)
-//                {
-//                    Ptr = s.top();
-//                    //s.pop();
-
-//                    if(Ptr->right != NULL)
-//                    {
-//                        Ptr = Ptr->right;
-//                    }
-//                    else
-//                    {
-
-//                    }
-//                }
-//                else
-//                {
-//                    Ptr = Ptr->right;
-//                }
-
-
-
-
-//            }
-
-
-
-//            if(Ptr != NULL)
-//            {
-//                if(s.top() == NULL)
-//                {
-//                    return;
-//                }
-
-//                s.push(Ptr);
-//                Ptr = Ptr->left;
-//            }
-//            else
-//            {
-//                Ptr = s.top();
-
-//                if(Ptr->right != NULL)
-//                {
-//                    Ptr = Ptr->right;
-//                }
-//                else
-//                {
-//                    cout << Ptr->key << " ";
-//                    s.pop();
-//                    Ptr = NULL;
-//                }
-
-
-
-
-
-
-
-//                else
-//                {
-
-//                    s.pop();
-//                }
-//            }
-//        }
-//        while(true);
+        while(!s.empty());
     }
     else
     {
