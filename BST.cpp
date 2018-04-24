@@ -25,6 +25,7 @@ TODO:
 #include <iostream>
 #include <cstdlib>
 #include <stack>
+#include <vector>
 #include "BST.h"
 
 using namespace std;
@@ -457,6 +458,36 @@ void BST<T>::DeleteLeaf(T key)
     {
         cout << "\nДерево пусто.\n";
     }
+}
+
+template <typename T>
+vector<node*> BST<T>::SortInOrder(node* Ptr)
+{
+	vector<node*> v;
+	stack<node*> s;
+	s.push(NULL);
+
+	do
+	{
+		if (Ptr != NULL)
+		{
+			s.push(Ptr);
+			Ptr = Ptr->left;
+		}
+		else
+		{
+			if (s.top() == NULL)
+			{
+				return v;
+			}
+
+			Ptr = s.top();
+			v.push_back(Ptr);
+			s.pop();
+			Ptr = Ptr->right;
+		}
+	}
+	while(true);
 }
 
 template <typename T>

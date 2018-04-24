@@ -13,6 +13,20 @@ private:
         node* right;
     };
 
+	/*class iterator
+	{
+		node* Pt;
+
+	public:
+		iterator() : pt(0) {}
+		iterator(node* Pn) : pt(pn) {}
+		T operator*() {return pt->key}
+		iterator& operator++()
+		{
+			pt = pt->p
+		}
+	};*/
+
     node* root;
 
     void FillTree();
@@ -32,6 +46,8 @@ private:
     void AddNewLeaf();
 
     void DeleteLeaf(T key);
+
+	vector<node*> SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
