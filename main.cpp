@@ -1,15 +1,61 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
+#include <string>
 #include "BST.cpp"
 
 using namespace std;
 
 int main()
 {
-    BST myTree;
+	setlocale(0, "");
 
-    myTree.ShowMenu();
+	while(true)
+    {
+        system("cls");
+        short choice;
 
+        cout << endl <<
+
+                "1. Целое число.\n" <<
+                "2. Число с плавающей точкой.\n" <<
+                "3. Символ.\n\n" <<
+
+                "4. Выход.\n" <<
+
+                "\n\nВыберите тип: ";
+
+        cin >> choice;
+        cout << endl;
+
+        switch (choice)
+        {
+            case 1:
+            {
+                BST<int> intTree;
+                intTree.ShowMenu();
+                break;
+            }
+
+            case 2:
+            {
+                BST<double> doubleTree;
+                doubleTree.ShowMenu();
+                break;
+            }
+
+            case 3:
+            {
+                BST<char> charTree;
+                charTree.ShowMenu();
+                break;
+            }
+
+            case 4:
+            {
+                return 0;
+            }
+        }
+    }
 /*
     //int input = 0;
 

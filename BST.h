@@ -1,14 +1,14 @@
-#ifndef BST_H
+﻿#ifndef BST_H
 #define BST_H
 
 using namespace std;
 
-class BST
+template <typename T> class BST
 {
 private:
     struct node
     {
-        int key;
+        T key;
         node* left;
         node* right;
     };
@@ -23,15 +23,15 @@ private:
 
     void EmptyCheck(node* Ptr);
 
-    void FindByKey(int key, node* Ptr);
+    void FindByKey(T key, node* Ptr);
 
-    node* CreateLeaf(int key);
+    node* CreateLeaf(T key);
 
-    void AddLeaf(int key, node* Ptr);
+    void AddLeaf(T key, node* Ptr);
 
     void AddNewLeaf();
 
-    void DeleteLeaf(int key);
+    void DeleteLeaf(T key);
 
     void PrintPostOrder(node* Ptr);
 

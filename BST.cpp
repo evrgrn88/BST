@@ -1,4 +1,4 @@
-/*
+﻿/*
 TODO:
 
 Итератор:
@@ -29,12 +29,14 @@ TODO:
 
 using namespace std;
 
-BST::BST()
+template <typename T>
+BST<T>::BST()
 {
     root = NULL;
 }
 
-void BST::ShowMenu()
+template <typename T>
+void BST<T>::ShowMenu()
 {
     while(true)
     {
@@ -42,18 +44,18 @@ void BST::ShowMenu()
 
         short choice;
         cout << endl <<
-                "1. Create a new tree.\n" <<
-                "2. Print the tree in order.\n" <<
-                "3. Show tree size.\n" <<
-                "4. Clear the tree.\n" <<
-                "5. Check if the tree is empty.\n" <<
-                "6. Search element.\n" <<
-                "7. Add new element.\n" <<
-                "8. Delete element.\n" <<
-                "9. Use the operation iterator.\n" <<
-                "10. Traverse the tree (Lt -> Rt -> t).\n" <<
-                "11. Merge two subtrees recursively.\n" <<
-                "\n\nChoose your operation: ";
+                "1. Создать новое дерево.\n" <<
+                "2. Вывести элементы по порядку.\n" <<
+                "3. Показать число элементов дерева.\n" <<
+                "4. Очистить дерево.\n" <<
+                "5. Проверить дерево на пустоту.\n" <<
+                "6. Искать элемент.\n" <<
+                "7. Добавить новый элемент.\n" <<
+                "8. Удалить элемент.\n" <<
+                "9. Использовать итератор.\n" <<
+                "10. Обход Post-order (Lt -> Rt -> t).\n" <<
+                "11. Объединить два поддерева.\n" <<
+                "\n\nВыберите операцию: ";
 
         cin >> choice;
         cout << endl;
@@ -81,9 +83,9 @@ void BST::ShowMenu()
             break;
 
         case 6:
-            int search;
+            T search;
 
-            cout << "\nSearch: ";
+            cout << "\Поиск: ";
             cin >> search;
             cout << endl;
 
@@ -96,9 +98,9 @@ void BST::ShowMenu()
             break;
 
         case 8:
-            int deleteKey;
+            T deleteKey;
 
-            cout << "Enter a key to delete: ";
+            cout << "Введите ключ: ";
             cin >> deleteKey;
 
             DeleteLeaf(deleteKey);
@@ -121,12 +123,13 @@ void BST::ShowMenu()
     }
 }
 
-void BST::FillTree()
+template <typename T>
+void BST<T>::FillTree()
 {
     ClearTree();
     int treeSize;
 
-    cout << "\nEnter tree size: \n";
+    cout << "\nВведите число элементов: \n";
     cin >> treeSize;
     cout << endl;
 
@@ -136,12 +139,13 @@ void BST::FillTree()
     }
 }
 
-void BST::ShowSize()
+template <typename T>
+void BST<T>::ShowSize()
 {
     if(root != NULL)
     {
         stack<node*> s;
-        int i = 0;
+        T i = 0;
         node* Ptr = root;
         s.push(NULL);
 
@@ -167,47 +171,50 @@ void BST::ShowSize()
         }
         while(true);
 
-        cout << "The tree consists of " << i << " elements.";
+        cout << "Количество элементов: " << i;
     }
     else
     {
-        cout << "\nThe tree is empty.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-void BST::ClearTree()
+template <typename T>
+void BST<T>::ClearTree()
 {
     if(root != NULL)
     {
         while(root != NULL)
         {
-            cout << "Deleting element " << root->key << endl;
+            cout << "Удаление элемента " << root->key << endl;
             DeleteLeaf(root->key);
         }
 
-        cout << "\nThe tree was cleared.\n";
+        cout << "\nДерево очищено.\n";
     }
     else
     {
-        cout << "The tree is empty.\n";
+        cout << "Дерево пусто.\n";
     }
 }
 
-void BST::EmptyCheck(node* Ptr)
+template <typename T>
+void BST<T>::EmptyCheck(node* Ptr)
 {
     if(Ptr == NULL)
     {
-        cout << "\nThe tree is empty.\n";
+        cout << "\nДерево пусто.\n";
     }
     else
     {
-        cout << "\nThe tree is NOT empty\n";
+        cout << "\nДерево НЕ пусто.\n";
     }
 
     cout << endl;
 }
 
-void BST::FindByKey(int key, node* Ptr)
+template <typename T>
+void BST<T>::FindByKey(T key, node* Ptr)
 {
     if(root != NULL)
     {
@@ -230,22 +237,23 @@ void BST::FindByKey(int key, node* Ptr)
 
         if(Ptr == NULL)
         {
-            cout << "\nElement is NOT found\n";
+            cout << "\nЭлемент НЕ найден\n";
             return;
         }
 
         if(Ptr->key == key)
         {
-            cout << "\nElement is found\n";
+            cout << "\nЭлемент найден\n";
         }
     }
     else
     {
-        cout << "\nThe tree is empty.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-BST::node* BST::CreateLeaf(int key)
+template <typename T>
+typename BST<T>::node* BST<T>::CreateLeaf(T key)
 {
     node* n = new node;
 
@@ -256,7 +264,8 @@ BST::node* BST::CreateLeaf(int key)
     return n;
 }
 
-void BST::AddLeaf(int key, node* Ptr)
+template <typename T>
+void BST<T>::AddLeaf(T key, node* Ptr)
 {
     if(root == NULL)
     {
@@ -268,7 +277,7 @@ void BST::AddLeaf(int key, node* Ptr)
         {
             if(key == Ptr->key)
             {
-                cout << "\nThe value already exists!\nType the new value: ";
+                cout << "\nЭлемент уже существует!\nВведите новое значение: ";
                 cin >> key;
                 Ptr = root;
             }
@@ -303,16 +312,18 @@ void BST::AddLeaf(int key, node* Ptr)
     }
 }
 
-void BST::AddNewLeaf()
+template <typename T>
+void BST<T>::AddNewLeaf()
 {
-    int newKey;
-    cout << "\nEnter an element: \n";
+    T newKey;
+    cout << "\nВведите ключ: \n";
     cin >> newKey;
     AddLeaf(newKey, root);
     cout << endl;
 }
 
-void BST::DeleteLeaf(int key)
+template <typename T>
+void BST<T>::DeleteLeaf(T key)
 {
     if(root != NULL)
     {
@@ -347,14 +358,12 @@ void BST::DeleteLeaf(int key)
 
         if(Ptr == NULL)
         {
-            cout << "\nElement is NOT found\n";
+            cout << "\nЭлемент НЕ найден\n";
             return;
         }
 
         if(Ptr->key == key)
         {
-            //cout << "\nElement is found. Deleting... ";
-
             if(Ptr->left == NULL && Ptr->right == NULL) // 0 children
             {
                 if(Parent == NULL) // Node is a root
@@ -376,7 +385,7 @@ void BST::DeleteLeaf(int key)
                     }
                 }
 
-                cout << "...done.\n\n";
+                cout << "...готово.\n\n";
                 return;
             }
 
@@ -410,7 +419,7 @@ void BST::DeleteLeaf(int key)
                     delete Ptr;
                 }
 
-                cout << "...done.\n\n";
+                cout << "...готово.\n\n";
                 return;
             }
 
@@ -439,22 +448,23 @@ void BST::DeleteLeaf(int key)
                     ParentReplacement->right = NodeReplacement->left;
                 }
 
-                cout << "...done.\n\n";
+                cout << "...готово.\n\n";
                 return;
             }
         }
     }
     else
     {
-        cout << "\nThe tree is empty.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-void BST::PrintInOrder(node* Ptr)
+template <typename T>
+void BST<T>::PrintInOrder(node* Ptr)
 {
     if(root != NULL)
     {
-        cout << "Printing keys in-order (Lt -> T -> Rt):\n";
+        cout << "Вывод элементов in-order (Lt -> T -> Rt):\n";
 
         stack<node*> s;
         s.push(NULL);
@@ -483,15 +493,16 @@ void BST::PrintInOrder(node* Ptr)
     }
     else
     {
-        cout << "\nThe tree is empty.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-void BST::PrintPostOrder(node* Ptr)
+template <typename T>
+void BST<T>::PrintPostOrder(node* Ptr)
 {
     if(root != NULL)
     {
-        cout << "Printing keys post-order (Lt -> Rt -> T):\n";
+        cout << "Вывод элементов post-order (Lt -> Rt -> T):\n";
 
         stack<node*> s;
 
@@ -534,7 +545,7 @@ void BST::PrintPostOrder(node* Ptr)
     }
     else
     {
-        cout << "\nThe tree is empty.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
@@ -615,7 +626,7 @@ int BST::FindSmallestPrivate(node* Ptr)
 {
     if(root == NULL)
     {
-        cout << "The tree is empty\n";
+        cout << "Дерево пусто\n";
         return -1000;
     }
     else
@@ -666,7 +677,7 @@ void BST::RemoveNodePrivate(int key, node* parent)
     }
     else
     {
-        cout << "The tree is empty\n";
+        cout << "Дерево пусто\n";
     }
 }
 
@@ -715,7 +726,7 @@ void BST::RemoveRootMatch()
     }
     else
     {
-        cout << "Can not remove root. The tree is empty\n";
+        cout << "Can not remove root. Дерево пусто\n";
     }
 }
 
@@ -770,7 +781,7 @@ void BST::RemoveMatch(node* parent, node* match, bool left)
     }
     else
     {
-        cout << "Can not remove match. The tree is empty\n";
+        cout << "Can not remove match. Дерево пусто\n";
 
     }
 }
@@ -794,7 +805,8 @@ void BST::RemoveSubtree(node* Ptr)
 }
 */
 
-BST::~BST()
+template <typename T>
+BST<T>::~BST()
 {
 
 }
