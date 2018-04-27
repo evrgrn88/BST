@@ -86,7 +86,7 @@ void BST<T>::ShowMenu()
         case 6:
             T search;
 
-            cout << "\Поиск: ";
+            cout << "\nПоиск: ";
             cin >> search;
             cout << endl;
 
@@ -116,7 +116,23 @@ void BST<T>::ShowMenu()
             break;
 
         case 11:
+        {
+            node* n = TreeKeys.front();
+            int k = n->key;
+            cout << k;
+
+            //template <typename T>
+//            typename vector<node*>::iterator it;
+//            //int k;
+//            //node* n;
+
+//            for(it = TreeKeys.begin(); it != TreeKeys.end(); it++)
+//            {
+//                cout << " " << it->key;
+//            }
+
             break;
+        }
         }
 
         cout << endl << endl;
@@ -271,6 +287,7 @@ void BST<T>::AddLeaf(T key, node* Ptr)
     if(root == NULL)
     {
         root = CreateLeaf(key);
+        TreeKeys.push_back(root);
     }
     else
     {
@@ -293,6 +310,8 @@ void BST<T>::AddLeaf(T key, node* Ptr)
                     else
                     {
                         Ptr->right = CreateLeaf(key);
+                        TreeKeys.push_back(Ptr->right);
+
                         break;
                     }
                 }
@@ -305,6 +324,8 @@ void BST<T>::AddLeaf(T key, node* Ptr)
                     else
                     {
                         Ptr->left = CreateLeaf(key);
+                        TreeKeys.push_back(Ptr->left);
+
                         break;
                     }
                 }
@@ -460,35 +481,35 @@ void BST<T>::DeleteLeaf(T key)
     }
 }
 
-template <typename T>
-vector<node*> BST<T>::SortInOrder(node* Ptr)
-{
-	vector<node*> v;
-	stack<node*> s;
-	s.push(NULL);
+//template <typename T>
+//vector<node*> BST<T>::SortInOrder(node* Ptr)
+//{
+//	vector<node*> v;
+//	stack<node*> s;
+//	s.push(NULL);
 
-	do
-	{
-		if (Ptr != NULL)
-		{
-			s.push(Ptr);
-			Ptr = Ptr->left;
-		}
-		else
-		{
-			if (s.top() == NULL)
-			{
-				return v;
-			}
+//	do
+//	{
+//		if (Ptr != NULL)
+//		{
+//			s.push(Ptr);
+//			Ptr = Ptr->left;
+//		}
+//		else
+//		{
+//			if (s.top() == NULL)
+//			{
+//				return v;
+//			}
 
-			Ptr = s.top();
-			v.push_back(Ptr);
-			s.pop();
-			Ptr = Ptr->right;
-		}
-	}
-	while(true);
-}
+//			Ptr = s.top();
+//			v.push_back(Ptr);
+//			s.pop();
+//			Ptr = Ptr->right;
+//		}
+//	}
+//	while(true);
+//}
 
 template <typename T>
 void BST<T>::PrintInOrder(node* Ptr)

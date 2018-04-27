@@ -27,6 +27,8 @@ private:
 		}
 	};*/
 
+    vector<node*> TreeKeys;
+
     node* root;
 
     void FillTree();
@@ -47,7 +49,7 @@ private:
 
     void DeleteLeaf(T key);
 
-	vector<node*> SortInOrder(node* Ptr);
+    //vector<node*> SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
