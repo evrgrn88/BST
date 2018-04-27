@@ -25,6 +25,7 @@ TODO:
 #include <iostream>
 #include <cstdlib>
 #include <stack>
+#include <iterator>
 #include <vector>
 #include "BST.h"
 
@@ -116,6 +117,16 @@ void BST<T>::ShowMenu()
             break;
 
         case 11:
+		{
+			node* show = TreeKeys.front();
+			cout << endl << show->key;
+			/*for (auto i : TreeKeys)
+			{
+				show = TreeKeys.at(i);
+				cout << " " << show->key;
+			}*/
+		}
+
             break;
         }
 
@@ -271,6 +282,7 @@ void BST<T>::AddLeaf(T key, node* Ptr)
     if(root == NULL)
     {
         root = CreateLeaf(key);
+		TreeKeys.push_back(root)
     }
     else
     {
@@ -293,6 +305,7 @@ void BST<T>::AddLeaf(T key, node* Ptr)
                     else
                     {
                         Ptr->right = CreateLeaf(key);
+						TreeKeys.push_back(Ptr->right)
                         break;
                     }
                 }
@@ -305,6 +318,7 @@ void BST<T>::AddLeaf(T key, node* Ptr)
                     else
                     {
                         Ptr->left = CreateLeaf(key);
+						TreeKeys.push_back(Ptr->left)
                         break;
                     }
                 }
@@ -460,35 +474,35 @@ void BST<T>::DeleteLeaf(T key)
     }
 }
 
-template <typename T>
-vector<node*> BST<T>::SortInOrder(node* Ptr)
-{
-	vector<node*> v;
-	stack<node*> s;
-	s.push(NULL);
-
-	do
-	{
-		if (Ptr != NULL)
-		{
-			s.push(Ptr);
-			Ptr = Ptr->left;
-		}
-		else
-		{
-			if (s.top() == NULL)
-			{
-				return v;
-			}
-
-			Ptr = s.top();
-			v.push_back(Ptr);
-			s.pop();
-			Ptr = Ptr->right;
-		}
-	}
-	while(true);
-}
+//template <typename T>
+//vector<node*> BST<T>::SortInOrder(node* Ptr)
+//{
+//	vector<node*> v;
+//	stack<node*> s;
+//	s.push(NULL);
+//
+//	do
+//	{
+//		if (Ptr != NULL)
+//		{
+//			s.push(Ptr);
+//			Ptr = Ptr->left;
+//		}
+//		else
+//		{
+//			if (s.top() == NULL)
+//			{
+//				return v;
+//			}
+//
+//			Ptr = s.top();
+//			v.push_back(Ptr);
+//			s.pop();
+//			Ptr = Ptr->right;
+//		}
+//	}
+//	while(true);
+//}
 
 template <typename T>
 void BST<T>::PrintInOrder(node* Ptr)

@@ -13,19 +13,24 @@ private:
         node* right;
     };
 
-	/*class iterator
-	{
-		node* Pt;
+	vector<node*> TreeKeys = new vector<node*>;
 
-	public:
-		iterator() : pt(0) {}
-		iterator(node* Pn) : pt(pn) {}
-		T operator*() {return pt->key}
-		iterator& operator++()
-		{
-			pt = pt->p
-		}
-	};*/
+	//class iterator
+	//{
+	//	node* Ptr;
+	//	//vector<node*> vPt;
+
+	//public:
+	//	iterator() : Ptr(0) {}
+	//	iterator(node* pn) : Ptr(pn) {}
+	//	
+	//	T operator*()
+	//	{
+	//		return Ptr->key
+	//	}
+
+	//	
+	//};
 
     node* root;
 
@@ -47,7 +52,7 @@ private:
 
     void DeleteLeaf(T key);
 
-	vector<node*> SortInOrder(node* Ptr);
+	//vector<node*> SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
@@ -75,6 +80,9 @@ public:
 
     void ShowMenu();
 
+	//void ItrStandOnRoot(node* Ptr);
+
+	//void ItrCheckEnd(node* Ptr);
 /*
     int ReturnRootKey();
 
