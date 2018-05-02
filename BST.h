@@ -1,7 +1,8 @@
 ﻿#ifndef BST_H
 #define BST_H
 
-#include <iterator>
+//#include <iterator>
+//#include <vector>
 
 using namespace std;
 
@@ -16,42 +17,86 @@ private:
         node* right;
     };
 
-	
-	
+	vector<node*> TreeKeys;
+	vector<node*> SortedKeys;
+	typename vector<node*>::iterator iterator;
+	//
+	//
 
-	/*class iterator
-	{*/
-	//	node* Ptr;
+	//class ItBST
+	//{
+	//private:
+	//	//node* Ptr;
+	//	using Nodes = vector<node*>;
+	//	void store_sorted_nodes(node* Ptr);
+	//	Nodes nodes;
+	//	typename Nodes::size_type current { 0 };
 
 	//public:
-	//	iterator() : Ptr(0) {}
-	//	iterator(node* pn) : Ptr(pn) {}
-	//	
-	//	// Установка на корень дерева
-	//	iterator& GoRoot()
+	//	// Iterator traits, previously from std::iterator.
+	//	using value_type = T;
+	//	using difference_type = ptrdiff_t;
+	//	using pointer = T*;
+	//	using reference = T&;
+	//	using iterator_category = bidirectional_iterator_tag;
 
-	//	int operator*()
-	//	{
-	//		return Ptr->key;
-	//	}
+	//	// Default constructible.
+	//	ItBST() = default;
+	//	explicit ItBST(node* Ptr);
 
-	//	iterator& operator++() // Для ++it
-	//	{
-	//		Ptr = pt->next;
-	//		return *this;
-	//	}
+	//	// Dereferencable.
+	//	reference operator*() const;
 
-	//	iterator operator++(int) // Для it++
-	//	{
-	//		iterator tmp = *this;
-	//		pt = pt->next;
-	//		return tmp;
-	//	}		
+	//	// Pre- and post-incrementable.
+	//	ItBST& operator++();
+	//	ItBST operator++(int);
+
+	//	// Pre- and post-decrementable.
+	//	ItBST& operator--();
+	//	ItBST operator--(int);
+
+	//	// Equality / inequality.
+	//	bool operator==(const ItBST& rhs);
+	//	bool operator!=(const ItBST& rhs);
+
+
+
+
+
+	////	iterator() : Ptr(0) {}
+	////	iterator(node* pn) : Ptr(pn) {}
+
+	////	// Установка на корень дерева
+	////	iterator& GoRoot()
+
+	////		int operator*()
+	////	{
+	////		return Ptr->key;
+	////	}
+
+	////	iterator& operator++() // Для ++it
+	////	{
+	////		Ptr = pt->next;
+	////		return *this;
+	////	}
+
+	////	iterator operator++(int) // Для it++
+	////	{
+	////		iterator tmp = *this;
+	////		pt = pt->next;
+	////		return tmp;
+	////	}
 	//};
+
+
+
+	//void IteratorMenu();
+
+	/*void ClearVector();*/
 
     node* root;
 
-	node* ReturnNodePrivate(node* Ptr);
+	//node* ReturnNodePrivate(node* Ptr);
 
     void FillTree();
 
@@ -71,11 +116,11 @@ private:
 
     void DeleteLeaf(T key);
 
-	//vector<node*> SortInOrder(node* Ptr);
+	void SortInOrder();
 
     void PrintPostOrder(node* Ptr);
 
-    void PrintInOrder(node* Ptr);
+    void PrintInOrder();
 
     /*
     node* ReturnNodePrivate(int key, node* Ptr);
@@ -94,39 +139,14 @@ private:
     */
 
 public:
-	// Iterator traits, previously from std::iterator.
-	using value_type = T;
-	using difference_type = ptrdiff_t;
-	using pointer = T*;
-	using reference = T&;
-	using iterator_category = bidirectional_iterator_tag;
-
-	node* begin();
-
-	node* end();
-	
-	// Default constructible.
-	//BST();
-	//BstIterator() = default;
-	//explicit BST(node* Ptr);
-
-	// Dereferencable.
-	reference operator*() const;
-	
-	// Pre- and post-incrementable.
-	node& operator++();
-	node operator++(int);
-
-	// Pre- and post-decrementable.
-	node& operator--();
-	node operator--(int);
-
-	// Equality / inequality.
-	bool operator==(const node& rhs);
-	bool operator!=(const node& rhs);
-
 	BST();
     ~BST();
+
+	/*using iterator = ItBST;
+
+	iterator begin() const;
+
+	iterator end() const;*/
 
     void ShowMenu();
 
@@ -143,5 +163,7 @@ public:
     void RemoveNode(int key);
 */
 };
+
+
 
 #endif // BST_H

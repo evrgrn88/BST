@@ -11,6 +11,7 @@ int main()
 	while(true)
     {
         system("cls");
+
         short choice;
 
         cout << endl <<
@@ -30,22 +31,22 @@ int main()
         {
             case 1:
             {
-                BST<int> intTree;
-                intTree.ShowMenu();
+                BST<int> MyTree;
+				MyTree.ShowMenu();
                 break;
             }
 
             case 2:
             {
-                BST<double> doubleTree;
-                doubleTree.ShowMenu();
+                BST<double> MyTree;
+				MyTree.ShowMenu();
                 break;
             }
 
             case 3:
             {
-                BST<char> charTree;
-                charTree.ShowMenu();
+                BST<char> MyTree;
+				MyTree.ShowMenu();
                 break;
             }
 
