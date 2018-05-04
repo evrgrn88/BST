@@ -107,7 +107,16 @@ void BST<T>::MainMenu()
 			PrintPostOrder(root);
 			break;
 
-		case 11:		
+		case 11:
+		{
+			node* Ptr = NULL;
+
+			for (iterator = SortedKeys.begin(); iterator < SortedKeys.end(); iterator++)
+			{
+				Ptr = *iterator;
+				cout << Ptr->key << " ";
+			}
+		}
 			break;
 		
 		}
@@ -126,7 +135,7 @@ void BST<T>::IteratorMenu()
 		node* Ptr = NULL;
 		short ch;
 		
-		SortInOrder();
+		SortInOrder(root);
 		iterator = SortedKeys.begin();
 		Ptr = *iterator;
 		
@@ -556,7 +565,7 @@ void BST<T>::DeleteLeaf(T key)
 }
 
 template <typename T>
-void BST<T>::SortInOrder()
+void BST<T>::SortInOrder(node* Ptr)
 {
 	if (!SortedKeys.empty())
 	{
@@ -564,7 +573,6 @@ void BST<T>::SortInOrder()
 	}
 	else
 	{
-		node* Ptr = root;
 		stack<node*> s;
 		s.push(NULL);
 
@@ -600,7 +608,7 @@ void BST<T>::PrintInOrder()
 		
 		cout << "Вывод элементов in-order (Lt -> T -> Rt):\n";
 
-		SortInOrder();
+		SortInOrder(root);
 		
 		for (iterator = SortedKeys.begin(); iterator != SortedKeys.end(); iterator++)
 		{

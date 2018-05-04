@@ -116,7 +116,7 @@ private:
 
     void DeleteLeaf(T key);
 
-	void SortInOrder();
+	void SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
