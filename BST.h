@@ -17,7 +17,7 @@ private:
         node* right;
     };
 
-	vector<node*> TreeKeys;
+	//vector<node*> TreeKeys;
 	vector<node*> SortedKeys;
 	typename vector<node*>::iterator iterator;
 	//
@@ -148,7 +148,9 @@ public:
 
 	iterator end() const;*/
 
-    void ShowMenu();
+    void MainMenu();
+
+	void IteratorMenu();
 
 	//void ItrStandOnRoot(node* Ptr);
 

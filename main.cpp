@@ -32,21 +32,21 @@ int main()
             case 1:
             {
                 BST<int> MyTree;
-				MyTree.ShowMenu();
+				MyTree.MainMenu();
                 break;
             }
 
             case 2:
             {
                 BST<double> MyTree;
-				MyTree.ShowMenu();
+				MyTree.MainMenu();
                 break;
             }
 
             case 3:
             {
                 BST<char> MyTree;
-				MyTree.ShowMenu();
+				MyTree.MainMenu();
                 break;
             }
 

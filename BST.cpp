@@ -1,14 +1,6 @@
 ﻿/*
 TODO:
 
-Итератор:
-Установка на корень
-Проверка конца
-Доступ к данным текущего элемента
-Переход к следующему по значению ключа элементу
-Переход к предыдущему по значению ключа элементу
-
-
 Объединение двух поддеревьев (рекурсивно)
 
 Вывод структуры на экран
@@ -24,7 +16,6 @@ TODO:
 #include <stack>
 #include <iterator>
 #include <vector>
-//#include <algorithm>
 #include "BST.h"
 
 using namespace std;
@@ -36,7 +27,7 @@ BST<T>::BST()
 }
 
 template <typename T>
-void BST<T>::ShowMenu()
+void BST<T>::MainMenu()
 {
     while (true)
     {
@@ -108,337 +99,130 @@ void BST<T>::ShowMenu()
 			break;
 
 		case 9:
-		{
-			if (root != NULL)
-			{
-				node* Ptr = root;
-				short ch;
-
-				SortInOrder();
-
-				while (true)
-				{
-					system("cls");
-
-					cout << endl <<
-						"1. Установить итератор на корень дерева.\n" <<
-						"2. Проверить конец дерева.\n" <<
-						"3. Текущий элемент.\n" <<
-						"4. Следующий по ключу элемент.\n" <<
-						"5. Предыдущий по ключу элемент.\n" <<
-
-						"\n\nВыберите операцию: ";
-
-					cin >> ch;
-					cout << endl;
-
-					switch (ch)
-					{
-					case 1:
-						iterator = TreeKeys.begin();
-						Ptr = *iterator;
-						cout << "Установка на корень дерева...\nКлюч: " << Ptr->key << endl;
-						break;
-
-					case 2:
-						iterator = TreeKeys.end();
-						Ptr = *--iterator;
-						cout << "Установка на конец дерева...\nКлюч: " << Ptr->key << endl;
-						break;
-
-					case 3:
-						cout << "Текущий элемент.\nКлюч: " << Ptr->key << endl;
-						break;
-
-					case 4:
-						
-						iterator = SortedKeys.begin();
-
-						while (iterator != *Ptr)
-							iterator++;
-
-						Ptr = *iterator;
-											
-						if (Ptr != NULL)
-							cout << "Переход на следующий по ключу элемент дерева...\nКлюч: " << Ptr->key << endl;
-						else
-							Ptr = *--iterator;
-
-						break;
-
-					case 5:
-						cout << "";
-						break;
-					}
-
-					system("pause");
-				}
-			}
-			else
-			{
-				cout << "Дерево пусто.\n";
-			}
-			
-			
-			
-					
+			IteratorMenu();
 			break;
-		}
+
 
 		case 10:
 			PrintPostOrder(root);
 			break;
 
-		case 11:
-		{
-			node* Ptrtst = NULL;
-			for (iterator = TreeKeys.begin(); iterator != TreeKeys.end(); iterator++)
-			{
-				Ptrtst = *iterator;
-				cout << Ptrtst->key << " ";
-			}
-				
-			
-			
-			//using BstIter = BST<T>::iterator;
-
-			//BstIter it = nodes.begin();
-			//BstIter it_end = nodes.end();
-
-			//// Test the equality / inequality.
-			//cout << "it == it: " << (it == it) << "\n";
-			//cout << "it != it: " << (it != it) << "\n";
-
-			//// Test dereferencing and iteration.
-			//cout << "First value: " << *it << "\n";
-			//cout << "Second value: " << *(++it) << "\n";
-			//cout << "Previous value: " << *(--it) << "\n";
-
-			//// Test range for loop.
-			//for (const auto& Ptr : nodes)
-			//	cout << n << "\n";
-
-			//// Test standard library algorithm.
-			//for_each(nodes.begin(), nodes.end(),
-			//	[](const auto& Ptr) { cout << Ptr << "\n"; });
-
-
-			//system("pause");
-
-			//
-			//
-			//
-			//
-			//////cout << "ыть\n";
-
-			////if (root != NULL)
-			////{
-			////	node* Ptr = begin();
-
-
-			////	cout << "Root is: " << Ptr->key << endl;
-
-			////	/*if (Ptr->right != NULL)
-			////	{
-			////		cout << "Go right.\nPtr is: ";
-			////		Ptr = Ptr->right;
-			////		cout << Ptr->key;
-			////	}
-			////	else
-			////	{
-			////		cout << "Not going right.";
-			////	}*/
-
-			////}
-			////else
-			////{
-			////	cout << "Дерево пусто.";
-			////}
-
-
-			//////node* show = TreeKeys.front();
-			//////cout << endl << show->key;
-			///////*for (auto i : TreeKeys)
-			//////{
-			//////	show = TreeKeys.at(i);
-			//////	cout << " " << show->key;
-			//////}*/
-
-
+		case 11:		
 			break;
-		}
-
+		
 		}
 
 		cout << endl << endl;
 		system("pause");
-
-		
+				
     }
 }
-//
-//template <typename T>
-//typename BST<T>::iterator BST<T>::begin() const
-//{
-//	return ItBST(root);
-//}
-//
-//template <typename T>
-//typename BST<T>::iterator BST<T>::end() const
-//{
-//	return ItBST(NULL);
-//}
-//
-////
-//// Функции итератора
-////
-//
-//
-//
-////template <typename T>
-////typename BST<T>::node* BST<T>::ReturnNodePrivate(node* Ptr)
-////{
-////	return Ptr;
-////}
-////
-////template <typename T>
-////typename BST<T>::node* BST<T>::begin()
-////{
-////	//return ReturnNodePrivate(root);
-////	node* Ptr = root;
-////
-////	while (Ptr->left != NULL)
-////	{
-////		Ptr = Ptr->left;
-////	}
-////
-////	return Ptr;
-////}
-////
-////template <typename T>
-////typename BST<T>::node* BST<T>::end()
-////{
-////	node* Ptr = root;
-////
-////	while (Ptr->right != NULL)
-////	{
-////		Ptr = Ptr->right;
-////	}
-////
-////	return Ptr;
-////}
-//
-//
-//
-//
-//
-////template <typename T>
-////BST<T>::BST(node* Ptr)
-////{
-////
-////}
-//
-//template <typename T>
-//BST<T>::ItBST::ItBST(node* Ptr)
-//{
-//	// Use internal helper to traverse in-order and store the nodes.
-//	store_sorted_nodes(Ptr);
-//
-//	// End-of-tree delimiter. This is also what end() ends up being.
-//	nodes.push_back(NULL);
-//}
-//
-//// Dereferencable.
-//template <typename T>
-//typename BST<T>::ItBST::reference BST<T>::ItBST::operator*() const
-//{
-//	return nodes[current]->key;
-//}
-//
-//// Pre-incrementable: ++it.
-//template <typename T>
-//typename BST<T>::ItBST& BST<T>::ItBST::operator++()
-//{
-//	++current;
-//	
-//	//if (Ptr)
-//
-//	return *this;
-//}
-//
-//// Post-incrementable: it++.
-//template <typename T>
-//typename BST<T>::ItBST BST<T>::ItBST::operator++(int)
-//{
-//	ItBST tmp = *this;
-//	//tmp = tmp->right;
-//	++current;
-//	return tmp;
-//}
-//
-//// Pre-decrementable: --it.
-//template <typename T>
-//typename BST<T>::ItBST& BST<T>::ItBST::operator--()
-//{
-//	--current;
-//	return *this;
-//}
-//
-//// Post-decrementable: it--.
-//template <typename T>
-//typename BST<T>::ItBST BST<T>::ItBST::operator--(int)
-//{
-//	ItBST tmp = *this;
-//	--current;
-//	return tmp;
-//}
-//
-//// Equality: it == end().
-//template <typename T>
-//bool BST<T>::ItBST::operator==(const ItBST& rhs)
-//{
-//	return nodes[current] == rhs.nodes[rhs.current];
-//}
-//
-//// Inequality: it != end().
-//template <typename T>
-//bool BST<T>::ItBST::operator!=(const ItBST& rhs)
-//{
-//	return !(*this == rhs);
-//}
-//
-//// Private helper functions for storing the tree nodes in sorted
-//// order.
-//template <typename T>
-//void BST<T>::ItBST::store_sorted_nodes(node* Ptr)
-//{
-//	if (Ptr)
-//	{
-//		store_sorted_nodes(Ptr->left);
-//		nodes.push_back(Ptr);
-//		store_sorted_nodes(Ptr->right);
-//	}
-//}
 
-//template <typename T>
-//void BST::IteratorMenu()
-//{
-//	
-//}
+template <typename T>
+void BST<T>::IteratorMenu()
+{
+	if (root != NULL)
+	{
+		node* Ptr = NULL;
+		short ch;
+		
+		SortInOrder();
+		iterator = SortedKeys.begin();
+		Ptr = *iterator;
+		
+		while (true)
+		{
+			system("cls");
 
+			cout << endl <<
+				"1. Установить итератор на корень дерева.\n" <<
+				"2. Проверить конец дерева.\n" <<
+				"3. Текущий элемент.\n" <<
+				"4. Следующий по ключу элемент.\n" <<
+				"5. Предыдущий по ключу элемент.\n" <<
 
+				"\n6. Предыдущее меню.\n"
 
+				"\n\nВыберите операцию: ";
 
+			cin >> ch;
+			cout << endl;
 
+			switch (ch)
+			{
+			case 1:
+				iterator = SortedKeys.begin();
+				Ptr = *iterator;
 
+				while (Ptr->key != root->key)
+				{
+					iterator++;
+					Ptr = *iterator;
+				}
 
+				cout << "Установка на корень дерева...\nКлюч: " << Ptr->key << endl;
 
+				break;
+
+			case 2:
+				iterator = SortedKeys.end();
+				Ptr = *--iterator;
+				cout << "Установка на конец дерева...\nКлюч: " << Ptr->key << endl;
+
+				break;
+
+			case 3:
+				cout << "Текущий элемент.\nКлюч: " << Ptr->key << endl;
+								
+				break;
+				
+			case 4:
+				iterator++;
+
+				if (iterator != SortedKeys.end())
+				{
+					Ptr = *iterator;
+					cout << "Переход на следующий по ключу элемент дерева...\nКлюч: " << Ptr->key << endl;
+				}
+				else
+				{
+					cout << "Ключ отсутствует!\n";
+					Ptr = *--iterator;
+				}
+
+				break;
+
+			case 5:
+				if (iterator != SortedKeys.begin())
+				{
+					iterator--;
+					Ptr = *iterator;
+					cout << "Переход на предыдущий по ключу элемент дерева...\nКлюч: " << Ptr->key << endl;
+				}
+				else
+				{
+					cout << "Ключ отсутствует!\n";
+				}
+
+				break;
+
+			case 6:
+				return;
+			}
+
+			system("pause");
+		}
+	}
+	else
+	{
+		cout << "Дерево пусто.\n";
+	}
+}
 
 template <typename T>
 void BST<T>::FillTree()
 {
     ClearTree();
-	//vector<node*> TreeKeys;
     int treeSize;
 
     cout << "\nВведите число элементов: \n";
@@ -450,12 +234,6 @@ void BST<T>::FillTree()
         AddNewLeaf();
     }
 }
-
-//template <typename T>
-//void BST<T>::ClearVector()
-//{
-//	TreeKeys.e
-//}
 
 template <typename T>
 void BST<T>::ShowSize()
@@ -588,7 +366,6 @@ void BST<T>::AddLeaf(T key, node* Ptr)
     if (root == NULL)
     {
         root = CreateLeaf(key);
-		TreeKeys.push_back(root);
     }
     else
     {
@@ -611,7 +388,6 @@ void BST<T>::AddLeaf(T key, node* Ptr)
                     else
                     {
                         Ptr->right = CreateLeaf(key);
-						TreeKeys.push_back(Ptr->right);
                         break;
                     }
                 }
@@ -624,7 +400,6 @@ void BST<T>::AddLeaf(T key, node* Ptr)
                     else
                     {
                         Ptr->left = CreateLeaf(key);
-						TreeKeys.push_back(Ptr->left);
                         break;
                     }
                 }
@@ -832,31 +607,6 @@ void BST<T>::PrintInOrder()
 			Ptr = *iterator;
 			cout << Ptr->key << " ";
 		}
-
-        /*stack<node*> s;
-        s.push(NULL);
-
-        do
-        {
-            if (Ptr != NULL)
-            {
-                s.push(Ptr);
-                Ptr = Ptr->left;
-            }
-            else
-            {
-                if (s.top() == NULL)
-                {
-                    return;
-                }
-
-                Ptr = s.top();
-                cout << Ptr->key << " ";
-                s.pop();
-                Ptr = Ptr->right;
-            }
-        }
-        while (true);*/
     }
     else
     {
