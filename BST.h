@@ -18,7 +18,7 @@ private:
     };
 
 	//vector<node*> TreeKeys;
-	vector<node*> SortedKeys;
+	//vector<node*> SortedKeys;
 	typename vector<node*>::iterator iterator;
 	//
 	//
@@ -106,7 +106,7 @@ private:
 
     void EmptyCheck(node* Ptr);
 
-    void FindByKey(T key, node* Ptr);
+	node* FindByKey(T key);//, node* Ptr);
 
     node* CreateLeaf(T key);
 
@@ -116,11 +116,13 @@ private:
 
     void DeleteLeaf(T key);
 
-	void SortInOrder(node* Ptr);
+	vector<node*> SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
     void PrintInOrder();
+
+	void MergeSubtrees(T key);
 
     /*
     node* ReturnNodePrivate(int key, node* Ptr);

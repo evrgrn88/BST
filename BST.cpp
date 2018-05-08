@@ -80,7 +80,7 @@ void BST<T>::MainMenu()
 			cin >> search;
 			cout << endl;
 
-			FindByKey(search, root);
+			FindByKey(search);// , root);
 
 			break;
 
@@ -109,13 +109,16 @@ void BST<T>::MainMenu()
 
 		case 11:
 		{
-			node* Ptr = NULL;
+			//node* Ptr;
+			T mergeKey;
 
-			for (iterator = SortedKeys.begin(); iterator < SortedKeys.end(); iterator++)
-			{
-				Ptr = *iterator;
-				cout << Ptr->key << " ";
-			}
+			cout << "Введите ключ-родитель поддеревьев для объединения: ";
+			cin >> mergeKey;
+			//cout << endl;
+
+			//Ptr = FindByKey(mergeKey);
+			MergeSubtrees(mergeKey);
+
 		}
 			break;
 		
@@ -132,10 +135,12 @@ void BST<T>::IteratorMenu()
 {
 	if (root != NULL)
 	{
+		vector<node*> SortedKeys;
+		//vector<node*>::iterator iterator;
 		node* Ptr = NULL;
 		short ch;
 		
-		SortInOrder(root);
+		SortedKeys = SortInOrder(root);
 		iterator = SortedKeys.begin();
 		Ptr = *iterator;
 		
@@ -319,10 +324,14 @@ void BST<T>::EmptyCheck(node* Ptr)
 }
 
 template <typename T>
-void BST<T>::FindByKey(T key, node* Ptr)
-{
-    if (root != NULL)
+typename BST<T>::node* BST<T>::FindByKey(T key)//, node* Ptr)
+{	
+	node* Ptr = NULL;
+
+	if (root != NULL)
     {
+		Ptr = root;
+
         while (Ptr != NULL)
         {
             if (Ptr->key == key)
@@ -343,17 +352,19 @@ void BST<T>::FindByKey(T key, node* Ptr)
         if (Ptr == NULL)
         {
             cout << "\nЭлемент НЕ найден\n";
-            return;
+			return Ptr;
         }
 
         if (Ptr->key == key)
         {
             cout << "\nЭлемент найден\n";
+			return Ptr;
         }
     }
     else
     {
         cout << "\nДерево пусто.\n";
+		return Ptr;
     }
 }
 
@@ -565,15 +576,13 @@ void BST<T>::DeleteLeaf(T key)
 }
 
 template <typename T>
-void BST<T>::SortInOrder(node* Ptr)
-{
-	if (!SortedKeys.empty())
-	{
-		SortedKeys.clear();
-	}
-	else
+vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
+{	
+	//SortedKeys.clear();
 	{
 		stack<node*> s;
+		vector<node*> v;
+		//v.push_back(NULL);
 		s.push(NULL);
 
 		do
@@ -581,22 +590,24 @@ void BST<T>::SortInOrder(node* Ptr)
 			if (Ptr != NULL)
 			{
 				s.push(Ptr);
+				//v.push_back(Ptr);
 				Ptr = Ptr->left;
 			}
 			else
 			{
 				if (s.top() == NULL)
 				{
-					return;
+					return v;
 				}
 
 				Ptr = s.top();
-				SortedKeys.push_back(Ptr);
+				v.push_back(Ptr);
+				//v.pop_back();
 				s.pop();
 				Ptr = Ptr->right;
 			}
 		} while (true);
-	}	
+	}
 }
 
 template <typename T>
@@ -604,11 +615,12 @@ void BST<T>::PrintInOrder()
 {
     if (root != NULL)
     {	
+		vector<node*> SortedKeys = SortInOrder(root);
 		node* Ptr = NULL;
 		
 		cout << "Вывод элементов in-order (Lt -> T -> Rt):\n";
 
-		SortInOrder(root);
+		SortedKeys = SortInOrder(root);
 		
 		for (iterator = SortedKeys.begin(); iterator != SortedKeys.end(); iterator++)
 		{
@@ -620,6 +632,51 @@ void BST<T>::PrintInOrder()
     {
         cout << "\nДерево пусто.\n";
     }
+}
+
+template<typename T>
+void BST<T>::MergeSubtrees(T key)
+{
+	//cout << "root is:" << p << " " << endl << *root->key;
+	if (root != NULL)
+		//cout << "Ptr is: " << &Ptr << " , key is: " << endl << Ptr->key;
+	{
+		vector<node*> v;
+		vector<node*> v_merged;
+		node* Ptr = FindByKey(key);
+
+		if (Ptr->left != NULL)
+		{
+			v_merged = SortInOrder(Ptr->left);
+		}
+
+		if (Ptr->right != NULL)
+		{
+			v = SortInOrder(Ptr->right);
+		}
+
+		v_merged = v_merged + v;
+
+		if (!v_merged.empty())
+		{
+			for (iterator = v_merged.begin(); iterator != v_merged.end(); iterator++)
+			{
+				Ptr = *iterator;
+				cout << Ptr->key << " ";
+			}
+		}
+
+		cout << endl << endl;
+
+		if (!rs.empty())
+		{
+			for (iterator = rs.begin(); iterator != rs.end(); iterator++)
+			{
+				Ptr = *iterator;
+				cout << Ptr->key << " ";
+			}
+		}
+	}
 }
 
 template <typename T>
