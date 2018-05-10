@@ -71,6 +71,7 @@ void BST<T>::MainMenu()
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case 5:
 				EmptyCheck(root);
 				break;
@@ -90,6 +91,19 @@ void BST<T>::MainMenu()
 			cin >> search;
 			cout << endl;
 
+=======
+		case 5:
+			EmptyCheck(root);
+			break;
+
+		case 6:
+			T search;
+
+			cout << "\nПоиск: ";
+			cin >> search;
+			cout << endl;
+
+>>>>>>> parent of 9782135... wip MergeSubtrees
 			FindByKey(search);// , root);
 
 			break;
@@ -110,9 +124,15 @@ void BST<T>::MainMenu()
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case 10:
 				PrintPostOrder(root);
 				break;
+=======
+		case 9:
+			IteratorMenu();
+			break;
+>>>>>>> parent of 9782135... wip MergeSubtrees
 =======
 		case 9:
 			IteratorMenu();
@@ -129,6 +149,7 @@ void BST<T>::MainMenu()
 			//node* Ptr;
 			T mergeKey;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case 12:
 				GenerateTree();
@@ -154,6 +175,15 @@ void BST<T>::MainMenu()
 			//Ptr = FindByKey(mergeKey);
 			MergeSubtrees(mergeKey);
 
+=======
+			cout << "Введите ключ-родитель поддеревьев для объединения: ";
+			cin >> mergeKey;
+			//cout << endl;
+
+			//Ptr = FindByKey(mergeKey);
+			MergeSubtrees(mergeKey);
+
+>>>>>>> parent of 9782135... wip MergeSubtrees
 		}
 			break;
 		
@@ -173,8 +203,12 @@ void BST<T>::IteratorMenu()
 <<<<<<< HEAD
 		vector<node*> SortedKeys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+		//vector<node*>::iterator iterator;
+>>>>>>> parent of 9782135... wip MergeSubtrees
 =======
 		//vector<node*>::iterator iterator;
 >>>>>>> parent of 9782135... wip MergeSubtrees
@@ -367,7 +401,11 @@ void BST<T>::EmptyCheck(node* Ptr)
 template <typename T>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 typename BST<T>::node* BST<T>::FindByKey(T key)
+=======
+typename BST<T>::node* BST<T>::FindByKey(T key)//, node* Ptr)
+>>>>>>> parent of 9782135... wip MergeSubtrees
 =======
 typename BST<T>::node* BST<T>::FindByKey(T key)//, node* Ptr)
 >>>>>>> parent of 9782135... wip MergeSubtrees
@@ -631,6 +669,7 @@ vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
 		stack<node*> s;
 		vector<node*> v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 void BST<T>::SortInOrder(node* Ptr)
 {
@@ -642,6 +681,9 @@ void BST<T>::SortInOrder(node* Ptr)
 	{
 		stack<node*> s;
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+		//v.push_back(NULL);
+>>>>>>> parent of 9782135... wip MergeSubtrees
 =======
 		//v.push_back(NULL);
 >>>>>>> parent of 9782135... wip MergeSubtrees
@@ -666,9 +708,13 @@ void BST<T>::SortInOrder(node* Ptr)
 <<<<<<< HEAD
 				v.push_back(Ptr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 				SortedKeys.push_back(Ptr);
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+				//v.pop_back();
+>>>>>>> parent of 9782135... wip MergeSubtrees
 =======
 				//v.pop_back();
 >>>>>>> parent of 9782135... wip MergeSubtrees
