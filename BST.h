@@ -100,7 +100,7 @@ private:
 
     void FillTree();
 
-    void ClearTree();
+    void ClearTree(node* Ptr);
 
     void ShowSize();
 
@@ -124,6 +124,9 @@ private:
 
 	void MergeSubtrees(T key);
 
+	void GenerateTree();
+
+	void DrawTree(T key);
     /*
     node* ReturnNodePrivate(int key, node* Ptr);
 
