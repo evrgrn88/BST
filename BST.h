@@ -1,9 +1,6 @@
 ﻿#ifndef BST_H
 #define BST_H
 
-//#include <iterator>
-//#include <vector>
-
 using namespace std;
 
 template <typename T> class BST
@@ -17,96 +14,19 @@ private:
         node* right;
     };
 
-	//vector<node*> TreeKeys;
-	//vector<node*> SortedKeys;
 	typename vector<node*>::iterator iterator;
-	//
-	//
 
-	//class ItBST
-	//{
-	//private:
-	//	//node* Ptr;
-	//	using Nodes = vector<node*>;
-	//	void store_sorted_nodes(node* Ptr);
-	//	Nodes nodes;
-	//	typename Nodes::size_type current { 0 };
-
-	//public:
-	//	// Iterator traits, previously from std::iterator.
-	//	using value_type = T;
-	//	using difference_type = ptrdiff_t;
-	//	using pointer = T*;
-	//	using reference = T&;
-	//	using iterator_category = bidirectional_iterator_tag;
-
-	//	// Default constructible.
-	//	ItBST() = default;
-	//	explicit ItBST(node* Ptr);
-
-	//	// Dereferencable.
-	//	reference operator*() const;
-
-	//	// Pre- and post-incrementable.
-	//	ItBST& operator++();
-	//	ItBST operator++(int);
-
-	//	// Pre- and post-decrementable.
-	//	ItBST& operator--();
-	//	ItBST operator--(int);
-
-	//	// Equality / inequality.
-	//	bool operator==(const ItBST& rhs);
-	//	bool operator!=(const ItBST& rhs);
-
-
-
-
-
-	////	iterator() : Ptr(0) {}
-	////	iterator(node* pn) : Ptr(pn) {}
-
-	////	// Установка на корень дерева
-	////	iterator& GoRoot()
-
-	////		int operator*()
-	////	{
-	////		return Ptr->key;
-	////	}
-
-	////	iterator& operator++() // Для ++it
-	////	{
-	////		Ptr = pt->next;
-	////		return *this;
-	////	}
-
-	////	iterator operator++(int) // Для it++
-	////	{
-	////		iterator tmp = *this;
-	////		pt = pt->next;
-	////		return tmp;
-	////	}
-	//};
-
-
-
-	//void IteratorMenu();
-
-	/*void ClearVector();*/
-
-    node* root;
-
-	//node* ReturnNodePrivate(node* Ptr);
+	node* root;
 
     void FillTree();
 
-    void ClearTree();
+    void ClearTree(node* Ptr);
 
     void ShowSize();
 
     void EmptyCheck(node* Ptr);
 
-	node* FindByKey(T key);//, node* Ptr);
+	node* FindByKey(T key);
 
     node* CreateLeaf(T key);
 
@@ -114,7 +34,7 @@ private:
 
     void AddNewLeaf();
 
-    void DeleteLeaf(T key);
+	node* DeleteLeaf(T key, node* Ptr);
 
 	vector<node*> SortInOrder(node* Ptr);
 
@@ -123,6 +43,8 @@ private:
     void PrintInOrder();
 
 	void MergeSubtrees(T key);
+
+	void GenerateTree();
 
     /*
     node* ReturnNodePrivate(int key, node* Ptr);
