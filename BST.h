@@ -14,6 +14,11 @@ private:
         node* right;
     };
 
+<<<<<<< HEAD
+=======
+	//vector<node*> TreeKeys;
+	vector<node*> SortedKeys;
+>>>>>>> parent of ec39690... wip MergeSubtrees
 	typename vector<node*>::iterator iterator;
 
 	node* root;
@@ -26,7 +31,11 @@ private:
 
     void EmptyCheck(node* Ptr);
 
+<<<<<<< HEAD
 	node* FindByKey(T key);
+=======
+    void FindByKey(T key, node* Ptr);
+>>>>>>> parent of ec39690... wip MergeSubtrees
 
     node* CreateLeaf(T key);
 
@@ -36,16 +45,19 @@ private:
 
 	node* DeleteLeaf(T key, node* Ptr);
 
-	vector<node*> SortInOrder(node* Ptr);
+	void SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
     void PrintInOrder();
 
+<<<<<<< HEAD
 	void MergeSubtrees(T key);
 
 	void GenerateTree();
 
+=======
+>>>>>>> parent of ec39690... wip MergeSubtrees
     /*
     node* ReturnNodePrivate(int key, node* Ptr);
 

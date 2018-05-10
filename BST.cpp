@@ -74,9 +74,13 @@ void BST<T>::MainMenu()
 				ClearTree(root);
 				break;
 
+<<<<<<< HEAD
 			case 5:
 				EmptyCheck(root);
 				break;
+=======
+			FindByKey(search, root);
+>>>>>>> parent of ec39690... wip MergeSubtrees
 
 			case 6:
 				T search;
@@ -106,6 +110,7 @@ void BST<T>::MainMenu()
 				break;
 
 
+<<<<<<< HEAD
 			case 10:
 				PrintPostOrder(root);
 				break;
@@ -124,6 +129,17 @@ void BST<T>::MainMenu()
 			case 12:
 				GenerateTree();
 				break;
+=======
+		case 11:
+		{
+			node* Ptr = NULL;
+
+			for (iterator = SortedKeys.begin(); iterator < SortedKeys.end(); iterator++)
+			{
+				Ptr = *iterator;
+				cout << Ptr->key << " ";
+			}
+>>>>>>> parent of ec39690... wip MergeSubtrees
 		}
 
 
@@ -138,11 +154,14 @@ void BST<T>::IteratorMenu()
 {
 	if (root != NULL)
 	{
+<<<<<<< HEAD
 		vector<node*> SortedKeys;
+=======
+>>>>>>> parent of ec39690... wip MergeSubtrees
 		node* Ptr = NULL;
 		short ch;
 		
-		SortedKeys = SortInOrder(root);
+		SortInOrder(root);
 		iterator = SortedKeys.begin();
 		Ptr = *iterator;
 		
@@ -332,14 +351,18 @@ void BST<T>::EmptyCheck(node* Ptr)
 }
 
 template <typename T>
+<<<<<<< HEAD
 typename BST<T>::node* BST<T>::FindByKey(T key)
 {	
 	node* Ptr = NULL;
 
 	if (root != NULL)
+=======
+void BST<T>::FindByKey(T key, node* Ptr)
+{
+    if (root != NULL)
+>>>>>>> parent of ec39690... wip MergeSubtrees
     {
-		Ptr = root;
-
         while (Ptr != NULL)
         {
             if (Ptr->key == key)
@@ -360,19 +383,17 @@ typename BST<T>::node* BST<T>::FindByKey(T key)
         if (Ptr == NULL)
         {
             cout << "\nЭлемент НЕ найден\n";
-			return Ptr;
+            return;
         }
 
         if (Ptr->key == key)
         {
             cout << "\nЭлемент найден\n";
-			return Ptr;
         }
     }
     else
     {
         cout << "\nДерево пусто.\n";
-		return Ptr;
     }
 
 	return Ptr;
@@ -638,11 +659,23 @@ typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
 }
 
 template <typename T>
+<<<<<<< HEAD
 vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
 {	
 	{
 		stack<node*> s;
 		vector<node*> v;
+=======
+void BST<T>::SortInOrder(node* Ptr)
+{
+	if (!SortedKeys.empty())
+	{
+		SortedKeys.clear();
+	}
+	else
+	{
+		stack<node*> s;
+>>>>>>> parent of ec39690... wip MergeSubtrees
 		s.push(NULL);
 
 		do
@@ -656,16 +689,20 @@ vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
 			{
 				if (s.top() == NULL)
 				{
-					return v;
+					return;
 				}
 
 				Ptr = s.top();
+<<<<<<< HEAD
 				v.push_back(Ptr);
+=======
+				SortedKeys.push_back(Ptr);
+>>>>>>> parent of ec39690... wip MergeSubtrees
 				s.pop();
 				Ptr = Ptr->right;
 			}
 		} while (true);
-	}
+	}	
 }
 
 template <typename T>
@@ -673,12 +710,11 @@ void BST<T>::PrintInOrder()
 {
     if (root != NULL)
     {	
-		vector<node*> SortedKeys = SortInOrder(root);
 		node* Ptr = NULL;
 		
 		cout << "Вывод элементов in-order (Lt -> T -> Rt):\n";
 
-		SortedKeys = SortInOrder(root);
+		SortInOrder(root);
 		
 		for (iterator = SortedKeys.begin(); iterator != SortedKeys.end(); iterator++)
 		{
@@ -692,6 +728,7 @@ void BST<T>::PrintInOrder()
     }
 }
 
+<<<<<<< HEAD
 template<typename T>
 void BST<T>::MergeSubtrees(T key)
 {
@@ -735,6 +772,8 @@ void BST<T>::GenerateTree()
 	cout << "...сделано\n";
 }
 
+=======
+>>>>>>> parent of ec39690... wip MergeSubtrees
 template <typename T>
 void BST<T>::PrintPostOrder(node* Ptr)
 {
