@@ -17,21 +17,8 @@ private:
         node* right;
     };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	//vector<node*> TreeKeys;
-	vector<node*> SortedKeys;
->>>>>>> parent of ec39690... wip MergeSubtrees
-=======
 	//vector<node*> TreeKeys;
 	//vector<node*> SortedKeys;
->>>>>>> parent of 9782135... wip MergeSubtrees
-=======
-	//vector<node*> TreeKeys;
-	//vector<node*> SortedKeys;
->>>>>>> parent of 9782135... wip MergeSubtrees
 	typename vector<node*>::iterator iterator;
 	//
 	//
@@ -75,7 +62,6 @@ private:
 
 
 
-<<<<<<< HEAD
 
 	////	iterator() : Ptr(0) {}
 	////	iterator(node* pn) : Ptr(pn) {}
@@ -110,42 +96,6 @@ private:
 
     node* root;
 
-=======
-
-	////	iterator() : Ptr(0) {}
-	////	iterator(node* pn) : Ptr(pn) {}
-
-	////	// Установка на корень дерева
-	////	iterator& GoRoot()
-
-	////		int operator*()
-	////	{
-	////		return Ptr->key;
-	////	}
-
-	////	iterator& operator++() // Для ++it
-	////	{
-	////		Ptr = pt->next;
-	////		return *this;
-	////	}
-
-	////	iterator operator++(int) // Для it++
-	////	{
-	////		iterator tmp = *this;
-	////		pt = pt->next;
-	////		return tmp;
-	////	}
-	//};
-
-
-
-	//void IteratorMenu();
-
-	/*void ClearVector();*/
-
-    node* root;
-
->>>>>>> parent of 9782135... wip MergeSubtrees
 	//node* ReturnNodePrivate(node* Ptr);
 
     void FillTree();
@@ -156,19 +106,7 @@ private:
 
     void EmptyCheck(node* Ptr);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	node* FindByKey(T key);
-=======
-    void FindByKey(T key, node* Ptr);
->>>>>>> parent of ec39690... wip MergeSubtrees
-=======
 	node* FindByKey(T key);//, node* Ptr);
->>>>>>> parent of 9782135... wip MergeSubtrees
-=======
-	node* FindByKey(T key);//, node* Ptr);
->>>>>>> parent of 9782135... wip MergeSubtrees
 
     node* CreateLeaf(T key);
 
@@ -178,25 +116,14 @@ private:
 
     void DeleteLeaf(T key);
 
-	void SortInOrder(node* Ptr);
+	vector<node*> SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 
     void PrintInOrder();
 
-<<<<<<< HEAD
 	void MergeSubtrees(T key);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	void GenerateTree();
-
-=======
->>>>>>> parent of ec39690... wip MergeSubtrees
-=======
->>>>>>> parent of 9782135... wip MergeSubtrees
-=======
->>>>>>> parent of 9782135... wip MergeSubtrees
     /*
     node* ReturnNodePrivate(int key, node* Ptr);
 
