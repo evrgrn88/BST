@@ -2,8 +2,6 @@
 TODO:
 
 Объединение двух поддеревьев (рекурсивно)
-SortPostOrder, вывод в вектор
-
 
 Вывод структуры на экран
 
@@ -31,49 +29,47 @@ BST<T>::BST()
 template <typename T>
 void BST<T>::MainMenu()
 {
-	while (true)
-	{
-		system("cls");
+    while (true)
+    {
+        system("cls");
 
-		short choice;
-		cout << endl <<
-			"1. Создать новое дерево.\n" <<
-			"2. Вывести элементы по порядку.\n" <<
-			"3. Показать число элементов дерева.\n" <<
-			"4. Очистить дерево.\n" <<
-			"5. Проверить дерево на пустоту.\n" <<
-			"6. Искать элемент.\n" <<
-			"7. Добавить новый элемент.\n" <<
-			"8. Удалить элемент.\n" <<
-			"9. Использовать итератор.\n" <<
-			"10. Обход Post-order (Lt -> Rt -> t).\n" <<
-			"11. Объединить два поддерева.\n" <<
-			"12. Сгенерировать тестовое дерево.\n" <<
+        short choice;
+        cout << endl <<
+                "1. Создать новое дерево.\n" <<
+                "2. Вывести элементы по порядку.\n" <<
+                "3. Показать число элементов дерева.\n" <<
+                "4. Очистить дерево.\n" <<
+                "5. Проверить дерево на пустоту.\n" <<
+                "6. Искать элемент.\n" <<
+                "7. Добавить новый элемент.\n" <<
+                "8. Удалить элемент.\n" <<
+                "9. Использовать итератор.\n" <<
+                "10. Обход Post-order (Lt -> Rt -> t).\n" <<
+                "11. Объединить два поддерева.\n" <<
+                "\n\nВыберите операцию: ";
 
-
-			"\n\nВыберите операцию: ";
-
-		cin >> choice;
-		cout << endl;
+        cin >> choice;
+        cout << endl;
 
 		switch (choice)
 		{
-			case 1:
-				FillTree();
-				break;
+		case 1:
+			FillTree();
+			break;
 
-			case 2:
-				PrintInOrder();
-				break;
+		case 2:
+			PrintInOrder();
+			break;
 
-			case 3:
-				ShowSize();
-				break;
+		case 3:
+			ShowSize();
+			break;
 
-			case 4:
-				ClearTree(root);
-				break;
+		case 4:
+			ClearTree();
+			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case 5:
 				EmptyCheck(root);
@@ -81,51 +77,59 @@ void BST<T>::MainMenu()
 =======
 			FindByKey(search, root);
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+		case 5:
+			EmptyCheck(root);
+			break;
+>>>>>>> parent of 9782135... wip MergeSubtrees
 
-			case 6:
-				T search;
+		case 6:
+			T search;
 
-				cout << "\nПоиск: ";
-				cin >> search;
-				cout << endl;
+			cout << "\nПоиск: ";
+			cin >> search;
+			cout << endl;
 
-				FindByKey(search);// , root);
-				break;
+			FindByKey(search);// , root);
 
-			case 7:
-				AddNewLeaf();
-				break;
+			break;
 
-			case 8:
-				T deleteKey;
+		case 7:
+			AddNewLeaf();
+			break;
 
-				cout << "Введите ключ: ";
-				cin >> deleteKey;
+		case 8:
+			T deleteKey;
 
-				DeleteLeaf(deleteKey);
-				break;
+			cout << "Введите ключ: ";
+			cin >> deleteKey;
 
-			case 9:
-				IteratorMenu();
-				break;
+			DeleteLeaf(deleteKey);
 
+			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			case 10:
 				PrintPostOrder(root);
 				break;
+=======
+		case 9:
+			IteratorMenu();
+			break;
+>>>>>>> parent of 9782135... wip MergeSubtrees
 
-			case 11:
-			{
-				T mergeKey;
 
-				cout << "Введите ключ-родитель поддеревьев для объединения: ";
-				cin >> mergeKey;
+		case 10:
+			PrintPostOrder(root);
+			break;
 
-				MergeSubtrees(mergeKey);
-				break;
-			}
+		case 11:
+		{
+			//node* Ptr;
+			T mergeKey;
 
+<<<<<<< HEAD
 			case 12:
 				GenerateTree();
 				break;
@@ -141,12 +145,24 @@ void BST<T>::MainMenu()
 			}
 >>>>>>> parent of ec39690... wip MergeSubtrees
 		}
+=======
+			cout << "Введите ключ-родитель поддеревьев для объединения: ";
+			cin >> mergeKey;
+			//cout << endl;
+>>>>>>> parent of 9782135... wip MergeSubtrees
 
+			//Ptr = FindByKey(mergeKey);
+			MergeSubtrees(mergeKey);
+
+		}
+			break;
+		
+		}
 
 		cout << endl << endl;
 		system("pause");
-
-	}
+				
+    }
 }
 
 template <typename T>
@@ -156,8 +172,12 @@ void BST<T>::IteratorMenu()
 	{
 <<<<<<< HEAD
 		vector<node*> SortedKeys;
+<<<<<<< HEAD
 =======
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+		//vector<node*>::iterator iterator;
+>>>>>>> parent of 9782135... wip MergeSubtrees
 		node* Ptr = NULL;
 		short ch;
 		
@@ -257,7 +277,7 @@ void BST<T>::IteratorMenu()
 template <typename T>
 void BST<T>::FillTree()
 {
-    ClearTree(root);
+    ClearTree();
     int treeSize;
 
     cout << "\nВведите число элементов: \n";
@@ -311,20 +331,14 @@ void BST<T>::ShowSize()
 }
 
 template <typename T>
-void BST<T>::ClearTree(node* Ptr)
+void BST<T>::ClearTree()
 {
     if (root != NULL)
     {
-        while (Ptr != NULL)
+        while (root != NULL)
         {
-			/*if (Ptr->left != NULL)
-			{
-				Ptr->left = DeleteLeaf
-			}*/
-			
-			
-			cout << "Удаление элемента " << Ptr->key << endl;
-            Ptr = DeleteLeaf(Ptr->key);
+            cout << "Удаление элемента " << root->key << endl;
+            DeleteLeaf(root->key);
         }
 
         cout << "\nДерево очищено.\n";
@@ -352,7 +366,11 @@ void BST<T>::EmptyCheck(node* Ptr)
 
 template <typename T>
 <<<<<<< HEAD
+<<<<<<< HEAD
 typename BST<T>::node* BST<T>::FindByKey(T key)
+=======
+typename BST<T>::node* BST<T>::FindByKey(T key)//, node* Ptr)
+>>>>>>> parent of 9782135... wip MergeSubtrees
 {	
 	node* Ptr = NULL;
 
@@ -395,8 +413,6 @@ void BST<T>::FindByKey(T key, node* Ptr)
     {
         cout << "\nДерево пусто.\n";
     }
-
-	return Ptr;
 }
 
 template <typename T>
@@ -470,11 +486,11 @@ void BST<T>::AddNewLeaf()
 }
 
 template <typename T>
-typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
+void BST<T>::DeleteLeaf(T key)
 {
     if (root != NULL)
     {
-        //node* Ptr = root;
+        node* Ptr = root;
         node* Parent = NULL;
         node* Child = NULL;
         node* ParentReplacement = NULL;
@@ -506,7 +522,7 @@ typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
         if (Ptr == NULL)
         {
             cout << "\nЭлемент НЕ найден\n";
-            return Ptr;
+            return;
         }
 
         if (Ptr->key == key)
@@ -515,31 +531,25 @@ typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
             {
                 if (Parent == NULL) // Node is a root
                 {
-                    delete root;
-					//Ptr = NULL;
+                    delete Ptr;
                     root = NULL;
-
-					return root;
                 }
                 else
                 {
-                    /*delete Ptr;
-					Ptr = NULL;*/
+                    delete Ptr;
 
                     if (isLeft)
                     {
-						delete Parent->left;
                         Parent->left = NULL;
                     }
                     else
                     {
-						delete Parent->right;
-						Parent->right = NULL;
+                        Parent->right = NULL;
                     }
                 }
 
                 cout << "...готово.\n\n";
-				return Parent;
+                return;
             }
 
             if (Ptr->left == NULL || Ptr->right == NULL) // 1 child
@@ -555,29 +565,25 @@ typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
 
                 if (Parent == NULL) // Root node is being deleted
                 {
-                    delete root;
-					//Ptr = NULL;
+                    delete Ptr;
                     root = Child;
                 }
                 else // Deleting node, parent adopting node children
                 {
                     if (isLeft)
                     {
-						delete Parent->left;
-						Parent->left = Child;
+                        Parent->left = Child;
                     }
                     else
                     {
-						delete Parent->right;
-						Parent->right = Child;
+                        Parent->right = Child;
                     }
 
-                    /*delete Ptr;
-					Ptr = NULL;*/
+                    delete Ptr;
                 }
 
                 cout << "...готово.\n\n";
-				return Child;
+                return;
             }
 
             if (Ptr->left != NULL && Ptr->right != NULL) // 2 children
@@ -591,62 +597,22 @@ typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
                 {
                     ParentReplacement = NodeReplacement;
                     NodeReplacement = NodeReplacement->right;
-                    isLeft = false; // NodeReplacement is right child of parent
+                    isLeft = 0; // NodeReplacement is right child of parent
                 }
 
-				
-				
-
-				//Ptr->key = NodeReplacement->key; // Copying data
+                Ptr->key = NodeReplacement->key; // Copying data
 
                 if (isLeft) // NodeReplacement is left child of Ptr.
                 {
-					if (Parent != NULL)
-					{
-						if (Ptr == Parent->left)
-						{
-							delete Parent->left;
-							Parent->left = NodeReplacement;
-							//Ptr = Parent->left;
-						}
-						else
-						{
-							delete Parent->right;
-							Parent->right = NodeReplacement;
-						}
-					}
-					
-					Ptr->left = NodeReplacement->left;
+                    Ptr->left = NodeReplacement->left;
                 }
                 else // NodeReplacement is right grandchild of Ptr->left
                 {
-					if (Parent != NULL)
-					{
-						if (Ptr == Parent->left)
-						{
-							Ptr = NodeReplacement;
-							
-							while (Ptr->left != NULL)
-							{
-								Ptr = Ptr->left;
-							}
-							
-							delete Parent->left;
-							Parent->left = NodeReplacement;
-							Ptr->left
-						}
-						else
-						{
-							delete Parent->right;
-							Parent->right = NodeReplacement;
-						}
-					}
-					
-					ParentReplacement->right = NodeReplacement->left;
+                    ParentReplacement->right = NodeReplacement->left;
                 }
 
                 cout << "...готово.\n\n";
-				return Parent;
+                return;
             }
         }
     }
@@ -654,17 +620,17 @@ typename BST<T>::node* BST<T>::DeleteLeaf(T key, node* Ptr)
     {
         cout << "\nДерево пусто.\n";
     }
-
-	return root;
 }
 
 template <typename T>
 <<<<<<< HEAD
 vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
 {	
+	//SortedKeys.clear();
 	{
 		stack<node*> s;
 		vector<node*> v;
+<<<<<<< HEAD
 =======
 void BST<T>::SortInOrder(node* Ptr)
 {
@@ -676,6 +642,9 @@ void BST<T>::SortInOrder(node* Ptr)
 	{
 		stack<node*> s;
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+		//v.push_back(NULL);
+>>>>>>> parent of 9782135... wip MergeSubtrees
 		s.push(NULL);
 
 		do
@@ -683,6 +652,7 @@ void BST<T>::SortInOrder(node* Ptr)
 			if (Ptr != NULL)
 			{
 				s.push(Ptr);
+				//v.push_back(Ptr);
 				Ptr = Ptr->left;
 			}
 			else
@@ -695,9 +665,13 @@ void BST<T>::SortInOrder(node* Ptr)
 				Ptr = s.top();
 <<<<<<< HEAD
 				v.push_back(Ptr);
+<<<<<<< HEAD
 =======
 				SortedKeys.push_back(Ptr);
 >>>>>>> parent of ec39690... wip MergeSubtrees
+=======
+				//v.pop_back();
+>>>>>>> parent of 9782135... wip MergeSubtrees
 				s.pop();
 				Ptr = Ptr->right;
 			}
@@ -732,9 +706,12 @@ void BST<T>::PrintInOrder()
 template<typename T>
 void BST<T>::MergeSubtrees(T key)
 {
+	//cout << "root is:" << p << " " << endl << *root->key;
 	if (root != NULL)
+		//cout << "Ptr is: " << &Ptr << " , key is: " << endl << Ptr->key;
 	{
-		vector<node*> v, v_merged;
+		vector<node*> v;
+		vector<node*> v_merged;
 		node* Ptr = FindByKey(key);
 
 		if (Ptr->left != NULL)
@@ -747,29 +724,28 @@ void BST<T>::MergeSubtrees(T key)
 			v = SortInOrder(Ptr->right);
 		}
 
-		v_merged.push_back(Ptr);
-		v_merged.insert(v_merged.end(), v.begin(), v.end());
+		v_merged = v_merged + v;
 
-		/*for (auto i : v_merged)
+		if (!v_merged.empty())
 		{
-			DeleteLeaf(i->key);
-		}*/
+			for (iterator = v_merged.begin(); iterator != v_merged.end(); iterator++)
+			{
+				Ptr = *iterator;
+				cout << Ptr->key << " ";
+			}
+		}
 
-		ClearTree(Ptr);
+		cout << endl << endl;
+
+		if (!rs.empty())
+		{
+			for (iterator = rs.begin(); iterator != rs.end(); iterator++)
+			{
+				Ptr = *iterator;
+				cout << Ptr->key << " ";
+			}
+		}
 	}
-}
-
-template<typename T>
-void BST<T>::GenerateTree()
-{
-	ClearTree(root);
-
-	int arr[11] = { 22, 7, 83, 6, 12, 33, 90, 4, 11, 1, 3 };
-
-	for (int i = 0; i < 11; i++)
-		AddLeaf(arr[i], root);
-
-	cout << "...сделано\n";
 }
 
 =======
