@@ -19,80 +19,7 @@ private:
 
 	//vector<node*> TreeKeys;
 	//vector<node*> SortedKeys;
-	typename vector<node*>::iterator iterator;
-	//
-	//
-
-	//class ItBST
-	//{
-	//private:
-	//	//node* Ptr;
-	//	using Nodes = vector<node*>;
-	//	void store_sorted_nodes(node* Ptr);
-	//	Nodes nodes;
-	//	typename Nodes::size_type current { 0 };
-
-	//public:
-	//	// Iterator traits, previously from std::iterator.
-	//	using value_type = T;
-	//	using difference_type = ptrdiff_t;
-	//	using pointer = T*;
-	//	using reference = T&;
-	//	using iterator_category = bidirectional_iterator_tag;
-
-	//	// Default constructible.
-	//	ItBST() = default;
-	//	explicit ItBST(node* Ptr);
-
-	//	// Dereferencable.
-	//	reference operator*() const;
-
-	//	// Pre- and post-incrementable.
-	//	ItBST& operator++();
-	//	ItBST operator++(int);
-
-	//	// Pre- and post-decrementable.
-	//	ItBST& operator--();
-	//	ItBST operator--(int);
-
-	//	// Equality / inequality.
-	//	bool operator==(const ItBST& rhs);
-	//	bool operator!=(const ItBST& rhs);
-
-
-
-
-
-	////	iterator() : Ptr(0) {}
-	////	iterator(node* pn) : Ptr(pn) {}
-
-	////	// Установка на корень дерева
-	////	iterator& GoRoot()
-
-	////		int operator*()
-	////	{
-	////		return Ptr->key;
-	////	}
-
-	////	iterator& operator++() // Для ++it
-	////	{
-	////		Ptr = pt->next;
-	////		return *this;
-	////	}
-
-	////	iterator operator++(int) // Для it++
-	////	{
-	////		iterator tmp = *this;
-	////		pt = pt->next;
-	////		return tmp;
-	////	}
-	//};
-
-
-
-	//void IteratorMenu();
-
-	/*void ClearVector();*/
+	typename vector<T>::iterator iterator;
 
     node* root;
 
@@ -116,7 +43,7 @@ private:
 
     void DeleteLeaf(T key);
 
-	vector<node*> SortInOrder(node* Ptr);
+	vector<T> SortInOrder(node* Ptr);
 
     void PrintPostOrder(node* Ptr);
 

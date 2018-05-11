@@ -156,14 +156,15 @@ void BST<T>::IteratorMenu()
 {
 	if (root != NULL)
 	{
-		vector<node*> SortedKeys;
+		vector<T> SortedKeys;
 		//vector<node*>::iterator iterator;
-		node* Ptr = NULL;
+		//node* Ptr = NULL;
 		short ch;
 		
 		SortedKeys = SortInOrder(root);
 		iterator = SortedKeys.begin();
-		Ptr = *iterator;
+		//Ptr = *iterator;
+		
 		
 		while (true)
 		{
@@ -187,27 +188,28 @@ void BST<T>::IteratorMenu()
 			{
 			case 1:
 				iterator = SortedKeys.begin();
-				Ptr = *iterator;
+				//Ptr = *iterator;
 
-				while (Ptr->key != root->key)
+				while (*iterator != root->key)
 				{
 					iterator++;
-					Ptr = *iterator;
+					//Ptr = *iterator;
 				}
 
-				cout << "Установка на корень дерева...\nКлюч: " << Ptr->key << endl;
+				cout << "Установка на корень дерева...\nКлюч: " << *iterator << endl;
 
 				break;
 
 			case 2:
 				iterator = SortedKeys.end();
-				Ptr = *--iterator;
-				cout << "Установка на конец дерева...\nКлюч: " << Ptr->key << endl;
+				//Ptr = *--iterator;
+
+				cout << "Установка на конец дерева...\nКлюч: " << *--iterator << endl;
 
 				break;
 
 			case 3:
-				cout << "Текущий элемент.\nКлюч: " << Ptr->key << endl;
+				cout << "Текущий элемент.\nКлюч: " << *iterator << endl;
 								
 				break;
 				
@@ -216,13 +218,13 @@ void BST<T>::IteratorMenu()
 
 				if (iterator != SortedKeys.end())
 				{
-					Ptr = *iterator;
-					cout << "Переход на следующий по ключу элемент дерева...\nКлюч: " << Ptr->key << endl;
+					//Ptr = *iterator;
+					cout << "Переход на следующий по ключу элемент дерева...\nКлюч: " << *iterator << endl;
 				}
 				else
 				{
 					cout << "Ключ отсутствует!\n";
-					Ptr = *--iterator;
+					--iterator;
 				}
 
 				break;
@@ -231,8 +233,8 @@ void BST<T>::IteratorMenu()
 				if (iterator != SortedKeys.begin())
 				{
 					iterator--;
-					Ptr = *iterator;
-					cout << "Переход на предыдущий по ключу элемент дерева...\nКлюч: " << Ptr->key << endl;
+					//Ptr = *iterator;
+					cout << "Переход на предыдущий по ключу элемент дерева...\nКлюч: " << *iterator << endl;
 				}
 				else
 				{
@@ -613,12 +615,12 @@ void BST<T>::DeleteLeaf(T key)
 }
 
 template <typename T>
-vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
+vector<T> BST<T>::SortInOrder(node* Ptr)
 {	
 	//SortedKeys.clear();
 	{
 		stack<node*> s;
-		vector<node*> v;
+		vector<T> v;
 		//v.push_back(NULL);
 		s.push(NULL);
 
@@ -638,7 +640,7 @@ vector<typename BST<T>::node*> BST<T>::SortInOrder(node* Ptr)
 				}
 
 				Ptr = s.top();
-				v.push_back(Ptr);
+				v.push_back(Ptr->key);
 				//v.pop_back();
 				s.pop();
 				Ptr = Ptr->right;
@@ -652,17 +654,17 @@ void BST<T>::PrintInOrder()
 {
     if (root != NULL)
     {	
-		vector<node*> SortedKeys = SortInOrder(root);
-		node* Ptr = NULL;
+		vector<T> SortedKeys = SortInOrder(root);
+		//node* Ptr = NULL;
 		
 		cout << "Вывод элементов in-order (Lt -> T -> Rt):\n";
 
-		SortedKeys = SortInOrder(root);
+		//SortedKeys = SortInOrder(root);
 		
-		for (iterator = SortedKeys.begin(); iterator != SortedKeys.end(); iterator++)
+		for (auto i : SortedKeys)
 		{
-			Ptr = *iterator;
-			cout << Ptr->key << " ";
+			//Ptr = *iterator;
+			cout << i << " ";
 		}
     }
     else
@@ -676,33 +678,38 @@ void BST<T>::MergeSubtrees(T key)
 {
 	if (root != NULL)
 	{
-		vector<node*> v;
-		vector<node*> v_merged;
+		vector<T> v;
+		vector<T> v_to_merge;
 		node* Ptr = FindByKey(key);
 
 		if (Ptr->left != NULL)
 		{
-			v_merged = SortInOrder(Ptr->left);
+			v = SortInOrder(Ptr->left);
 		}
 
 		if (Ptr->right != NULL)
 		{
-			v = SortInOrder(Ptr->right);
+			v_to_merge = SortInOrder(Ptr->right);
 		}
 
-		v_merged.push_back(Ptr);
-		v_merged.insert(v_merged.end(), v.begin(), v.end());
+		v.push_back(Ptr->key);
+		v.insert(v.end(), v_to_merge.begin(), v_to_merge.end());
 
-		for (auto i : v_merged)
+		for (auto i : v)
 		{
-			cout << i->key << " ";
+			cout << i << " ";
 		}
 
 		cout << endl << endl;
 
 		ClearTree(Ptr);
 
-		
+		while (!v.empty())
+		{
+			cout << "\n\nДобавление элемента " << v.back();
+			AddLeaf(v.back(), root);
+			v.pop_back();
+		}
 	}
 }
 
