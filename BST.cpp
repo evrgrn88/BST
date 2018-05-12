@@ -111,29 +111,37 @@ void BST<T>::MainMenu()
 
 		case 11:
 		{
-			//node* Ptr;
-			T mergeKey;
-
-			cout << "Введите ключ-родитель поддеревьев для объединения: ";
-			cin >> mergeKey;
-			//cout << endl;
-
-			//Ptr = FindByKey(mergeKey);
-			MergeSubtrees(mergeKey);
-
+			MergePrepare();
 		}
 			break;
 		
 		case 12:
 		{
-			node* testptr = root;
+			vector<node*> test;
 
-			cout << testptr->key << " " << &testptr << " " << &root << endl;
+			GenerateTree();
+			test.push_back(root);
+			test.push_back(root->left);
+			test.push_back(root->left->left);
+			test.push_back(root->left->right);
+			test.push_back(root->left->right->left);
+			test.push_back(root->right);
+			
+			cout << endl;
 
-			delete testptr;
+			for (auto i : test)
+				cout << i->key << " ";
+			cout << endl << endl;
 
-			cout << root->key << " " << &testptr << " " << &root << endl;
+			node* Ptr = root->left->right;
+			
+			Ptr = root->left->left;
 
+			cout << endl << root->key << endl << root->left->key << endl << root->left->right->key << endl << endl;
+						
+			for (auto i : test)
+				cout << i->key << " ";
+			cout << endl << endl;
 
 			break;
 		}
@@ -357,50 +365,115 @@ void BST<T>::EmptyCheck(node* Ptr)
 
 template <typename T>
 typename BST<T>::node* BST<T>::FindByKey(T key)//, node* Ptr)
-{	
-	node* Ptr = NULL;
-
+{
 	if (root != NULL)
-    {
-		Ptr = root;
+	{
+		node* Parent = NULL;
+		node* Ptr = root;
 
-        while (Ptr != NULL)
-        {
-            if (Ptr->key == key)
-            {
-                break;
-            }
+		//bool isLeft; // 1 for left. 0 for right
 
-            if (key > Ptr->key)
-            {
-                Ptr = Ptr->right;
-            }
-            else if (key < Ptr->key)
-            {
-                Ptr = Ptr->left;
-            }
-        }
+		while (Ptr != NULL) // Check if the key is present
+		{
+			if (key == Ptr->key)
+			{
+				break;
+			}
 
-        if (Ptr == NULL)
-        {
-            cout << "\nЭлемент НЕ найден\n";
+			if (key > Ptr->key)
+			{
+				Parent = Ptr;
+				//isLeft = false; // Right
+				Ptr = Ptr->right;
+			}
+			else if (key < Ptr->key)
+			{
+				Parent = Ptr;
+				//isLeft = true; // Left
+				Ptr = Ptr->left;
+			}
+		}
+
+		if (Ptr == NULL)
+		{
+			cout << "\nЭлемент НЕ найден\n";
 			return Ptr;
-        }
+		}
 
-        if (Ptr->key == key)
-        {
-            cout << "\nЭлемент найден\n";
-			return Ptr;
-        }
-    }
-    else
-    {
-        cout << "\nДерево пусто.\n";
+		if (Ptr->key == key)
+		{
+			cout << "\nЭлемент найден\n";
+			
+			if (Parent != NULL)
+				return Parent;
+			else
+				return Ptr;
+
+			/*if (Parent != NULL)
+				return Parent;
+			else
+				return Ptr;*/
+		}
+
 		return Ptr;
-    }
-
-	return Ptr;
+	}
+	else
+	{
+		cout << "\nДерево пусто.\n";
+		return root;
+	}
 }
+
+
+
+
+
+											   
+											   
+//{	
+//	node* Ptr = NULL;
+//
+//	if (root != NULL)
+//    {
+//		Ptr = root;
+//
+//        while (Ptr != NULL)
+//        {
+//            if (Ptr->key == key)
+//            {
+//                break;
+//            }
+//
+//            if (key > Ptr->key)
+//            {
+//                Ptr = Ptr->right;
+//            }
+//            else if (key < Ptr->key)
+//            {
+//                Ptr = Ptr->left;
+//            }
+//        }
+//
+//        if (Ptr == NULL)
+//        {
+//            cout << "\nЭлемент НЕ найден\n";
+//			return Ptr;
+//        }
+//
+//        if (Ptr->key == key)
+//        {
+//            cout << "\nЭлемент найден\n";
+//			return Ptr;
+//        }
+//    }
+//    else
+//    {
+//        cout << "\nДерево пусто.\n";
+//		return Ptr;
+//    }
+//
+//	return Ptr;
+//}
 
 template <typename T>
 typename BST<T>::node* BST<T>::CreateLeaf(T key)
@@ -674,42 +747,167 @@ void BST<T>::PrintInOrder()
 }
 
 template<typename T>
-void BST<T>::MergeSubtrees(T key)
+void BST<T>::MergePrepare()
 {
 	if (root != NULL)
 	{
-		vector<T> v;
-		vector<T> v_to_merge;
-		node* Ptr = FindByKey(key);
+		//vector<T> v;
+		//vector<T> v_to_merge;
 
-		if (Ptr->left != NULL)
+		node* test = root;
+		node* Ptr;
+		T mergeKey;
+
+		//cout << endl << root->key << " " << root->left->key << " " << root->left->left->key << " " << root->left->left->left->key << endl;
+		while (test != NULL)
 		{
-			v = SortInOrder(Ptr->left);
+			cout << test->key << " ";
+			test = test->left;
 		}
+
+
+		cout << "Введите ключ-родитель поддеревьев для объединения: ";
+		cin >> mergeKey;
+
+		node* Parent = FindByKey(mergeKey);
+		if (Parent->key != mergeKey)
+		{
+			Ptr = Parent->left;
+
+			while (Ptr->right != NULL)
+			{
+				MergeSubtree(Parent, Ptr, true);
+				Parent = Parent->left;
+			}
+		}
+		else
+		{			
+			Ptr = Parent;
+			
+			while (Ptr->right != NULL)
+			{
+				Parent = MergeSubtree(Parent, Ptr, true);
+				Parent = Parent->left;
+			}
+		}
+
+		
+		
+		cout << endl;
+
+		test = root;
+		while (test != NULL)
+		{
+			cout << test->key << " ";
+			test = test->left;
+		}
+
+		//cout << endl << root->left->left->key;
+		/*if (root->left->left->left->right != NULL)
+			cout << endl << root->left->left->left->right->key;
+		else
+			cout << "ыть";*/
+		/*if (Parent->left->key != NULL && Parent->left->key == mergeKey)
+		{
+			Parent->left = MergeSubtree(Parent, Parent->left, true);
+		}
+
+		if (Parent->right->key != NULL && Parent->right->key == mergeKey)
+		{
+			MergeSubtree(Parent, Parent->right, false);
+		}*/
+
+		//cout << endl << root->key << " " << root->left->key << " " << root->left->left->key << " " << root->left->left->left->key << endl;
+
+
+
+
+
+		//if (Parent != NULL)
+		//{
+		//	MergeSubtree(Parent, Ptr)
+		//}
+		//else
+		//{
+
+		//}
+
+
+
+
+
+
+		//if (Ptr->left != NULL)
+		//{
+		//	v = SortInOrder(Ptr->left);
+		//}
+
+		//if (Ptr->right != NULL)
+		//{
+		//	v_to_merge = SortInOrder(Ptr->right);
+		//}
+
+		//v.push_back(Ptr->key);
+		//v.insert(v.end(), v_to_merge.begin(), v_to_merge.end());
+
+		//for (auto i : v)
+		//{
+		//	cout << i << " ";
+		//}
+
+		//cout << endl << endl;
+
+		//ClearTree(Ptr);
+
+		//while (!v.empty())
+		//{
+		//	cout << "\n\nДобавление элемента " << v.back();
+		//	AddLeaf(v.back(), root);
+		//	v.pop_back();
+		//}
+	}
+}
+
+template<typename T>
+typename BST<T>::node* BST<T>::MergeSubtree(node* Parent, node* Ptr, bool isLeft)
+{
+	if (Parent != NULL)
+	{
+		node* temp;
 
 		if (Ptr->right != NULL)
 		{
-			v_to_merge = SortInOrder(Ptr->right);
+			temp = MergeSubtree(Ptr, Ptr->right, true);
+			temp->left = Parent->left;
+			Parent->left = temp;
 		}
-
-		v.push_back(Ptr->key);
-		v.insert(v.end(), v_to_merge.begin(), v_to_merge.end());
-
-		for (auto i : v)
+		else
 		{
-			cout << i << " ";
+			cout << "\nПеремещаем Ptr. \n";
+			Parent->right = Ptr->left;
+			Ptr->left = NULL;
 		}
 
-		cout << endl << endl;
+		return Ptr;
+	}
+	else
+	{
+		//node* temp;
 
-		ClearTree(Ptr);
-
-		while (!v.empty())
+		if (Ptr->right != NULL)
 		{
-			cout << "\n\nДобавление элемента " << v.back();
-			AddLeaf(v.back(), root);
-			v.pop_back();
+			root = MergeSubtree(Ptr, Ptr->right, true);
+			root->left = Ptr;
+			//Parent->left = temp;
 		}
+		/*else
+		{
+			cout << "\nПеремещаем Ptr. \n";
+			Parent->right = Ptr->left;
+			Ptr->left = NULL;
+		}*/
+
+		return Ptr;
 	}
 }
 

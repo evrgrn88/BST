@@ -49,7 +49,9 @@ private:
 
     void PrintInOrder();
 
-	void MergeSubtrees(T key);
+	void MergePrepare();
+
+	node* MergeSubtree(node* Parent, node* Ptr, bool isLeft);
 
 	void GenerateTree();
 
