@@ -51,7 +51,7 @@ private:
 
 	void MergePrepare();
 
-	node* MergeSubtree(node* Parent, node* Ptr, bool isLeft);
+	node* MergeSubtree(node* Parent, node* Ptr, short isLeft);
 
 	void GenerateTree();
 

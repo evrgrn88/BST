@@ -112,6 +112,40 @@ void BST<T>::MainMenu()
 		case 11:
 		{
 			MergePrepare();
+			node* test;
+			test = root;
+
+			if (test != NULL)
+			{
+				cout << "\nkey is: " << test->key << endl;
+
+				if (test->left != NULL)
+				{
+					cout << "\nleft is: " << test->right->key << endl;
+				}
+				else
+					cout << "\left is empty\n";
+				
+				if (test->right != NULL)
+				{
+					cout << "\nright is: " << test->right->key << endl;
+				}
+				else
+					cout << "\nright is empty\n";
+
+				cout << endl;
+			}
+			else
+			{
+				cout << "\nempty\n\n";
+			}
+
+
+			cout << "\nroot is: " << root->key << endl;
+			cout << "\nroot->right is: " << root->key << endl;
+			cout << "\nroot->left is: " << root->left->key << endl;
+			cout << "\nroot->left->left is: " << root->left->left->key << endl;
+			cout << "\nroot->left->left->left is: " << root->left->left->left->key << endl;
 		}
 			break;
 		
@@ -789,7 +823,7 @@ void BST<T>::MergePrepare()
 
 					while (Ptr->right != NULL)
 					{
-						MergeSubtree(Parent, Ptr, true);
+						MergeSubtree(Parent, Ptr, 1);
 						Parent = Parent->left;
 					}
 				}
@@ -800,7 +834,7 @@ void BST<T>::MergePrepare()
 
 					while (Ptr->left != NULL)
 					{
-						MergeSubtree(Parent, Ptr, false);
+						MergeSubtree(Parent, Ptr, 0);
 						Parent = Parent->right;
 					}
 				}
@@ -809,19 +843,34 @@ void BST<T>::MergePrepare()
 			{
 				Ptr = Parent->left;
 				
-				if (Ptr->right != NULL)
+				while (Ptr->right != NULL)
 				{
-					Parent = Ptr;
-					Ptr = Ptr->right;
-
-					while (Ptr->left != NULL)
-					{
-						MergeSubtree(Parent, Ptr, false);
-						Parent = Parent->right;
-					}
+					MergeSubtree(Parent, Ptr, -1);
+					//MergeSubtree(Ptr, Ptr->right, false);
 				}
-				else
-					cout << "\nНет поддерева для слияния.\n";
+
+				root = Parent->left;
+
+				cout << "\nroot is: " << root->key << endl;
+				cout << "\nParent is: " << Parent->key << endl;
+				cout << "\nParent->left is: " << Parent->left->key << endl;
+				cout << "\nParent->left->left is: " << Parent->left->left->key << endl;
+				cout << "\nParent->left->left->left is: " << Parent->left->left->left->key << endl;
+
+				
+				//if (Ptr->right != NULL)
+				//{
+				//	//Parent = Ptr;
+				//	//Ptr = Ptr->right;
+
+				//	while (Ptr->right->left != NULL)
+				//	{
+				//		MergeSubtree(Ptr, Ptr->right, false);
+				//		Parent = Parent->right;
+				//	}
+				//}
+				//else
+				//	cout << "\nНет поддерева для слияния.\n";
 				//MergeSubtree(Parent, Ptr, true);
 
 			}
@@ -945,56 +994,58 @@ void BST<T>::MergePrepare()
 //}
 
 template<typename T>
-typename BST<T>::node* BST<T>::MergeSubtree(node* Parent, node* Ptr, bool isLeft)
+typename BST<T>::node* BST<T>::MergeSubtree(node* Parent, node* Ptr, short isLeft)
 {
 	node* temp;
 
-	if (Parent->key != Ptr->key)
-	{
-		if (isLeft)
-		{
-			if (Ptr->right != NULL)
-			{
-				temp = MergeSubtree(Ptr, Ptr->right, true);
-				temp->left = Parent->left;
-				Parent->left = temp;
-			}
-			else
-			{
-				//if (Parent != Ptr)
-				//{
-					cout << "\nПеремещаем Ptr. \n";
-
-					Parent->right = Ptr->left;
-					Ptr->left = NULL;
-				//}
-				//else
-					//cout << "\nНет поддерева для слияния.\n";
-			}
-		}
-		else
-		{
-			if (Ptr->left != NULL)
-			{
-				temp = MergeSubtree(Ptr, Ptr->left, false);
-				temp->right = Parent->right;
-				Parent->right = temp;
-				//cout << "\nPtr is: " << Ptr->key << endl;
-			}
-			else
-			{
-				cout << "\nПеремещаем Ptr. \n";
-
-				Parent->left = Ptr->right;
-				Ptr->right = NULL;
-			}
-		}
-	}
-	else
+	if (isLeft == 1)
 	{
 		if (Ptr->right != NULL)
 		{
-			temp = MergeSubtree(Ptr, Ptr->right, false);
+			temp = MergeSubtree(Ptr, Ptr->right, 1);
+			temp->left = Parent->left;
+			Parent->left = temp;
+		}
+		else
+		{
+			//if (Parent != Ptr)
+			//{
+			cout << "\nПеремещаем Ptr. \n";
+
+			Parent->right = Ptr->left;
+			Ptr->left = NULL;
+			//}
+			//else
+			//cout << "\nНет поддерева для слияния.\n";
+		}
+	}
+
+	if (isLeft == 0)
+	{
+		if (Ptr->left != NULL)
+		{
+			temp = MergeSubtree(Ptr, Ptr->left, 0);
+			temp->right = Parent->right;
+			Parent->right = temp;
+			//cout << "\nPtr is: " << Ptr->key << endl;
+		}
+		else
+		{
+			cout << "\nПеремещаем Ptr. \n";
+
+			Parent->left = Ptr->right;
+			Ptr->right = NULL;
+		}
+	}
+
+	if (isLeft == -1)
+	{
+		if (Ptr->right->left != NULL)
+		{
+			temp = MergeSubtree(Ptr->right, Ptr->right->left, 0);
+			temp->left = Parent->left;
+			Parent->left = temp;
+
 
 			//cout << "\nReturned temp: " << temp->key << endl;
 			//cout << "\nParent is: " << Parent->key << endl;
@@ -1006,7 +1057,15 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Parent, node* Ptr, bool isLeft
 		}
 		else
 		{
-			if (Parent != Ptr)
+			cout << "\nПеремещаем Ptr->right. \n";
+
+			temp = Ptr->right;
+			Ptr->right = temp->right;
+			temp->right = NULL;
+			temp->left = Parent->left;
+			Parent->left = temp;
+			
+			/*if (Parent != Ptr)
 			{
 				cout << "\nПеремещаем Ptr. \n";
 
@@ -1014,10 +1073,9 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Parent, node* Ptr, bool isLeft
 				Ptr->left = NULL;
 			}
 			else
-				cout << "\nНет поддерева для слияния.\n";
+				cout << "\nНет поддерева для слияния.\n";*/
 		}
 	}
-
 	return Ptr;
 }
 //}
