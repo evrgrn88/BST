@@ -14,9 +14,18 @@ private:
         node* right;
     };
 
+	struct search
+	{
+		node* nodeptr;
+		node* parent;
+		bool isLeft;
+	};
+
 	typename vector<T>::iterator iterator;
 
     node* root;
+
+	int counter;
 
     void FillTree();
 
@@ -26,7 +35,9 @@ private:
 
     void EmptyCheck(node* Ptr);
 
-	node* FindByKey(T key);
+	search FindKey(T key);
+
+	void FindKeyHelper(T searchKey);
 
     node* CreateLeaf(T key);
 
@@ -44,7 +55,7 @@ private:
 
 	void MergePrepare();
 
-	node* MergeSubtree(node* Parent, node* Ptr, short isLeft);
+	node* MergeSubtree(node* Ptr, bool isLeft);
 
 	void GenerateTree();
 
