@@ -25,7 +25,11 @@ private:
 
     node* root;
 
+	short type;
+
 	int counter;
+
+	int lastCounter;
 
     void FillTree();
 
@@ -41,7 +45,7 @@ private:
 
     node* CreateLeaf(T key);
 
-    void AddLeaf(T key, node* Ptr);
+    bool AddLeaf(T key, node* Ptr);
 
     void AddNewLeaf();
 
@@ -57,7 +61,9 @@ private:
 
 	node* MergeSubtree(node* Ptr, bool isLeft);
 
-	void GenerateTree();
+	void GenerateTree(unsigned int size, short type);
+
+	T randVar(unsigned int size);
 
 	void DrawTree(node* Ptr, int space);
 
@@ -65,7 +71,7 @@ public:
 	BST();
     ~BST();
 
-    void MainMenu();
+    void MainMenu(short type);
 
 	void IteratorMenu();
 };

@@ -2,6 +2,8 @@
 TODO:
 
 Опрос числа просмотренных нод (в каждую операцию?)
+Комментарии
+Выбор типа данных после MainMenu
 
 */
 
@@ -12,6 +14,7 @@ TODO:
 #include <stack>
 #include <iterator>
 #include <vector>
+#include <ctime>
 #include "BST.h"
 
 using namespace std;
@@ -23,14 +26,24 @@ BST<T>::BST()
 }
 
 template <typename T>
-void BST<T>::MainMenu()
+void BST<T>::MainMenu(short type)
 {
     while (true)
     {
         system("cls");
 
+		if (type == 1)
+			cout << "Тип: целое число\n\n\n";
+		else if (type == 2)
+			cout << "Тип: число с плавающей точкой\n\n\n";
+		else if (type == 3)
+			cout << "Тип: символ\n\n\n";
+
         short choice;
         cout << endl <<
+			
+			"Операции:\n" <<
+			"---------------------------------------------\n" <<
 			"1. Создать новое дерево.\n" <<
 			"2. Вывести элементы по порядку.\n" <<
 			"3. Показать число элементов дерева.\n" <<
@@ -42,8 +55,14 @@ void BST<T>::MainMenu()
 			"9. Использовать итератор.\n" <<
 			"10. Обход Post-order (Lt -> Rt -> t).\n" <<
 			"11. Объединить два поддерева.\n" <<
-			"12. test (DrawTree)\n" <<
+			"12. test (DrawTree)\n\n" <<
+			
+			"Тестирование:\n" <<
+			"---------------------------------------------\n" <<
 			"13. Сгенерировать тестовое дерево.\n" <<
+			"14. .\n" <<
+			"15. Назад.\n" <<
+
 			"\n\nВыберите операцию: ";
 
         cin >> choice;
@@ -116,15 +135,42 @@ void BST<T>::MainMenu()
 		case 12:
 		{
 			DrawTree(root, 0);
-
 			break;
 		}
 
 		case 13:
-			GenerateTree();
+		{
+			unsigned int treeSize;
+
+			cout << "\nВведите число элементов: \n";
+			
+			cin >> treeSize;
+
+			if (type == 3 && treeSize > 26)
+			{
+				cout << "\nДля символьного типа данных размер дерева ограничен 26 элементами. Введите иной размер: \n";
+				cin >> treeSize;
+			}
+
+			cout << endl;
+
+			GenerateTree(treeSize, type);
 			DrawTree(root, 0);
 			break;
-
+		}
+		
+		case 14:
+		{
+			//DrawTree(root, 0);
+			break;
+		}
+		
+		case 15:
+		{
+			return;
+			//DrawTree(root, 0);
+			break;
+		}
 		}
 
 		cout << endl << endl;
@@ -392,7 +438,7 @@ typename BST<T>::node* BST<T>::CreateLeaf(T key)
 }
 
 template <typename T>
-void BST<T>::AddLeaf(T key, node* Ptr)
+bool BST<T>::AddLeaf(T key, node* Ptr)
 {
     if (root == NULL)
     {
@@ -404,9 +450,10 @@ void BST<T>::AddLeaf(T key, node* Ptr)
         {
             if (key == Ptr->key)
             {
-                cout << "\nЭлемент уже существует!\nВведите новое значение: ";
-                cin >> key;
-                Ptr = root;
+				return true;
+                //cout << "\nЭлемент уже существует!\nВведите новое значение: ";
+                //cin >> key;
+                //Ptr = root;
             }
             else
             {
@@ -439,17 +486,29 @@ void BST<T>::AddLeaf(T key, node* Ptr)
             }
         }
     }
+	return false;
 }
 
 template <typename T>
 void BST<T>::AddNewLeaf()
 {
     T newKey;
-	counter = 0;
-    cout << "\nВведите ключ: \n";
-    cin >> newKey;
-    AddLeaf(newKey, root);
-	cout << "\nЧисло пройденных узлов: " << counter << endl;
+	bool exists;
+	//counter = 0;
+    
+	do
+	{
+		cout << "\nВведите ключ: \n";
+		cin >> newKey;
+		exists = AddLeaf(newKey, root);
+
+		if (exists)
+			cout << "\nЭлемент уже существует!";
+	}
+	while (exists);
+	
+	
+	//cout << "\nЧисло пройденных узлов: " << counter << endl;
     cout << endl;
 }
 
@@ -464,7 +523,13 @@ void BST<T>::DeleteLeaf(T key)
 		node* ParentReplacement = NULL;
 		node* NodeReplacement = NULL;
 
-        if (result.nodeptr->key == key)
+		if (result.nodeptr == NULL)
+		{
+			cout << "\nЭлемент НЕ найден\n";
+			return;
+		}
+
+		if (result.nodeptr->key == key)
         {
             if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 children
             {
@@ -709,17 +774,54 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Ptr, bool isLeft)
 }
 
 template<typename T>
-void BST<T>::GenerateTree()
+void BST<T>::GenerateTree(unsigned int size, short type)
 {
 	ClearTree(root);
 
-	//int arr[11] = { 22, 7, 83, 6, 12, 33, 90, 4, 11, 1, 3 };
-	int arr[20] = { 48, 1, 20, 66, 111, 51, 2, 7, 4, 13, 5, 90, 100, 30, 15, 8, 9, 325, 125, 12 };
+	T key;
+	bool exists;
 
-	for (int i = 0; i < 20; i++)
-		AddLeaf(arr[i], root);
+	srand((unsigned int)time(NULL));
+
+	for (unsigned int i = 0; i < size; i++)
+	{
+		do
+		{
+			if (type == 3)
+				key = (rand() % 26) + 'a';
+			else if (type == 2)
+				key = (T)(rand())/(rand());
+			else if (type == 1)
+				key = rand();
+			//cout << key << " ";
+			exists = AddLeaf(key, root);
+		}
+		while (exists);
+	}
+
+
+	//int iKey;
+	//double dKey;
+	//char cKey;
+
+	
+
+
+
+	//int arr[11] = { 22, 7, 83, 6, 12, 33, 90, 4, 11, 1, 3 };
+	//int arr[20] = { 48, 1, 20, 66, 111, 51, 2, 7, 4, 13, 5, 90, 100, 30, 15, 8, 9, 325, 125, 12 };
+
 
 	cout << "...сделано\n";
+}
+
+template<typename T>
+T BST<T>::randVar(unsigned int size)
+{
+	T key;
+
+
+	return key;
 }
 
 template<typename T>
