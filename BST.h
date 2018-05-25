@@ -27,7 +27,7 @@ private:
 
 	short type;
 
-	int counter;
+	int counter = 0;
 
 	int lastCounter;
 
@@ -66,6 +66,8 @@ private:
 	T randVar(unsigned int size);
 
 	void DrawTree(node* Ptr, int space);
+
+	void TestTree(short type);
 
 public:
 	BST();

@@ -33,11 +33,11 @@ void BST<T>::MainMenu(short type)
         system("cls");
 
 		if (type == 1)
-			cout << "Тип: целое число\n\n\n";
+			cout << "Тип: целое число\n";
 		else if (type == 2)
-			cout << "Тип: число с плавающей точкой\n\n\n";
+			cout << "Тип: число с плавающей точкой\n";
 		else if (type == 3)
-			cout << "Тип: символ\n\n\n";
+			cout << "Тип: символ\n";
 
         short choice;
         cout << endl <<
@@ -55,11 +55,11 @@ void BST<T>::MainMenu(short type)
 			"9. Использовать итератор.\n" <<
 			"10. Обход Post-order (Lt -> Rt -> t).\n" <<
 			"11. Объединить два поддерева.\n" <<
-			"12. test (DrawTree)\n\n" <<
+			"12. Сгенерировать дерево.\n\n" <<
 			
 			"Тестирование:\n" <<
 			"---------------------------------------------\n" <<
-			"13. Сгенерировать тестовое дерево.\n" <<
+			"13. Проверить производительность дерева.\n" <<
 			"14. .\n" <<
 			"15. Назад.\n" <<
 
@@ -72,11 +72,13 @@ void BST<T>::MainMenu(short type)
 		{
 		case 1:
 			FillTree();
+			cout << endl;
 			DrawTree(root, 0);
 			break;
 
 		case 2:
 			PrintInOrder();
+			cout << endl;
 			DrawTree(root, 0);
 			break;
 
@@ -100,10 +102,12 @@ void BST<T>::MainMenu(short type)
 			cout << endl;
 
 			FindKeyHelper(searchKey);
+			cout << counter;
 			break;
 
 		case 7:
 			AddNewLeaf();
+			cout << endl;
 			DrawTree(root, 0);
 			break;
 
@@ -114,6 +118,7 @@ void BST<T>::MainMenu(short type)
 			cin >> deleteKey;
 
 			DeleteLeaf(deleteKey);
+			cout << endl;
 			DrawTree(root, 0);
 			break;
 
@@ -124,38 +129,42 @@ void BST<T>::MainMenu(short type)
 
 		case 10:
 			PrintPostOrder(root);
+			cout << endl;
 			DrawTree(root, 0);
 			break;
 
 		case 11:		
 			MergePrepare();
+			cout << endl;
 			DrawTree(root, 0);
 			break;
 		
 		case 12:
 		{
-			DrawTree(root, 0);
-			break;
-		}
-
-		case 13:
-		{
 			unsigned int treeSize;
 
 			cout << "\nВведите число элементов: \n";
-			
+
 			cin >> treeSize;
 
 			if (type == 3 && treeSize > 26)
 			{
-				cout << "\nДля символьного типа данных размер дерева ограничен 26 элементами. Введите иной размер: \n";
+				cout << "\nДля символьного типа данных размер дерева ограничен 26 элементами (пока). Введите новый размер: \n";
 				cin >> treeSize;
 			}
 
 			cout << endl;
 
 			GenerateTree(treeSize, type);
+			cout << endl;
 			DrawTree(root, 0);
+
+			break;
+		}
+
+		case 13:
+		{
+			TestTree(type);
 			break;
 		}
 		
@@ -338,24 +347,24 @@ void BST<T>::ClearTree(node* Ptr)
     {
 		while (Ptr->left != NULL)
 		{
-			cout << "Удаление элемента " << Ptr->left->key << endl;
+			//cout << "Удаление элемента " << Ptr->left->key << endl;
 			DeleteLeaf(Ptr->left->key);
 		}
 
 		while (Ptr->right != NULL)
 		{
-			cout << "Удаление элемента " << Ptr->right->key << endl;
+			//cout << "Удаление элемента " << Ptr->right->key << endl;
 			DeleteLeaf(Ptr->right->key);
 		}
 
-		cout << "Удаление элемента " << Ptr->key << endl;
+		//cout << "Удаление элемента " << Ptr->key << endl;
 		DeleteLeaf(Ptr->key);
 
-        cout << "\nДерево очищено.\n";
+        //cout << "\nДерево очищено.\n";
     }
     else
     {
-        cout << "Дерево пусто.\n";
+        //cout << "Дерево пусто.\n";
     }
 }
 
@@ -378,6 +387,7 @@ template <typename T>
 typename BST<T>::search BST<T>::FindKey(T key)
 {
 	search result;
+	counter = 0;
 
 	result.nodeptr = root;
 	result.parent = NULL;
@@ -440,9 +450,12 @@ typename BST<T>::node* BST<T>::CreateLeaf(T key)
 template <typename T>
 bool BST<T>::AddLeaf(T key, node* Ptr)
 {
-    if (root == NULL)
+	counter = 0;
+
+	if (root == NULL)
     {
-        root = CreateLeaf(key);
+		counter++;
+		root = CreateLeaf(key);
     }
     else
     {
@@ -450,10 +463,8 @@ bool BST<T>::AddLeaf(T key, node* Ptr)
         {
             if (key == Ptr->key)
             {
+				counter++;
 				return true;
-                //cout << "\nЭлемент уже существует!\nВведите новое значение: ";
-                //cin >> key;
-                //Ptr = root;
             }
             else
             {
@@ -516,7 +527,7 @@ template <typename T>
 void BST<T>::DeleteLeaf(T key)
 {
     if (root != NULL)
-    {
+    {		
 		search result = FindKey(key);
 
 		node* Child = NULL;
@@ -551,7 +562,7 @@ void BST<T>::DeleteLeaf(T key)
                     }
                 }
 
-                cout << "...готово.\n\n";
+                //cout << "...готово.\n\n";
                 return;
             }
 
@@ -587,7 +598,7 @@ void BST<T>::DeleteLeaf(T key)
 					result.nodeptr = NULL;
                 }
 
-                cout << "...готово.\n\n";
+                //cout << "...готово.\n\n";
                 return;
             }
 
@@ -616,7 +627,7 @@ void BST<T>::DeleteLeaf(T key)
                     ParentReplacement->right = NodeReplacement->left;
                 }
 
-                cout << "...готово.\n\n";
+                //cout << "...готово.\n\n";
                 return;
             }
         }
@@ -778,7 +789,7 @@ void BST<T>::GenerateTree(unsigned int size, short type)
 {
 	ClearTree(root);
 
-	T key;
+	T key = NULL;
 	bool exists;
 
 	srand((unsigned int)time(NULL));
@@ -792,7 +803,7 @@ void BST<T>::GenerateTree(unsigned int size, short type)
 			else if (type == 2)
 				key = (T)(rand())/(rand());
 			else if (type == 1)
-				key = rand();
+				key = ((rand() + 1) * (rand() + 1) / (rand() + 1)) + 1;
 			//cout << key << " ";
 			exists = AddLeaf(key, root);
 		}
@@ -812,7 +823,7 @@ void BST<T>::GenerateTree(unsigned int size, short type)
 	//int arr[20] = { 48, 1, 20, 66, 111, 51, 2, 7, 4, 13, 5, 90, 100, 30, 15, 8, 9, 325, 125, 12 };
 
 
-	cout << "...сделано\n";
+	//cout << "\nДерево сгенерировано.\n";
 }
 
 template<typename T>
@@ -908,6 +919,102 @@ void BST<T>::PrintPostOrder(node* Ptr)
     {
         cout << "\nДерево пусто.\n";
     }
+}
+
+template<typename T>
+void BST<T>::TestTree(short type)
+{	
+	//T key;
+
+	unsigned int size;
+	unsigned int searchCounter = 0;
+	unsigned int insertCounter = 0;
+	unsigned int deleteCounter = 0;
+
+
+	vector<T> v;
+
+	srand((unsigned int)time(NULL));
+
+	if (type != 3)
+	{
+		for (size = 10; size < 100001; size *= 10)
+		{
+			cout << "\n\nРазмер: " << size << " элементов.\n";
+			
+			GenerateTree(size, type);
+
+			//cout << "\nroot: " << root->key << endl;
+			v = SortInOrder(root);
+
+			//key = rand() % size;
+			//for (auto i : v)
+			//	cout << i << "! ";
+
+			counter = 0;
+			
+			cout << "\nСреднее число пройденных узлов:\n";
+
+			for (auto i : v)
+			{
+				FindKey(i);
+				searchCounter += counter;
+			}
+
+			cout << "Поиск: " << searchCounter / size << endl;
+			
+			
+			for (unsigned int i = 0; i < size; i++)
+			{
+				unsigned int key = (rand() % size);
+
+				//cout << ""key << endl;
+				//for (auto i : v)
+					//cout << i << " ";
+
+				//cout << endl << v.at(key) << endl;
+
+				//system("pause");
+				DeleteLeaf(v.at(key));
+
+				v.erase(v.begin() + key);
+
+				deleteCounter += counter;
+			}
+
+			cout << "Удаление: " << deleteCounter / size << endl;
+
+			//for (auto i : v)
+			//{
+			//	//FindKey(i);
+			//}
+
+			for (auto i : v)
+			{
+				//FindKey(i);
+				insertCounter += counter;
+			}
+
+			cout << "Вставка: " << insertCounter / size << endl;
+		}
+
+		cout << endl;
+
+		system("pause");
+
+
+	}
+	else
+	{
+		cout << "\nДля символьного типа размер дерева ограничен 26 элементами (пока).\n";
+		system("pause");
+	}
+
+
+	cout << "Среднее число пройденных узлов: " << counter;
+	
+
+
 }
 
 template <typename T>

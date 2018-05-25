@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void main()
+int main()
 {
 	setlocale(0, "");
 
@@ -52,8 +52,10 @@ void main()
 
             case 4:
             {
-                return;
+                return 0;
             }
         }
     }
+
+	return 0;
 }
