@@ -1,12 +1,4 @@
-﻿/*
-TODO:
-
-Комментарии
-*/
-
-
-
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
 #include <stack>
 #include <iterator>
@@ -28,6 +20,7 @@ void BST<T>::MainMenu(short type)
     while (true)
     {
         system("cls");
+
 
 		if (type == 1)
 			cout << "Тип: целое число\n";
@@ -175,7 +168,9 @@ void BST<T>::IteratorMenu()
 {
 	if (root != NULL)
 	{
-		vector<T> SortedKeys;
+		// Вектор для отсортированной последовательности эл-тов 
+		// для последовательного перехода по итератору
+		vector<T> SortedKeys; 
 		short ch;
 		
 		SortedKeys = SortInOrder(root);
@@ -282,12 +277,14 @@ void BST<T>::FillTree()
     }
 }
 
+// Инфиксный обход для подсчета количества узлов
 template <typename T>
 void BST<T>::ShowSize()
 {
     if (root != NULL)
     {
-        stack<node*> s;
+        // Стек для промежуточного хранения
+		stack<node*> s;
         int i = 0;
         node* Ptr = root;
         s.push(NULL);
@@ -322,6 +319,7 @@ void BST<T>::ShowSize()
     }
 }
 
+// Поэлементное удаление левых и правых подузлов корня с замещением
 template <typename T>
 void BST<T>::ClearTree(node* Ptr)
 {
@@ -356,6 +354,7 @@ void BST<T>::EmptyCheck(node* Ptr)
     cout << endl;
 }
 
+// Поиск элемента
 template <typename T>
 typename BST<T>::search BST<T>::FindKey(T key)
 {
@@ -366,9 +365,9 @@ typename BST<T>::search BST<T>::FindKey(T key)
 	result.parent = NULL;
 	result.isLeft = true;
 		
-	while (result.nodeptr != NULL) // Check if the key is present
+	while (result.nodeptr != NULL)
 	{
-		counter++;
+		counter++; // Счетчик просмотренных узлов для тестирования
 
 		if (key == result.nodeptr->key)
 		{			
@@ -477,6 +476,7 @@ bool BST<T>::AddLeaf(T key, node* Ptr)
 	return false;
 }
 
+// Добавление узла вручную
 template <typename T>
 void BST<T>::AddNewLeaf()
 {
@@ -492,16 +492,18 @@ void BST<T>::AddNewLeaf()
 		if (exists)
 			cout << "\nЭлемент уже существует!";
 	}
-	while (exists);
+	while (exists); // Проверка на повторяющиеся узлы
 	
     cout << endl;
 }
 
+// Удаление узла
 template <typename T>
 void BST<T>::DeleteLeaf(T key)
 {
     if (root != NULL)
     {		
+		// Поиск узла для удаления
 		search result = FindKey(key);
 
 		node* Child = NULL;
@@ -518,9 +520,9 @@ void BST<T>::DeleteLeaf(T key)
         {
 			counter++;
 
-			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 children
+			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 подузлов
             {
-                if (result.parent == NULL) // Node is a root
+                if (result.parent == NULL) // Узел является корневым
                 {
                     root = NULL;
                 }
@@ -540,7 +542,7 @@ void BST<T>::DeleteLeaf(T key)
 				return;
             }
 
-            if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 child
+            if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 подузел
             {
 				counter++;
 
@@ -553,13 +555,13 @@ void BST<T>::DeleteLeaf(T key)
                     Child = result.nodeptr->right;
                 }
 
-                if (result.parent == NULL) // Root node is being deleted
+                if (result.parent == NULL) // Узел является корневым
                 {
                     delete result.nodeptr;
 					result.nodeptr = NULL;
                     root = Child;
                 }
-                else // Deleting node, parent adopting node children
+                else // Удаление с замещением подузлом
                 {
                     if (result.isLeft)
                     {
@@ -577,28 +579,28 @@ void BST<T>::DeleteLeaf(T key)
 				return;
             }
 
-            if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 children
+            if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 подузла
             {
-                // Finding replacement (highest node less than node to delete)
+                // Поиск замещающего узла (наибольшего слева)
                 ParentReplacement = result.nodeptr;
                 NodeReplacement = result.nodeptr->left;
-				result.isLeft = true; // NodeReplacement is left child of parent
+				result.isLeft = true; // Замещающий узел слева
 
                 while (NodeReplacement->right != NULL)
                 {
 					counter++;
 					ParentReplacement = NodeReplacement;
                     NodeReplacement = NodeReplacement->right;
-					result.isLeft = 0; // NodeReplacement is right child of parent
+					result.isLeft = 0; // Замещающий узел справа
                 }
 
-				result.nodeptr->key = NodeReplacement->key; // Copying data
+				result.nodeptr->key = NodeReplacement->key; // Копирование данных
 
-                if (result.isLeft) // NodeReplacement is left child of Ptr.
+                if (result.isLeft)
                 {
 					result.nodeptr->left = NodeReplacement->left;
                 }
-                else // NodeReplacement is right grandchild of Ptr->left
+                else
                 {
                     ParentReplacement->right = NodeReplacement->left;
                 }
@@ -614,6 +616,7 @@ void BST<T>::DeleteLeaf(T key)
     }
 }
 
+// Инфиксная сортировка с выводом в вектор
 template <typename T>
 vector<T> BST<T>::SortInOrder(node* Ptr)
 {	
@@ -666,6 +669,7 @@ void BST<T>::PrintInOrder()
     }
 }
 
+// Постфиксный обход
 template <typename T>
 void BST<T>::PrintPostOrder(node* Ptr)
 {
@@ -728,11 +732,11 @@ void BST<T>::MergePrepare()
 		cin >> mergeKey;
 
 		node* Ptr;
-		search result = FindKey(mergeKey);
+		search result = FindKey(mergeKey); // Поиск узла-родителя для объединения поддеревьев
 
 		if (result.nodeptr != NULL)
 		{
-			if (result.parent == NULL)
+			if (result.parent == NULL) // Родитель - корень
 			{
 				while (result.nodeptr->right != NULL)
 				{
@@ -746,7 +750,7 @@ void BST<T>::MergePrepare()
 					root = Ptr;
 				}
 			}
-			else if (result.isLeft == true)
+			else if (result.isLeft == true) // Узел - слева от родителя
 			{
 				while (result.nodeptr->right != NULL)
 				{
@@ -756,7 +760,7 @@ void BST<T>::MergePrepare()
 					result.parent = result.parent->left;
 				}
 			}
-			else if (result.isLeft == false)
+			else if (result.isLeft == false) // Узел - справа от родителя
 			{
 				while (result.nodeptr->left != NULL)
 				{
@@ -811,6 +815,7 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Ptr, bool isLeft)
 	return Ptr;
 }
 
+// Отображение структуры дерева
 template<typename T>
 void BST<T>::DrawTree(node* Ptr, int space)
 {
@@ -819,14 +824,13 @@ void BST<T>::DrawTree(node* Ptr, int space)
 		if (Ptr == NULL)
 			return;
 		
-		// Increase distance between levels
+		// Дистанция между уровнями
 		space += 5;
 
-		// Process right child first
+		// Обработка правой стороны первой
 		DrawTree(Ptr->right, space);
 
-		// Print current node after space
-		
+		// Печать текущего узла после пробела
 		cout << endl;
 
 		for (int i = 5; i < space; i++)
@@ -834,7 +838,7 @@ void BST<T>::DrawTree(node* Ptr, int space)
 		
 		cout << Ptr->key;
 
-		// Process left child
+		// Обработка левой стороны
 		DrawTree(Ptr->left, space);
 
 		cout << endl << endl;
@@ -848,24 +852,24 @@ void BST<T>::DrawTree(node* Ptr, int space)
 template<typename T>
 unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 {
-	unsigned int insertCounter = 0;
+	unsigned int insertCounter = 0; // Счетчик для тестирования
 	
 	ClearTree(root);
 
 	T key = NULL;
 	bool exists;
 
-	srand((unsigned int)time(NULL));
+	srand((unsigned int)time(NULL)); // Инициализация генератора случайных значений (часы)
 
 	for (unsigned int i = 0; i < size; i++)
 	{
 		do
 		{
-			if (type == 3)
+			if (type == 3) // Символ от a до z;
 				key = (rand() % 26) + 'a';
-			else if (type == 2)
+			else if (type == 2) // Число с плавающей точкой
 				key = (T)(rand()) / (rand());
-			else if (type == 1)
+			else if (type == 1) // Целое число
 				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
 
 			exists = AddLeaf(key, root);
@@ -877,6 +881,7 @@ unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 	return insertCounter;
 }
 
+// Тестирование коллекции
 template<typename T>
 void BST<T>::TestTree(short type)
 {	
@@ -885,13 +890,14 @@ void BST<T>::TestTree(short type)
 	unsigned int insertCounter = 0;
 	unsigned int deleteCounter = 0;
 
-	vector<T> v;
+	vector<T> v; // Вектор для промежуточного хранения
 
-	srand((unsigned int)time(NULL));
+	srand((unsigned int)time(NULL)); // Инициализация генератора случайных значений (часы)
 
 	if (type != 3)
 	{
-		for (size = 10; size < 100001; size *= 10)
+		// Последовательная обработка деревьев от 10 до 100000 элементов, с шагом 10
+		for (size = 10; size < 100001; size *= 10) 
 		{
 			cout << "\n\nРазмер: " << size << " элементов.\n";
 			
@@ -899,14 +905,17 @@ void BST<T>::TestTree(short type)
 
 			counter = 0;
 
+			// Генерация дерева с поодсчетом просмотренных узлов
 			insertCounter = GenerateTree(size, type);
 
 			cout << "Вставка: " << insertCounter / size << endl;
 
+			// Помещение элементов дерева в вектор по возрастанию
 			v = SortInOrder(root);
 
 			counter = 0;
 			
+			// Последовательный поиск всех узлов с подсчетом пройденных
 			for (auto i : v)
 			{
 				FindKey(i);
@@ -915,12 +924,15 @@ void BST<T>::TestTree(short type)
 
 			cout << "Поиск: " << searchCounter / size << endl;
 			
+			// Удаление всех элементов дерева случайным образом с подсчетом
+			// просмотренных узлов
 			for (unsigned int i = 0; i < size; i++)
 			{
+				// Выбор случайного элемента вектора
 				unsigned int key = (rand() % v.size());
 				
-				DeleteLeaf(v.at(key));
-				v.erase(v.begin() + key);
+				DeleteLeaf(v.at(key)); // Удаление элемента дерева
+				v.erase(v.begin() + key); // Удаление элемента вектора
 				deleteCounter += counter;
 			}
 

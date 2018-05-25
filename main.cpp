@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// В main производится выбор типа данных дерева. Поддерживаются int, double и char
 int main()
 {
 	setlocale(0, "");
