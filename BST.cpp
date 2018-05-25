@@ -885,6 +885,8 @@ unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 template<typename T>
 void BST<T>::TestTree(short type)
 {	
+	bool exists;
+	
 	unsigned int size;
 	unsigned int searchCounter = 0;
 	unsigned int insertCounter = 0;
@@ -896,7 +898,8 @@ void BST<T>::TestTree(short type)
 
 	if (type != 3)
 	{
-		// Последовательная обработка деревьев от 10 до 100000 элементов, с шагом 10
+		// Последовательная обработка деревьев от 10 до 100000 элементов, с шагом 10,
+		// средний случай
 		for (size = 10; size < 100001; size *= 10) 
 		{
 			cout << "\n\nРазмер: " << size << " элементов.\n";
@@ -940,6 +943,66 @@ void BST<T>::TestTree(short type)
 		}
 
 		cout << endl;
+
+		searchCounter = 0;
+		insertCounter = 0;
+		deleteCounter = 0;
+
+		// Худший случай (на входе - упорядоченный вектор)
+		for (size = 10; size < 100001; size *= 10)
+		{
+			cout << "\n\nРазмер: " << size << " элементов.\n";
+
+			cout << "\nСреднее число пройденных узлов (худший случай):\n";
+
+			GenerateTree(size, type);
+
+			// Создание упорядоченного вектора случайных значений
+			v = SortInOrder(root);
+
+			ClearTree(root);
+
+			counter = 0;
+
+			// Генерация дерева с подсчетом просмотренных узлов
+			for (auto i = v.rbegin(); i != v.rend(); i++)
+			{
+				do
+					exists = AddLeaf(*i, root);
+				while (exists);
+
+				insertCounter += counter;
+			}
+
+			cout << "Вставка: " << insertCounter / size << endl;
+
+			counter = 0;
+
+			// Последовательный поиск всех узлов с подсчетом пройденных
+			for (auto i = v.rbegin(); i != v.rend(); i++)
+			{
+				FindKey(*i);
+				searchCounter += counter;
+			}
+
+			cout << "Поиск: " << searchCounter / size << endl;
+
+			// Удаление всех элементов дерева случайным образом с подсчетом
+			// просмотренных узлов
+			for (unsigned int i = 0; i < size; i++)
+			{
+				// Выбор случайного элемента вектора
+				unsigned int key = (rand() % v.size());
+
+				DeleteLeaf(v.at(key)); // Удаление элемента дерева
+				v.erase(v.begin() + key); // Удаление элемента вектора
+				deleteCounter += counter;
+			}
+
+			cout << "Удаление: " << deleteCounter / size << endl << endl;
+		}
+
+		cout << endl;
 	}
 	else
 	{
@@ -959,6 +1022,56 @@ void BST<T>::TestTree(short type)
 		v = SortInOrder(root);
 
 		counter = 0;
+
+		for (auto i : v)
+		{
+			FindKey(i);
+			searchCounter += counter;
+		}
+
+		cout << "Поиск: " << searchCounter / size << endl;
+
+		for (unsigned int i = 0; i < size; i++)
+		{
+			unsigned int key = (rand() % v.size());
+
+			DeleteLeaf(v.at(key));
+
+			v.erase(v.begin() + key);
+
+			deleteCounter += counter;
+		}
+
+		cout << "Удаление: " << deleteCounter / size << endl;
+		cout << endl;
+
+		// Тестирование вырожденного дерева
+		cout << "\nДля символьного типа размер дерева ограничен 26 элементами (пока).\n";
+
+		size = 26;
+
+		cout << "\n\nРазмер: " << size << " элементов.\n";
+		cout << "\nСреднее число пройденных узлов (худший случай):\n";
+
+		GenerateTree(size, type);
+
+		v = SortInOrder(root);
+
+		ClearTree(root);
+
+		counter = 0;
+
+		// Генерация дерева с подсчетом просмотренных узлов
+		for (auto i = v.rbegin(); i != v.rend(); i++)
+		{
+			do
+				exists = AddLeaf(*i, root);
+			while (exists);
+
+			insertCounter += counter;
+		}
+
+		cout << "Вставка: " << insertCounter / size << endl;
 
 		for (auto i : v)
 		{
