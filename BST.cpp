@@ -942,7 +942,13 @@ void BST<T>::TestTree(short type)
 		{
 			cout << "\n\nРазмер: " << size << " элементов.\n";
 			
+			counter = 0;
+
 			GenerateTree(size, type);
+
+			insertCounter += counter;
+
+			cout << "Вставка: " << insertCounter / size << endl;
 
 			//cout << "\nroot: " << root->key << endl;
 			v = SortInOrder(root);
@@ -989,13 +995,12 @@ void BST<T>::TestTree(short type)
 			//	//FindKey(i);
 			//}
 
-			for (auto i : v)
-			{
-				//FindKey(i);
-				insertCounter += counter;
-			}
+			//for (auto i : v)
+			//{
+			//	//FindKey(i);
+			//	insertCounter += counter;
+			//}
 
-			cout << "Вставка: " << insertCounter / size << endl;
 		}
 
 		cout << endl;
