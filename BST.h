@@ -61,9 +61,7 @@ private:
 
 	node* MergeSubtree(node* Ptr, bool isLeft);
 
-	void GenerateTree(unsigned int size, short type);
-
-	T randVar(unsigned int size);
+	unsigned int GenerateTree(unsigned int size, short type);
 
 	void DrawTree(node* Ptr, int space);
 

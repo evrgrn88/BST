@@ -1,10 +1,7 @@
 ﻿/*
 TODO:
-ытьыть
-Опрос числа просмотренных нод (в каждую операцию?)
-Комментарии
-Выбор типа данных после MainMenu
 
+Комментарии
 */
 
 
@@ -59,9 +56,8 @@ void BST<T>::MainMenu(short type)
 			
 			"Тестирование:\n" <<
 			"---------------------------------------------\n" <<
-			"13. Проверить производительность дерева.\n" <<
-			"14. .\n" <<
-			"15. Назад.\n" <<
+			"13. Проверить производительность дерева.\n\n" <<
+			"14. Назад.\n" <<
 
 			"\n\nВыберите операцию: ";
 
@@ -102,7 +98,6 @@ void BST<T>::MainMenu(short type)
 			cout << endl;
 
 			FindKeyHelper(searchKey);
-			cout << counter;
 			break;
 
 		case 7:
@@ -140,7 +135,6 @@ void BST<T>::MainMenu(short type)
 			break;
 		
 		case 12:
-		{
 			unsigned int treeSize;
 
 			cout << "\nВведите число элементов: \n";
@@ -160,26 +154,14 @@ void BST<T>::MainMenu(short type)
 			DrawTree(root, 0);
 
 			break;
-		}
 
 		case 13:
-		{
 			TestTree(type);
 			break;
-		}
 		
 		case 14:
-		{
-			//DrawTree(root, 0);
-			break;
-		}
-		
-		case 15:
-		{
 			return;
-			//DrawTree(root, 0);
 			break;
-		}
 		}
 
 		cout << endl << endl;
@@ -347,24 +329,15 @@ void BST<T>::ClearTree(node* Ptr)
     {
 		while (Ptr->left != NULL)
 		{
-			//cout << "Удаление элемента " << Ptr->left->key << endl;
 			DeleteLeaf(Ptr->left->key);
 		}
 
 		while (Ptr->right != NULL)
 		{
-			//cout << "Удаление элемента " << Ptr->right->key << endl;
 			DeleteLeaf(Ptr->right->key);
 		}
 
-		//cout << "Удаление элемента " << Ptr->key << endl;
 		DeleteLeaf(Ptr->key);
-
-        //cout << "\nДерево очищено.\n";
-    }
-    else
-    {
-        //cout << "Дерево пусто.\n";
     }
 }
 
@@ -398,11 +371,11 @@ typename BST<T>::search BST<T>::FindKey(T key)
 		counter++;
 
 		if (key == result.nodeptr->key)
-		{
-			break;
+		{			
+			return result;
 		}
 
-		if (key > result.nodeptr->key)
+		else if (key > result.nodeptr->key)
 		{
 			result.parent = result.nodeptr;
 			result.nodeptr = result.nodeptr->right;
@@ -438,7 +411,7 @@ void BST<T>::FindKeyHelper(T searchKey)
 template <typename T>
 typename BST<T>::node* BST<T>::CreateLeaf(T key)
 {
-    node* n = new node;
+	node* n = new node;
 
     n->key = key;
     n->left = NULL;
@@ -459,34 +432,38 @@ bool BST<T>::AddLeaf(T key, node* Ptr)
     }
     else
     {
-        while (Ptr != NULL)
+		counter++;
+		
+		while (Ptr != NULL)
         {
             if (key == Ptr->key)
             {
-				counter++;
+				counter = 0;
 				return true;
             }
             else
-            {
-                if (key > Ptr->key)
+            {				
+				if (key > Ptr->key)
                 {
-                    if (Ptr->right != NULL)
+					counter++;
+					
+					if (Ptr->right != NULL)
                     {
-                        Ptr = Ptr->right;
-						counter++;
+						Ptr = Ptr->right;
                     }
                     else
                     {
-                        Ptr->right = CreateLeaf(key);
+						Ptr->right = CreateLeaf(key);
                         break;
                     }
                 }
                 else if (key < Ptr->key)
                 {
-                    if (Ptr->left != NULL)
+					counter++;
+					
+					if (Ptr->left != NULL)
                     {
                         Ptr = Ptr->left;
-						counter++;
                     }
                     else
                     {
@@ -505,7 +482,6 @@ void BST<T>::AddNewLeaf()
 {
     T newKey;
 	bool exists;
-	//counter = 0;
     
 	do
 	{
@@ -518,8 +494,6 @@ void BST<T>::AddNewLeaf()
 	}
 	while (exists);
 	
-	
-	//cout << "\nЧисло пройденных узлов: " << counter << endl;
     cout << endl;
 }
 
@@ -542,7 +516,9 @@ void BST<T>::DeleteLeaf(T key)
 
 		if (result.nodeptr->key == key)
         {
-            if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 children
+			counter++;
+
+			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 children
             {
                 if (result.parent == NULL) // Node is a root
                 {
@@ -561,14 +537,14 @@ void BST<T>::DeleteLeaf(T key)
 						result.parent->right = NULL;
                     }
                 }
-
-                //cout << "...готово.\n\n";
-                return;
+				return;
             }
 
             if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 child
             {
-                if (result.nodeptr->left != NULL)
+				counter++;
+
+				if (result.nodeptr->left != NULL)
                 {
                     Child = result.nodeptr->left;
                 }
@@ -598,8 +574,7 @@ void BST<T>::DeleteLeaf(T key)
 					result.nodeptr = NULL;
                 }
 
-                //cout << "...готово.\n\n";
-                return;
+				return;
             }
 
             if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 children
@@ -611,7 +586,8 @@ void BST<T>::DeleteLeaf(T key)
 
                 while (NodeReplacement->right != NULL)
                 {
-                    ParentReplacement = NodeReplacement;
+					counter++;
+					ParentReplacement = NodeReplacement;
                     NodeReplacement = NodeReplacement->right;
 					result.isLeft = 0; // NodeReplacement is right child of parent
                 }
@@ -627,7 +603,7 @@ void BST<T>::DeleteLeaf(T key)
                     ParentReplacement->right = NodeReplacement->left;
                 }
 
-                //cout << "...готово.\n\n";
+				counter++;
                 return;
             }
         }
@@ -688,6 +664,57 @@ void BST<T>::PrintInOrder()
     {
         cout << "\nДерево пусто.\n";
     }
+}
+
+template <typename T>
+void BST<T>::PrintPostOrder(node* Ptr)
+{
+	if (root != NULL)
+	{
+		cout << "Вывод элементов post-order (Lt -> Rt -> T):\n";
+
+		stack<node*> s;
+
+		do
+		{
+			while (Ptr != NULL)
+			{
+				if (Ptr->right != NULL)
+				{
+					s.push(Ptr->right);
+				}
+
+				s.push(Ptr);
+				Ptr = Ptr->left;
+			}
+
+			Ptr = s.top();
+			s.pop();
+
+			if (!s.empty())
+			{
+				if (Ptr->right != NULL && s.top() == Ptr->right)
+				{
+					s.pop();
+					s.push(Ptr);
+					Ptr = Ptr->right;
+				}
+				else
+				{
+					cout << Ptr->key << " ";
+					Ptr = NULL;
+				}
+			}
+			else
+			{
+				cout << Ptr->key << " ";
+			}
+		} while (!s.empty());
+	}
+	else
+	{
+		cout << "\nДерево пусто.\n";
+	}
 }
 
 template<typename T>
@@ -785,57 +812,6 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Ptr, bool isLeft)
 }
 
 template<typename T>
-void BST<T>::GenerateTree(unsigned int size, short type)
-{
-	ClearTree(root);
-
-	T key = NULL;
-	bool exists;
-
-	srand((unsigned int)time(NULL));
-
-	for (unsigned int i = 0; i < size; i++)
-	{
-		do
-		{
-			if (type == 3)
-				key = (rand() % 26) + 'a';
-			else if (type == 2)
-				key = (T)(rand())/(rand());
-			else if (type == 1)
-				key = ((rand() + 1) * (rand() + 1) / (rand() + 1)) + 1;
-			//cout << key << " ";
-			exists = AddLeaf(key, root);
-		}
-		while (exists);
-	}
-
-
-	//int iKey;
-	//double dKey;
-	//char cKey;
-
-	
-
-
-
-	//int arr[11] = { 22, 7, 83, 6, 12, 33, 90, 4, 11, 1, 3 };
-	//int arr[20] = { 48, 1, 20, 66, 111, 51, 2, 7, 4, 13, 5, 90, 100, 30, 15, 8, 9, 325, 125, 12 };
-
-
-	//cout << "\nДерево сгенерировано.\n";
-}
-
-template<typename T>
-T BST<T>::randVar(unsigned int size)
-{
-	T key;
-
-
-	return key;
-}
-
-template<typename T>
 void BST<T>::DrawTree(node* Ptr, int space)
 {
 	if (root != NULL)
@@ -869,68 +845,45 @@ void BST<T>::DrawTree(node* Ptr, int space)
 	}
 }
 
-template <typename T>
-void BST<T>::PrintPostOrder(node* Ptr)
+template<typename T>
+unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 {
-    if (root != NULL)
-    {
-        cout << "Вывод элементов post-order (Lt -> Rt -> T):\n";
+	unsigned int insertCounter = 0;
+	
+	ClearTree(root);
 
-        stack<node*> s;
+	T key = NULL;
+	bool exists;
 
-        do
-        {
-            while (Ptr != NULL)
-            {
-                if (Ptr->right != NULL)
-                {
-                    s.push(Ptr->right);
-                }
+	srand((unsigned int)time(NULL));
 
-                s.push(Ptr);
-                Ptr = Ptr->left;
-            }
+	for (unsigned int i = 0; i < size; i++)
+	{
+		do
+		{
+			if (type == 3)
+				key = (rand() % 26) + 'a';
+			else if (type == 2)
+				key = (T)(rand()) / (rand());
+			else if (type == 1)
+				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
 
-            Ptr = s.top();
-            s.pop();
+			exists = AddLeaf(key, root);
+		} while (exists);
 
-            if (!s.empty())
-            {
-                if (Ptr->right != NULL && s.top() == Ptr->right)
-                {
-                    s.pop();
-                    s.push(Ptr);
-                    Ptr = Ptr->right;
-                }
-                else
-                {
-                    cout << Ptr->key << " ";
-                    Ptr = NULL;
-                }
-            }
-            else
-            {
-                cout << Ptr->key << " ";
-            }
-        }
-        while (!s.empty());
-    }
-    else
-    {
-        cout << "\nДерево пусто.\n";
-    }
+		insertCounter += counter;
+	}
+
+	return insertCounter;
 }
 
 template<typename T>
 void BST<T>::TestTree(short type)
 {	
-	//T key;
-
 	unsigned int size;
 	unsigned int searchCounter = 0;
 	unsigned int insertCounter = 0;
 	unsigned int deleteCounter = 0;
-
 
 	vector<T> v;
 
@@ -942,25 +895,18 @@ void BST<T>::TestTree(short type)
 		{
 			cout << "\n\nРазмер: " << size << " элементов.\n";
 			
+			cout << "\nСреднее число пройденных узлов:\n";
+
 			counter = 0;
 
-			GenerateTree(size, type);
-
-			insertCounter += counter;
+			insertCounter = GenerateTree(size, type);
 
 			cout << "Вставка: " << insertCounter / size << endl;
 
-			//cout << "\nroot: " << root->key << endl;
 			v = SortInOrder(root);
-
-			//key = rand() % size;
-			//for (auto i : v)
-			//	cout << i << "! ";
 
 			counter = 0;
 			
-			cout << "\nСреднее число пройденных узлов:\n";
-
 			for (auto i : v)
 			{
 				FindKey(i);
@@ -969,57 +915,61 @@ void BST<T>::TestTree(short type)
 
 			cout << "Поиск: " << searchCounter / size << endl;
 			
-			
 			for (unsigned int i = 0; i < size; i++)
 			{
-				unsigned int key = (rand() % size);
-
-				//cout << ""key << endl;
-				//for (auto i : v)
-					//cout << i << " ";
-
-				//cout << endl << v.at(key) << endl;
-
-				//system("pause");
+				unsigned int key = (rand() % v.size());
+				
 				DeleteLeaf(v.at(key));
-
 				v.erase(v.begin() + key);
-
 				deleteCounter += counter;
 			}
 
-			cout << "Удаление: " << deleteCounter / size << endl;
-
-			//for (auto i : v)
-			//{
-			//	//FindKey(i);
-			//}
-
-			//for (auto i : v)
-			//{
-			//	//FindKey(i);
-			//	insertCounter += counter;
-			//}
-
+			cout << "Удаление: " << deleteCounter / size << endl << endl;
 		}
 
 		cout << endl;
-
-		system("pause");
-
-
 	}
 	else
 	{
 		cout << "\nДля символьного типа размер дерева ограничен 26 элементами (пока).\n";
-		system("pause");
+
+		size = 26;
+		
+		cout << "\n\nРазмер: " << size << " элементов.\n";
+		cout << "\nСреднее число пройденных узлов:\n";
+
+		counter = 0;
+
+		insertCounter = GenerateTree(size, type);
+
+		cout << "Вставка: " << insertCounter / size << endl;
+
+		v = SortInOrder(root);
+
+		counter = 0;
+
+		for (auto i : v)
+		{
+			FindKey(i);
+			searchCounter += counter;
+		}
+
+		cout << "Поиск: " << searchCounter / size << endl;
+
+		for (unsigned int i = 0; i < size; i++)
+		{
+			unsigned int key = (rand() % v.size());
+
+			DeleteLeaf(v.at(key));
+
+			v.erase(v.begin() + key);
+
+			deleteCounter += counter;
+		}
+
+		cout << "Удаление: " << deleteCounter / size << endl;
+		cout << endl;
 	}
-
-
-	cout << "Среднее число пройденных узлов: " << counter;
-	
-
-
 }
 
 template <typename T>
