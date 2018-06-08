@@ -11,3 +11,15 @@ BST.VC.VC.opendb
 .vs/BST/v15/Browse.VC.opendb
 .vs/BST/v15/ipch/AutoPCH/33f7620b2a1cf88b/BST.ipch
 /Debug
+BST/Debug/BST.log
+BST/Debug/BST.obj
+BST/Debug/BST.tlog/BST.lastbuildstate
+BST/Debug/BST.tlog/CL.command.1.tlog
+BST/Debug/BST.tlog/CL.read.1.tlog
+BST/Debug/BST.tlog/CL.write.1.tlog
+BST/Debug/BST.tlog/link.command.1.tlog
+BST/Debug/BST.tlog/link.read.1.tlog
+BST/Debug/BST.tlog/link.write.1.tlog
+BST/Debug/main.obj
+BST/Debug/vc140.idb
+BST/Debug/vc140.pdb
