@@ -1171,9 +1171,40 @@ vector<T> BST<T>::GenerateVector(short type)
 }
 
 template<typename T>
+vector<T> BST<T>::EnterVector()
+{
+	vector<T> vec;
+	T key;
+	
+	int size;
+	
+	cout << "Введите размер: ";
+	cin >> size;
+	
+	cout << endl;
+	
+	for (int i = 0; i < size; i++)
+	{
+		cin >> key;
+		//cout << key << " ";
+		vec.push_back(key);
+		//cout << endl << vec.back() << endl;
+	}
+	
+	cout << endl;
+	
+	for (auto i : vec)
+		cout << i << " ";
+		
+	cout << endl << endl;
+}
+
+template<typename T>
 void BST<T>::BubbleSort(short type)
 {
-	vector<T> vec = GenerateVector(type);
+	//vector<T> vec = GenerateVector(type);
+	
+	vector<T> vec = EnterVector();
 	
 	unsigned int size = vec.size();
 	T left, right;
@@ -1196,6 +1227,11 @@ void BST<T>::BubbleSort(short type)
 			*it-- = left;
 			*it = right;
 		}
+		
+		for (auto i : vec)
+		cout << i << " ";
+		
+		cout << endl;
 	}
 }
 
