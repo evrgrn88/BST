@@ -1184,20 +1184,19 @@ void BST<T>::BubbleSort(short type)
 
 	cout << endl << endl;
 
-	iterator = vec.begin();
+	vector<T>::iterator it = vec.begin();
 	
-	if (iterator != vec.end())
+	while (it != vec.end())
 	{
-		left = *iterator;
-		right = *++iterator;
+		left = *it;
+		right = *++it;
 
 		if (left > right)
 		{
-			
+			*it-- = left;
+			*it = right;
 		}
 	}
-
-	//cout << *iterator << endl;
 }
 
 template <typename T>
