@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cstdlib>
 #include <stack>
 #include <iterator>
@@ -1184,7 +1184,7 @@ void BST<T>::BubbleSort(short type)
 
 	cout << endl << endl;
 
-	vector<T>::iterator it = vec.begin();
+	typename vector<T>::iterator it = vec.begin();
 	
 	while (it != vec.end())
 	{
