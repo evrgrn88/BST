@@ -1,4 +1,4 @@
-﻿#ifndef BST_H
+#ifndef BST_H
 #define BST_H
 
 using namespace std;
@@ -99,6 +99,8 @@ private:
 
 	// Пузырьковая сортировка элементов вектора
 	void BubbleSort(short type);
+
+	vector<T> EnterVector();
 
 public:
 	BST();
