@@ -47,6 +47,9 @@ void BST<T>::MainMenu(short type)
 			"11. Объединить два поддерева.\n" <<
 			"12. Сгенерировать дерево.\n\n" <<
 			
+			
+			"15. Пузырьковая сортировка случайного вектора.\n\n" <<
+
 			"Тестирование:\n" <<
 			"---------------------------------------------\n" <<
 			"13. Проверить производительность дерева.\n\n" <<
@@ -154,6 +157,33 @@ void BST<T>::MainMenu(short type)
 		
 		case 14:
 			return;
+			break;
+
+		case 15:
+			BubbleSort(type);
+
+			/*vector<T> testvec;
+			T lSearchKey;
+			bool result;
+
+			testvec.push_back(2);
+			testvec.push_back(5);
+			testvec.push_back(1);
+			testvec.push_back(6);
+			testvec.push_back(3);
+			testvec.push_back(8);
+
+			cout << "\nПоиск: ";
+			cin >> lSearchKey;
+			cout << endl << endl;
+
+			result = LinearSearch(testvec, lSearchKey);
+
+			if (result)
+				cout << "\nНайдено\n";
+			else
+				cout << "\nНе найдено\n";*/
+
 			break;
 		}
 
@@ -1095,6 +1125,79 @@ void BST<T>::TestTree(short type)
 		cout << "Удаление: " << deleteCounter / size << endl;
 		cout << endl;
 	}
+}
+
+template<typename T>
+bool BST<T>::LinearSearch(vector<T> v, T key)
+{
+	for (auto i : v)
+		if (i == key)
+			return true;
+
+	return false;
+}
+
+template<typename T>
+vector<T> BST<T>::GenerateVector(short type)
+{
+	vector<T> v;
+	T key = NULL;
+	unsigned int size;
+	bool exists;
+
+	srand((unsigned int)time(NULL)); // Инициализация генератора случайных значений (часы)
+
+	cout << "\nВведите размер вектора: ";
+	cin >> size;
+
+	for (unsigned int i = 0; i < size; i++)
+	{
+		do
+		{
+			if (type == 3) // Символ от a до z;
+				key = (rand() % 26) + 'a';
+			else if (type == 2) // Число с плавающей точкой
+				key = (T)(rand()) / (rand());
+			else if (type == 1) // Целое число
+				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
+
+			exists = LinearSearch(v, key);
+		} while (exists);
+
+		v.push_back(key);
+	}
+
+	return v;
+}
+
+template<typename T>
+void BST<T>::BubbleSort(short type)
+{
+	vector<T> vec = GenerateVector(type);
+	
+	unsigned int size = vec.size();
+	T left, right;
+	T temp;
+
+	for (auto i : vec)
+		cout << i << " ";
+
+	cout << endl << endl;
+
+	iterator = vec.begin();
+	
+	if (iterator != vec.end())
+	{
+		left = *iterator;
+		right = *++iterator;
+
+		if (left > right)
+		{
+			
+		}
+	}
+
+	//cout << *iterator << endl;
 }
 
 template <typename T>

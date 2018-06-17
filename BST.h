@@ -91,6 +91,15 @@ private:
 	// Среднее число посещённых узлов для операций вставки, поиска и удаления
 	void TestTree(short type);
 
+	// Линейный поиск по вектору
+	bool LinearSearch(vector<T> v, T key);
+
+	// Генерация вектора заданной длины
+	vector<T> GenerateVector(short type);
+
+	// Пузырьковая сортировка элементов вектора
+	void BubbleSort(short type);
+
 public:
 	BST();
     ~BST();
