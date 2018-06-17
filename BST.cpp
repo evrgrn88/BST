@@ -23,39 +23,39 @@ void BST<T>::MainMenu(short type)
 
 
 		if (type == 1)
-			cout << "РўРёРї: С†РµР»РѕРµ С‡РёСЃР»Рѕ\n";
+			cout << "Тип: целое число\n";
 		else if (type == 2)
-			cout << "РўРёРї: С‡РёСЃР»Рѕ СЃ РїР»Р°РІР°СЋС‰РµР№ С‚РѕС‡РєРѕР№\n";
+			cout << "Тип: число с плавающей точкой\n";
 		else if (type == 3)
-			cout << "РўРёРї: СЃРёРјРІРѕР»\n";
+			cout << "Тип: символ\n";
 
         short choice;
         cout << endl <<
 			
-			"РћРїРµСЂР°С†РёРё:\n" <<
+			"Операции:\n" <<
 			"---------------------------------------------\n" <<
-			"1. РЎРѕР·РґР°С‚СЊ РЅРѕРІРѕРµ РґРµСЂРµРІРѕ.\n" <<
-			"2. Р’С‹РІРµСЃС‚Рё СЌР»РµРјРµРЅС‚С‹ РїРѕ РїРѕСЂСЏРґРєСѓ.\n" <<
-			"3. РџРѕРєР°Р·Р°С‚СЊ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР°.\n" <<
-			"4. РћС‡РёСЃС‚РёС‚СЊ РґРµСЂРµРІРѕ.\n" <<
-			"5. РџСЂРѕРІРµСЂРёС‚СЊ РґРµСЂРµРІРѕ РЅР° РїСѓСЃС‚РѕС‚Сѓ.\n" <<
-			"6. РСЃРєР°С‚СЊ СЌР»РµРјРµРЅС‚.\n" <<
-			"7. Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚.\n" <<
-			"8. РЈРґР°Р»РёС‚СЊ СЌР»РµРјРµРЅС‚.\n" <<
-			"9. РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС‚РµСЂР°С‚РѕСЂ.\n" <<
-			"10. РћР±С…РѕРґ Post-order (Lt -> Rt -> t).\n" <<
-			"11. РћР±СЉРµРґРёРЅРёС‚СЊ РґРІР° РїРѕРґРґРµСЂРµРІР°.\n" <<
-			"12. РЎРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РґРµСЂРµРІРѕ.\n\n" <<
+			"1. Создать новое дерево.\n" <<
+			"2. Вывести элементы по порядку.\n" <<
+			"3. Показать число элементов дерева.\n" <<
+			"4. Очистить дерево.\n" <<
+			"5. Проверить дерево на пустоту.\n" <<
+			"6. Искать элемент.\n" <<
+			"7. Добавить новый элемент.\n" <<
+			"8. Удалить элемент.\n" <<
+			"9. Использовать итератор.\n" <<
+			"10. Обход Post-order (Lt -> Rt -> t).\n" <<
+			"11. Объединить два поддерева.\n" <<
+			"12. Сгенерировать дерево.\n\n" <<
 			
 			
-			"15. РџСѓР·С‹СЂСЊРєРѕРІР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР° СЃР»СѓС‡Р°Р№РЅРѕРіРѕ РІРµРєС‚РѕСЂР°.\n\n" <<
+			"15. Пузырьковая сортировка случайного вектора.\n\n" <<
 
-			"РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ:\n" <<
+			"Тестирование:\n" <<
 			"---------------------------------------------\n" <<
-			"13. РџСЂРѕРІРµСЂРёС‚СЊ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚СЊ РґРµСЂРµРІР°.\n\n" <<
-			"14. РќР°Р·Р°Рґ.\n" <<
+			"13. Проверить производительность дерева.\n\n" <<
+			"14. Назад.\n" <<
 
-			"\n\nР’С‹Р±РµСЂРёС‚Рµ РѕРїРµСЂР°С†РёСЋ: ";
+			"\n\nВыберите операцию: ";
 
         cin >> choice;
         cout << endl;
@@ -89,7 +89,7 @@ void BST<T>::MainMenu(short type)
 		case 6:
 			T searchKey;
 
-			cout << "\nРџРѕРёСЃРє: ";
+			cout << "\nПоиск: ";
 			cin >> searchKey;
 			cout << endl;
 
@@ -105,7 +105,7 @@ void BST<T>::MainMenu(short type)
 		case 8:
 			T deleteKey;
 
-			cout << "Р’РІРµРґРёС‚Рµ РєР»СЋС‡: ";
+			cout << "Введите ключ: ";
 			cin >> deleteKey;
 
 			DeleteLeaf(deleteKey);
@@ -133,13 +133,13 @@ void BST<T>::MainMenu(short type)
 		case 12:
 			unsigned int treeSize;
 
-			cout << "\nР’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ: \n";
+			cout << "\nВведите число элементов: \n";
 
 			cin >> treeSize;
 
 			if (type == 3 && treeSize > 26)
 			{
-				cout << "\nР”Р»СЏ СЃРёРјРІРѕР»СЊРЅРѕРіРѕ С‚РёРїР° РґР°РЅРЅС‹С… СЂР°Р·РјРµСЂ РґРµСЂРµРІР° РѕРіСЂР°РЅРёС‡РµРЅ 26 СЌР»РµРјРµРЅС‚Р°РјРё (РїРѕРєР°). Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ СЂР°Р·РјРµСЂ: \n";
+				cout << "\nДля символьного типа данных размер дерева ограничен 26 элементами (пока). Введите новый размер: \n";
 				cin >> treeSize;
 			}
 
@@ -173,16 +173,16 @@ void BST<T>::MainMenu(short type)
 			testvec.push_back(3);
 			testvec.push_back(8);
 
-			cout << "\nРџРѕРёСЃРє: ";
+			cout << "\nПоиск: ";
 			cin >> lSearchKey;
 			cout << endl << endl;
 
 			result = LinearSearch(testvec, lSearchKey);
 
 			if (result)
-				cout << "\nРќР°Р№РґРµРЅРѕ\n";
+				cout << "\nНайдено\n";
 			else
-				cout << "\nРќРµ РЅР°Р№РґРµРЅРѕ\n";*/
+				cout << "\nНе найдено\n";*/
 
 			break;
 		}
@@ -198,8 +198,8 @@ void BST<T>::IteratorMenu()
 {
 	if (root != NULL)
 	{
-		// Р’РµРєС‚РѕСЂ РґР»СЏ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё СЌР»-С‚РѕРІ 
-		// РґР»СЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕРіРѕ РїРµСЂРµС…РѕРґР° РїРѕ РёС‚РµСЂР°С‚РѕСЂСѓ
+		// Вектор для отсортированной последовательности эл-тов 
+		// для последовательного перехода по итератору
 		vector<T> SortedKeys; 
 		short ch;
 		
@@ -211,15 +211,15 @@ void BST<T>::IteratorMenu()
 			system("cls");
 
 			cout << endl <<
-				"1. РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РёС‚РµСЂР°С‚РѕСЂ РЅР° РєРѕСЂРµРЅСЊ РґРµСЂРµРІР°.\n" <<
-				"2. РџСЂРѕРІРµСЂРёС‚СЊ РєРѕРЅРµС† РґРµСЂРµРІР°.\n" <<
-				"3. РўРµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚.\n" <<
-				"4. РЎР»РµРґСѓСЋС‰РёР№ РїРѕ РєР»СЋС‡Сѓ СЌР»РµРјРµРЅС‚.\n" <<
-				"5. РџСЂРµРґС‹РґСѓС‰РёР№ РїРѕ РєР»СЋС‡Сѓ СЌР»РµРјРµРЅС‚.\n" <<
+				"1. Установить итератор на корень дерева.\n" <<
+				"2. Проверить конец дерева.\n" <<
+				"3. Текущий элемент.\n" <<
+				"4. Следующий по ключу элемент.\n" <<
+				"5. Предыдущий по ключу элемент.\n" <<
 
-				"\n6. РџСЂРµРґС‹РґСѓС‰РµРµ РјРµРЅСЋ.\n"
+				"\n6. Предыдущее меню.\n"
 
-				"\n\nР’С‹Р±РµСЂРёС‚Рµ РѕРїРµСЂР°С†РёСЋ: ";
+				"\n\nВыберите операцию: ";
 
 			cin >> ch;
 			cout << endl;
@@ -234,19 +234,19 @@ void BST<T>::IteratorMenu()
 					iterator++;
 				}
 
-				cout << "РЈСЃС‚Р°РЅРѕРІРєР° РЅР° РєРѕСЂРµРЅСЊ РґРµСЂРµРІР°...\nРљР»СЋС‡: " << *iterator << endl;
+				cout << "Установка на корень дерева...\nКлюч: " << *iterator << endl;
 
 				break;
 
 			case 2:
 				iterator = SortedKeys.end();
 
-				cout << "РЈСЃС‚Р°РЅРѕРІРєР° РЅР° РєРѕРЅРµС† РґРµСЂРµРІР°...\nРљР»СЋС‡: " << *--iterator << endl;
+				cout << "Установка на конец дерева...\nКлюч: " << *--iterator << endl;
 
 				break;
 
 			case 3:
-				cout << "РўРµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚.\nРљР»СЋС‡: " << *iterator << endl;
+				cout << "Текущий элемент.\nКлюч: " << *iterator << endl;
 								
 				break;
 				
@@ -255,11 +255,11 @@ void BST<T>::IteratorMenu()
 
 				if (iterator != SortedKeys.end())
 				{
-					cout << "РџРµСЂРµС…РѕРґ РЅР° СЃР»РµРґСѓСЋС‰РёР№ РїРѕ РєР»СЋС‡Сѓ СЌР»РµРјРµРЅС‚ РґРµСЂРµРІР°...\nРљР»СЋС‡: " << *iterator << endl;
+					cout << "Переход на следующий по ключу элемент дерева...\nКлюч: " << *iterator << endl;
 				}
 				else
 				{
-					cout << "РљР»СЋС‡ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚!\n";
+					cout << "Ключ отсутствует!\n";
 					--iterator;
 				}
 
@@ -269,11 +269,11 @@ void BST<T>::IteratorMenu()
 				if (iterator != SortedKeys.begin())
 				{
 					iterator--;
-					cout << "РџРµСЂРµС…РѕРґ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ РїРѕ РєР»СЋС‡Сѓ СЌР»РµРјРµРЅС‚ РґРµСЂРµРІР°...\nРљР»СЋС‡: " << *iterator << endl;
+					cout << "Переход на предыдущий по ключу элемент дерева...\nКлюч: " << *iterator << endl;
 				}
 				else
 				{
-					cout << "РљР»СЋС‡ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚!\n";
+					cout << "Ключ отсутствует!\n";
 				}
 
 				break;
@@ -287,7 +287,7 @@ void BST<T>::IteratorMenu()
 	}
 	else
 	{
-		cout << "Р”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+		cout << "Дерево пусто.\n";
 	}
 }
 
@@ -297,7 +297,7 @@ void BST<T>::FillTree()
     ClearTree(root);
     int treeSize;
 
-    cout << "\nР’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ: \n";
+    cout << "\nВведите число элементов: \n";
     cin >> treeSize;
     cout << endl;
 
@@ -307,13 +307,13 @@ void BST<T>::FillTree()
     }
 }
 
-// РРЅС„РёРєСЃРЅС‹Р№ РѕР±С…РѕРґ РґР»СЏ РїРѕРґСЃС‡РµС‚Р° РєРѕР»РёС‡РµСЃС‚РІР° СѓР·Р»РѕРІ
+// Инфиксный обход для подсчета количества узлов
 template <typename T>
 void BST<T>::ShowSize()
 {
     if (root != NULL)
     {
-        // РЎС‚РµРє РґР»СЏ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРіРѕ С…СЂР°РЅРµРЅРёСЏ
+        // Стек для промежуточного хранения
 		stack<node*> s;
         int i = 0;
         node* Ptr = root;
@@ -341,15 +341,15 @@ void BST<T>::ShowSize()
         }
         while (true);
 
-        cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ: " << i;
+        cout << "Количество элементов: " << i;
     }
     else
     {
-        cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-// РџРѕСЌР»РµРјРµРЅС‚РЅРѕРµ СѓРґР°Р»РµРЅРёРµ Р»РµРІС‹С… Рё РїСЂР°РІС‹С… РїРѕРґСѓР·Р»РѕРІ РєРѕСЂРЅСЏ СЃ Р·Р°РјРµС‰РµРЅРёРµРј
+// Поэлементное удаление левых и правых подузлов корня с замещением
 template <typename T>
 void BST<T>::ClearTree(node* Ptr)
 {
@@ -374,17 +374,17 @@ void BST<T>::EmptyCheck(node* Ptr)
 {
     if (Ptr == NULL)
     {
-        cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+        cout << "\nДерево пусто.\n";
     }
     else
     {
-        cout << "\nР”РµСЂРµРІРѕ РќР• РїСѓСЃС‚Рѕ.\n";
+        cout << "\nДерево НЕ пусто.\n";
     }
 
     cout << endl;
 }
 
-// РџРѕРёСЃРє СЌР»РµРјРµРЅС‚Р°
+// Поиск элемента
 template <typename T>
 typename BST<T>::search BST<T>::FindKey(T key)
 {
@@ -397,7 +397,7 @@ typename BST<T>::search BST<T>::FindKey(T key)
 		
 	while (result.nodeptr != NULL)
 	{
-		counter++; // РЎС‡РµС‚С‡РёРє РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СѓР·Р»РѕРІ РґР»СЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ
+		counter++; // Счетчик просмотренных узлов для тестирования
 
 		if (key == result.nodeptr->key)
 		{			
@@ -429,12 +429,12 @@ void BST<T>::FindKeyHelper(T searchKey)
 		search result = FindKey(searchKey);
 		
 		if (result.nodeptr == NULL)
-			cout << "\nР­Р»РµРјРµРЅС‚ РќР• РЅР°Р№РґРµРЅ\n";
+			cout << "\nЭлемент НЕ найден\n";
 		else if (result.nodeptr->key == searchKey)
-			cout << "\nР­Р»РµРјРµРЅС‚ РЅР°Р№РґРµРЅ\n";
+			cout << "\nЭлемент найден\n";
 	}
 	else
-		cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+		cout << "\nДерево пусто.\n";
 }
 
 template <typename T>
@@ -506,7 +506,7 @@ bool BST<T>::AddLeaf(T key, node* Ptr)
 	return false;
 }
 
-// Р”РѕР±Р°РІР»РµРЅРёРµ СѓР·Р»Р° РІСЂСѓС‡РЅСѓСЋ
+// Добавление узла вручную
 template <typename T>
 void BST<T>::AddNewLeaf()
 {
@@ -515,25 +515,25 @@ void BST<T>::AddNewLeaf()
     
 	do
 	{
-		cout << "\nР’РІРµРґРёС‚Рµ РєР»СЋС‡: \n";
+		cout << "\nВведите ключ: \n";
 		cin >> newKey;
 		exists = AddLeaf(newKey, root);
 
 		if (exists)
-			cout << "\nР­Р»РµРјРµРЅС‚ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!";
+			cout << "\nЭлемент уже существует!";
 	}
-	while (exists); // РџСЂРѕРІРµСЂРєР° РЅР° РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ СѓР·Р»С‹
+	while (exists); // Проверка на повторяющиеся узлы
 	
     cout << endl;
 }
 
-// РЈРґР°Р»РµРЅРёРµ СѓР·Р»Р°
+// Удаление узла
 template <typename T>
 void BST<T>::DeleteLeaf(T key)
 {
     if (root != NULL)
     {		
-		// РџРѕРёСЃРє СѓР·Р»Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
+		// Поиск узла для удаления
 		search result = FindKey(key);
 
 		node* Child = NULL;
@@ -542,7 +542,7 @@ void BST<T>::DeleteLeaf(T key)
 
 		if (result.nodeptr == NULL)
 		{
-			cout << "\nР­Р»РµРјРµРЅС‚ РќР• РЅР°Р№РґРµРЅ\n";
+			cout << "\nЭлемент НЕ найден\n";
 			return;
 		}
 
@@ -550,9 +550,9 @@ void BST<T>::DeleteLeaf(T key)
         {
 			counter++;
 
-			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 РїРѕРґСѓР·Р»РѕРІ
+			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 подузлов
             {
-                if (result.parent == NULL) // РЈР·РµР» СЏРІР»СЏРµС‚СЃСЏ РєРѕСЂРЅРµРІС‹Рј
+                if (result.parent == NULL) // Узел является корневым
                 {
                     root = NULL;
                 }
@@ -572,7 +572,7 @@ void BST<T>::DeleteLeaf(T key)
 				return;
             }
 
-            if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 РїРѕРґСѓР·РµР»
+            if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 подузел
             {
 				counter++;
 
@@ -585,13 +585,13 @@ void BST<T>::DeleteLeaf(T key)
                     Child = result.nodeptr->right;
                 }
 
-                if (result.parent == NULL) // РЈР·РµР» СЏРІР»СЏРµС‚СЃСЏ РєРѕСЂРЅРµРІС‹Рј
+                if (result.parent == NULL) // Узел является корневым
                 {
                     delete result.nodeptr;
 					result.nodeptr = NULL;
                     root = Child;
                 }
-                else // РЈРґР°Р»РµРЅРёРµ СЃ Р·Р°РјРµС‰РµРЅРёРµРј РїРѕРґСѓР·Р»РѕРј
+                else // Удаление с замещением подузлом
                 {
                     if (result.isLeft)
                     {
@@ -609,22 +609,22 @@ void BST<T>::DeleteLeaf(T key)
 				return;
             }
 
-            if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 РїРѕРґСѓР·Р»Р°
+            if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 подузла
             {
-                // РџРѕРёСЃРє Р·Р°РјРµС‰Р°СЋС‰РµРіРѕ СѓР·Р»Р° (РЅР°РёР±РѕР»СЊС€РµРіРѕ СЃР»РµРІР°)
+                // Поиск замещающего узла (наибольшего слева)
                 ParentReplacement = result.nodeptr;
                 NodeReplacement = result.nodeptr->left;
-				result.isLeft = true; // Р—Р°РјРµС‰Р°СЋС‰РёР№ СѓР·РµР» СЃР»РµРІР°
+				result.isLeft = true; // Замещающий узел слева
 
                 while (NodeReplacement->right != NULL)
                 {
 					counter++;
 					ParentReplacement = NodeReplacement;
                     NodeReplacement = NodeReplacement->right;
-					result.isLeft = 0; // Р—Р°РјРµС‰Р°СЋС‰РёР№ СѓР·РµР» СЃРїСЂР°РІР°
+					result.isLeft = 0; // Замещающий узел справа
                 }
 
-				result.nodeptr->key = NodeReplacement->key; // РљРѕРїРёСЂРѕРІР°РЅРёРµ РґР°РЅРЅС‹С…
+				result.nodeptr->key = NodeReplacement->key; // Копирование данных
 
                 if (result.isLeft)
                 {
@@ -642,11 +642,11 @@ void BST<T>::DeleteLeaf(T key)
     }
     else
     {
-        cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-// РРЅС„РёРєСЃРЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР° СЃ РІС‹РІРѕРґРѕРј РІ РІРµРєС‚РѕСЂ
+// Инфиксная сортировка с выводом в вектор
 template <typename T>
 vector<T> BST<T>::SortInOrder(node* Ptr)
 {	
@@ -686,7 +686,7 @@ void BST<T>::PrintInOrder()
     {	
 		vector<T> SortedKeys = SortInOrder(root);
 		
-		cout << "Р’С‹РІРѕРґ СЌР»РµРјРµРЅС‚РѕРІ in-order (Lt -> T -> Rt):\n";
+		cout << "Вывод элементов in-order (Lt -> T -> Rt):\n";
 		
 		for (auto i : SortedKeys)
 		{
@@ -695,17 +695,17 @@ void BST<T>::PrintInOrder()
     }
     else
     {
-        cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+        cout << "\nДерево пусто.\n";
     }
 }
 
-// РџРѕСЃС‚С„РёРєСЃРЅС‹Р№ РѕР±С…РѕРґ
+// Постфиксный обход
 template <typename T>
 void BST<T>::PrintPostOrder(node* Ptr)
 {
 	if (root != NULL)
 	{
-		cout << "Р’С‹РІРѕРґ СЌР»РµРјРµРЅС‚РѕРІ post-order (Lt -> Rt -> T):\n";
+		cout << "Вывод элементов post-order (Lt -> Rt -> T):\n";
 
 		stack<node*> s;
 
@@ -747,7 +747,7 @@ void BST<T>::PrintPostOrder(node* Ptr)
 	}
 	else
 	{
-		cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+		cout << "\nДерево пусто.\n";
 	}
 }
 
@@ -758,15 +758,15 @@ void BST<T>::MergePrepare()
 	{
 		T mergeKey;
 
-		cout << "Р’РІРµРґРёС‚Рµ РєР»СЋС‡-СЂРѕРґРёС‚РµР»СЊ РїРѕРґРґРµСЂРµРІСЊРµРІ РґР»СЏ РѕР±СЉРµРґРёРЅРµРЅРёСЏ: ";
+		cout << "Введите ключ-родитель поддеревьев для объединения: ";
 		cin >> mergeKey;
 
 		node* Ptr;
-		search result = FindKey(mergeKey); // РџРѕРёСЃРє СѓР·Р»Р°-СЂРѕРґРёС‚РµР»СЏ РґР»СЏ РѕР±СЉРµРґРёРЅРµРЅРёСЏ РїРѕРґРґРµСЂРµРІСЊРµРІ
+		search result = FindKey(mergeKey); // Поиск узла-родителя для объединения поддеревьев
 
 		if (result.nodeptr != NULL)
 		{
-			if (result.parent == NULL) // Р РѕРґРёС‚РµР»СЊ - РєРѕСЂРµРЅСЊ
+			if (result.parent == NULL) // Родитель - корень
 			{
 				while (result.nodeptr->right != NULL)
 				{
@@ -780,7 +780,7 @@ void BST<T>::MergePrepare()
 					root = Ptr;
 				}
 			}
-			else if (result.isLeft == true) // РЈР·РµР» - СЃР»РµРІР° РѕС‚ СЂРѕРґРёС‚РµР»СЏ
+			else if (result.isLeft == true) // Узел - слева от родителя
 			{
 				while (result.nodeptr->right != NULL)
 				{
@@ -790,7 +790,7 @@ void BST<T>::MergePrepare()
 					result.parent = result.parent->left;
 				}
 			}
-			else if (result.isLeft == false) // РЈР·РµР» - СЃРїСЂР°РІР° РѕС‚ СЂРѕРґРёС‚РµР»СЏ
+			else if (result.isLeft == false) // Узел - справа от родителя
 			{
 				while (result.nodeptr->left != NULL)
 				{
@@ -845,7 +845,7 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Ptr, bool isLeft)
 	return Ptr;
 }
 
-// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РґРµСЂРµРІР°
+// Отображение структуры дерева
 template<typename T>
 void BST<T>::DrawTree(node* Ptr, int space)
 {
@@ -854,13 +854,13 @@ void BST<T>::DrawTree(node* Ptr, int space)
 		if (Ptr == NULL)
 			return;
 		
-		// Р”РёСЃС‚Р°РЅС†РёСЏ РјРµР¶РґСѓ СѓСЂРѕРІРЅСЏРјРё
+		// Дистанция между уровнями
 		space += 5;
 
-		// РћР±СЂР°Р±РѕС‚РєР° РїСЂР°РІРѕР№ СЃС‚РѕСЂРѕРЅС‹ РїРµСЂРІРѕР№
+		// Обработка правой стороны первой
 		DrawTree(Ptr->right, space);
 
-		// РџРµС‡Р°С‚СЊ С‚РµРєСѓС‰РµРіРѕ СѓР·Р»Р° РїРѕСЃР»Рµ РїСЂРѕР±РµР»Р°
+		// Печать текущего узла после пробела
 		cout << endl;
 
 		for (int i = 5; i < space; i++)
@@ -868,38 +868,38 @@ void BST<T>::DrawTree(node* Ptr, int space)
 		
 		cout << Ptr->key;
 
-		// РћР±СЂР°Р±РѕС‚РєР° Р»РµРІРѕР№ СЃС‚РѕСЂРѕРЅС‹
+		// Обработка левой стороны
 		DrawTree(Ptr->left, space);
 
 		cout << endl << endl;
 	}
 	else
 	{
-		cout << "\nР”РµСЂРµРІРѕ РїСѓСЃС‚Рѕ.\n";
+		cout << "\nДерево пусто.\n";
 	}
 }
 
 template<typename T>
 unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 {
-	unsigned int insertCounter = 0; // РЎС‡РµС‚С‡РёРє РґР»СЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ
+	unsigned int insertCounter = 0; // Счетчик для тестирования
 	
 	ClearTree(root);
 
 	T key = NULL;
 	bool exists;
 
-	srand((unsigned int)time(NULL)); // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… Р·РЅР°С‡РµРЅРёР№ (С‡Р°СЃС‹)
+	srand((unsigned int)time(NULL)); // Инициализация генератора случайных значений (часы)
 
 	for (unsigned int i = 0; i < size; i++)
 	{
 		do
 		{
-			if (type == 3) // РЎРёРјРІРѕР» РѕС‚ a РґРѕ z;
+			if (type == 3) // Символ от a до z;
 				key = (rand() % 26) + 'a';
-			else if (type == 2) // Р§РёСЃР»Рѕ СЃ РїР»Р°РІР°СЋС‰РµР№ С‚РѕС‡РєРѕР№
+			else if (type == 2) // Число с плавающей точкой
 				key = (T)(rand()) / (rand());
-			else if (type == 1) // Р¦РµР»РѕРµ С‡РёСЃР»Рѕ
+			else if (type == 1) // Целое число
 				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
 
 			exists = AddLeaf(key, root);
@@ -911,7 +911,7 @@ unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 	return insertCounter;
 }
 
-// РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РєРѕР»Р»РµРєС†РёРё
+// Тестирование коллекции
 template<typename T>
 void BST<T>::TestTree(short type)
 {	
@@ -922,54 +922,54 @@ void BST<T>::TestTree(short type)
 	unsigned int insertCounter = 0;
 	unsigned int deleteCounter = 0;
 
-	vector<T> v; // Р’РµРєС‚РѕСЂ РґР»СЏ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРіРѕ С…СЂР°РЅРµРЅРёСЏ
+	vector<T> v; // Вектор для промежуточного хранения
 
-	srand((unsigned int)time(NULL)); // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… Р·РЅР°С‡РµРЅРёР№ (С‡Р°СЃС‹)
+	srand((unsigned int)time(NULL)); // Инициализация генератора случайных значений (часы)
 
 	if (type != 3)
 	{
-		// РџРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РґРµСЂРµРІСЊРµРІ РѕС‚ 10 РґРѕ 100000 СЌР»РµРјРµРЅС‚РѕРІ, СЃ С€Р°РіРѕРј 10,
-		// СЃСЂРµРґРЅРёР№ СЃР»СѓС‡Р°Р№
+		// Последовательная обработка деревьев от 10 до 100000 элементов, с шагом 10,
+		// средний случай
 		for (size = 10; size < 100001; size *= 10) 
 		{
-			cout << "\n\nР Р°Р·РјРµСЂ: " << size << " СЌР»РµРјРµРЅС‚РѕРІ.\n";
+			cout << "\n\nРазмер: " << size << " элементов.\n";
 			
-			cout << "\nРЎСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ РїСЂРѕР№РґРµРЅРЅС‹С… СѓР·Р»РѕРІ:\n";
+			cout << "\nСреднее число пройденных узлов:\n";
 
 			counter = 0;
 
-			// Р“РµРЅРµСЂР°С†РёСЏ РґРµСЂРµРІР° СЃ РїРѕРѕРґСЃС‡РµС‚РѕРј РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СѓР·Р»РѕРІ
+			// Генерация дерева с поодсчетом просмотренных узлов
 			insertCounter = GenerateTree(size, type);
 
-			cout << "Р’СЃС‚Р°РІРєР°: " << insertCounter / size << endl;
+			cout << "Вставка: " << insertCounter / size << endl;
 
-			// РџРѕРјРµС‰РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР° РІ РІРµРєС‚РѕСЂ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ
+			// Помещение элементов дерева в вектор по возрастанию
 			v = SortInOrder(root);
 
 			counter = 0;
 			
-			// РџРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅС‹Р№ РїРѕРёСЃРє РІСЃРµС… СѓР·Р»РѕРІ СЃ РїРѕРґСЃС‡РµС‚РѕРј РїСЂРѕР№РґРµРЅРЅС‹С…
+			// Последовательный поиск всех узлов с подсчетом пройденных
 			for (auto i : v)
 			{
 				FindKey(i);
 				searchCounter += counter;
 			}
 
-			cout << "РџРѕРёСЃРє: " << searchCounter / size << endl;
+			cout << "Поиск: " << searchCounter / size << endl;
 			
-			// РЈРґР°Р»РµРЅРёРµ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР° СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј СЃ РїРѕРґСЃС‡РµС‚РѕРј
-			// РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СѓР·Р»РѕРІ
+			// Удаление всех элементов дерева случайным образом с подсчетом
+			// просмотренных узлов
 			for (unsigned int i = 0; i < size; i++)
 			{
-				// Р’С‹Р±РѕСЂ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
+				// Выбор случайного элемента вектора
 				unsigned int key = (rand() % v.size());
 				
-				DeleteLeaf(v.at(key)); // РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РґРµСЂРµРІР°
-				v.erase(v.begin() + key); // РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
+				DeleteLeaf(v.at(key)); // Удаление элемента дерева
+				v.erase(v.begin() + key); // Удаление элемента вектора
 				deleteCounter += counter;
 			}
 
-			cout << "РЈРґР°Р»РµРЅРёРµ: " << deleteCounter / size << endl << endl;
+			cout << "Удаление: " << deleteCounter / size << endl << endl;
 		}
 
 		cout << endl;
@@ -978,23 +978,23 @@ void BST<T>::TestTree(short type)
 		insertCounter = 0;
 		deleteCounter = 0;
 
-		// РҐСѓРґС€РёР№ СЃР»СѓС‡Р°Р№ (РЅР° РІС…РѕРґРµ - СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ)
+		// Худший случай (на входе - упорядоченный вектор)
 		for (size = 10; size < 100001; size *= 10)
 		{
-			cout << "\n\nР Р°Р·РјРµСЂ: " << size << " СЌР»РµРјРµРЅС‚РѕРІ.\n";
+			cout << "\n\nРазмер: " << size << " элементов.\n";
 
-			cout << "\nРЎСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ РїСЂРѕР№РґРµРЅРЅС‹С… СѓР·Р»РѕРІ (С…СѓРґС€РёР№ СЃР»СѓС‡Р°Р№):\n";
+			cout << "\nСреднее число пройденных узлов (худший случай):\n";
 
 			GenerateTree(size, type);
 
-			// РЎРѕР·РґР°РЅРёРµ СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅРѕРіРѕ РІРµРєС‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… Р·РЅР°С‡РµРЅРёР№
+			// Создание упорядоченного вектора случайных значений
 			v = SortInOrder(root);
 
 			ClearTree(root);
 
 			counter = 0;
 
-			// Р“РµРЅРµСЂР°С†РёСЏ РґРµСЂРµРІР° СЃ РїРѕРґСЃС‡РµС‚РѕРј РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СѓР·Р»РѕРІ
+			// Генерация дерева с подсчетом просмотренных узлов
 			for (auto i = v.rbegin(); i != v.rend(); i++)
 			{
 				do
@@ -1004,50 +1004,50 @@ void BST<T>::TestTree(short type)
 				insertCounter += counter;
 			}
 
-			cout << "Р’СЃС‚Р°РІРєР°: " << insertCounter / size << endl;
+			cout << "Вставка: " << insertCounter / size << endl;
 
 			counter = 0;
 
-			// РџРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅС‹Р№ РїРѕРёСЃРє РІСЃРµС… СѓР·Р»РѕРІ СЃ РїРѕРґСЃС‡РµС‚РѕРј РїСЂРѕР№РґРµРЅРЅС‹С…
+			// Последовательный поиск всех узлов с подсчетом пройденных
 			for (auto i = v.rbegin(); i != v.rend(); i++)
 			{
 				FindKey(*i);
 				searchCounter += counter;
 			}
 
-			cout << "РџРѕРёСЃРє: " << searchCounter / size << endl;
+			cout << "Поиск: " << searchCounter / size << endl;
 
-			// РЈРґР°Р»РµРЅРёРµ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР° СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј СЃ РїРѕРґСЃС‡РµС‚РѕРј
-			// РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СѓР·Р»РѕРІ
+			// Удаление всех элементов дерева случайным образом с подсчетом
+			// просмотренных узлов
 			for (unsigned int i = 0; i < size; i++)
 			{
-				// Р’С‹Р±РѕСЂ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
+				// Выбор случайного элемента вектора
 				unsigned int key = (rand() % v.size());
 
-				DeleteLeaf(v.at(key)); // РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РґРµСЂРµРІР°
-				v.erase(v.begin() + key); // РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
+				DeleteLeaf(v.at(key)); // Удаление элемента дерева
+				v.erase(v.begin() + key); // Удаление элемента вектора
 				deleteCounter += counter;
 			}
 
-			cout << "РЈРґР°Р»РµРЅРёРµ: " << deleteCounter / size << endl << endl;
+			cout << "Удаление: " << deleteCounter / size << endl << endl;
 		}
 
 		cout << endl;
 	}
 	else
 	{
-		cout << "\nР”Р»СЏ СЃРёРјРІРѕР»СЊРЅРѕРіРѕ С‚РёРїР° СЂР°Р·РјРµСЂ РґРµСЂРµРІР° РѕРіСЂР°РЅРёС‡РµРЅ 26 СЌР»РµРјРµРЅС‚Р°РјРё (РїРѕРєР°).\n";
+		cout << "\nДля символьного типа размер дерева ограничен 26 элементами (пока).\n";
 
 		size = 26;
 		
-		cout << "\n\nР Р°Р·РјРµСЂ: " << size << " СЌР»РµРјРµРЅС‚РѕРІ.\n";
-		cout << "\nРЎСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ РїСЂРѕР№РґРµРЅРЅС‹С… СѓР·Р»РѕРІ:\n";
+		cout << "\n\nРазмер: " << size << " элементов.\n";
+		cout << "\nСреднее число пройденных узлов:\n";
 
 		counter = 0;
 
 		insertCounter = GenerateTree(size, type);
 
-		cout << "Р’СЃС‚Р°РІРєР°: " << insertCounter / size << endl;
+		cout << "Вставка: " << insertCounter / size << endl;
 
 		v = SortInOrder(root);
 
@@ -1059,7 +1059,7 @@ void BST<T>::TestTree(short type)
 			searchCounter += counter;
 		}
 
-		cout << "РџРѕРёСЃРє: " << searchCounter / size << endl;
+		cout << "Поиск: " << searchCounter / size << endl;
 
 		for (unsigned int i = 0; i < size; i++)
 		{
@@ -1072,16 +1072,16 @@ void BST<T>::TestTree(short type)
 			deleteCounter += counter;
 		}
 
-		cout << "РЈРґР°Р»РµРЅРёРµ: " << deleteCounter / size << endl;
+		cout << "Удаление: " << deleteCounter / size << endl;
 		cout << endl;
 
-		// РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РІС‹СЂРѕР¶РґРµРЅРЅРѕРіРѕ РґРµСЂРµРІР°
-		cout << "\nР”Р»СЏ СЃРёРјРІРѕР»СЊРЅРѕРіРѕ С‚РёРїР° СЂР°Р·РјРµСЂ РґРµСЂРµРІР° РѕРіСЂР°РЅРёС‡РµРЅ 26 СЌР»РµРјРµРЅС‚Р°РјРё (РїРѕРєР°).\n";
+		// Тестирование вырожденного дерева
+		cout << "\nДля символьного типа размер дерева ограничен 26 элементами (пока).\n";
 
 		size = 26;
 
-		cout << "\n\nР Р°Р·РјРµСЂ: " << size << " СЌР»РµРјРµРЅС‚РѕРІ.\n";
-		cout << "\nРЎСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ РїСЂРѕР№РґРµРЅРЅС‹С… СѓР·Р»РѕРІ (С…СѓРґС€РёР№ СЃР»СѓС‡Р°Р№):\n";
+		cout << "\n\nРазмер: " << size << " элементов.\n";
+		cout << "\nСреднее число пройденных узлов (худший случай):\n";
 
 		GenerateTree(size, type);
 
@@ -1091,7 +1091,7 @@ void BST<T>::TestTree(short type)
 
 		counter = 0;
 
-		// Р“РµРЅРµСЂР°С†РёСЏ РґРµСЂРµРІР° СЃ РїРѕРґСЃС‡РµС‚РѕРј РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… СѓР·Р»РѕРІ
+		// Генерация дерева с подсчетом просмотренных узлов
 		for (auto i = v.rbegin(); i != v.rend(); i++)
 		{
 			do
@@ -1101,7 +1101,7 @@ void BST<T>::TestTree(short type)
 			insertCounter += counter;
 		}
 
-		cout << "Р’СЃС‚Р°РІРєР°: " << insertCounter / size << endl;
+		cout << "Вставка: " << insertCounter / size << endl;
 
 		for (auto i : v)
 		{
@@ -1109,7 +1109,7 @@ void BST<T>::TestTree(short type)
 			searchCounter += counter;
 		}
 
-		cout << "РџРѕРёСЃРє: " << searchCounter / size << endl;
+		cout << "Поиск: " << searchCounter / size << endl;
 
 		for (unsigned int i = 0; i < size; i++)
 		{
@@ -1122,7 +1122,7 @@ void BST<T>::TestTree(short type)
 			deleteCounter += counter;
 		}
 
-		cout << "РЈРґР°Р»РµРЅРёРµ: " << deleteCounter / size << endl;
+		cout << "Удаление: " << deleteCounter / size << endl;
 		cout << endl;
 	}
 }
@@ -1145,20 +1145,20 @@ vector<T> BST<T>::GenerateVector(short type)
 	unsigned int size;
 	bool exists;
 
-	srand((unsigned int)time(NULL)); // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… Р·РЅР°С‡РµРЅРёР№ (С‡Р°СЃС‹)
+	srand((unsigned int)time(NULL)); // Инициализация генератора случайных значений (часы)
 
-	cout << "\nР’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РІРµРєС‚РѕСЂР°: ";
+	cout << "\nВведите размер вектора: ";
 	cin >> size;
 
 	for (unsigned int i = 0; i < size; i++)
 	{
 		do
 		{
-			if (type == 3) // РЎРёРјРІРѕР» РѕС‚ a РґРѕ z;
+			if (type == 3) // Символ от a до z;
 				key = (rand() % 26) + 'a';
-			else if (type == 2) // Р§РёСЃР»Рѕ СЃ РїР»Р°РІР°СЋС‰РµР№ С‚РѕС‡РєРѕР№
+			else if (type == 2) // Число с плавающей точкой
 				key = (T)(rand()) / (rand());
-			else if (type == 1) // Р¦РµР»РѕРµ С‡РёСЃР»Рѕ
+			else if (type == 1) // Целое число
 				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
 
 			exists = LinearSearch(v, key);
@@ -1178,61 +1178,62 @@ vector<T> BST<T>::EnterVector()
 	
 	int size;
 	
-	cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ: ";
+	cout << "Введите размер: ";
 	cin >> size;
-	
-	cout << endl;
-	
+		
 	for (int i = 0; i < size; i++)
 	{
 		cin >> key;
-		//cout << key << " ";
 		vec.push_back(key);
-		//cout << endl << vec.back() << endl;
 	}
-	
-	cout << endl;
-	
-	for (auto i : vec)
-		cout << i << " ";
-		
-	cout << endl << endl;
+			
+	return vec;
 }
 
 template<typename T>
 void BST<T>::BubbleSort(short type)
-{
-	//vector<T> vec = GenerateVector(type);
-	
-	vector<T> vec = EnterVector();
-	
-	unsigned int size = vec.size();
+{	
+	//vector<T> vec = EnterVector();
+	vector<T> vec = GenerateVector(type);
+
+	int size = vec.size();
+	bool swaps;
 	T left, right;
-	T temp;
 
 	for (auto i : vec)
 		cout << i << " ";
 
 	cout << endl << endl;
 
-	typename vector<T>::iterator it = vec.begin();
-	
-	while (it != vec.end())
-	{
-		left = *it;
-		right = *++it;
+	system("pause");
 
-		if (left > right)
+	do
+	{
+		swaps = false;
+
+		for (int i = 0; i < size; i++)
 		{
-			*it-- = left;
-			*it = right;
+			if (vec.at(i) != vec.back())
+			{
+				left = vec.at(i);
+				right = vec.at(++i);
+
+				if (left > right)
+				{
+					vec.at(i) = left;
+					vec.at(--i) = right;
+					swaps = true;
+
+					for (auto i : vec)
+						cout << i << " ";
+
+					cout << endl;
+				}
+				else
+					i--;
+			}
 		}
-		
-		for (auto i : vec)
-		cout << i << " ";
-		
-		cout << endl;
-	}
+	} while (swaps);
 }
 
 template <typename T>
