@@ -8,6 +8,7 @@ template <typename T> class BST
 private:
 	
 	// Определение узла дерева
+	// ааа
 	struct node
     {
         T key;
