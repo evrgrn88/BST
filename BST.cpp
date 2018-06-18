@@ -45,15 +45,15 @@ void BST<T>::MainMenu(short type)
 			"9. Использовать итератор.\n" <<
 			"10. Обход Post-order (Lt -> Rt -> t).\n" <<
 			"11. Объединить два поддерева.\n" <<
-			"12. Сгенерировать дерево.\n\n" <<
-			
-			
-			"15. Пузырьковая сортировка случайного вектора.\n\n" <<
+			"12. Сгенерировать дерево.\n" <<
+			"13. Проверить производительность дерева.\n" <<
+			"14. Пузырьковая сортировка.\n" <<
+			"15. Сортировка выбором.\n" <<
+			"16. Сортировка вставками.\n\n" <<
 
-			"Тестирование:\n" <<
-			"---------------------------------------------\n" <<
-			"13. Проверить производительность дерева.\n\n" <<
-			"14. Назад.\n" <<
+
+			
+			"0. Назад.\n" <<
 
 			"\n\nВыберите операцию: ";
 
@@ -156,35 +156,22 @@ void BST<T>::MainMenu(short type)
 			break;
 		
 		case 14:
-			return;
+			BubbleSort(type);
 			break;
 
 		case 15:
-			BubbleSort(type);
-
-			/*vector<T> testvec;
-			T lSearchKey;
-			bool result;
-
-			testvec.push_back(2);
-			testvec.push_back(5);
-			testvec.push_back(1);
-			testvec.push_back(6);
-			testvec.push_back(3);
-			testvec.push_back(8);
-
-			cout << "\nПоиск: ";
-			cin >> lSearchKey;
-			cout << endl << endl;
-
-			result = LinearSearch(testvec, lSearchKey);
-
-			if (result)
-				cout << "\nНайдено\n";
-			else
-				cout << "\nНе найдено\n";*/
-
+			SelectionSort(type);
 			break;
+
+		case 16:
+			InsertionSort(type);
+			break;
+
+		case 0:
+			return;
+			break;
+
+		
 		}
 
 		cout << endl << endl;
@@ -1234,6 +1221,84 @@ void BST<T>::BubbleSort(short type)
 			}
 		}
 	} while (swaps);
+}
+
+template<typename T>
+void BST<T>::SelectionSort(short type)
+{
+	int hold, step;
+	T temp;
+
+	//vector<T> vec = EnterVector();
+	vector<T> vec = GenerateVector(type);
+	int size = vec.size();
+
+	cout << "\nСгенерированный вектор:\n";
+
+	for (auto i : vec)
+		cout << i << " ";
+
+	cout << endl << endl;
+
+	system("pause");
+	
+	for (int i = 0; i < size;)
+	{
+		hold = i;
+		step = i;
+
+		while (vec.at(step) != vec.back())
+		{
+			step++;
+
+			if (vec.at(step) < vec.at(hold))
+				hold = step;			
+		}
+
+		temp = vec.at(hold);
+		vec.at(hold) = vec.at(i);
+		vec.at(i) = temp;
+
+		cout << endl << "[ " << ++i << " ]\n";
+		
+		for (auto i : vec)
+			cout << i << " ";
+
+		cout << endl;
+	}
+}
+
+template<typename T>
+void BST<T>::InsertionSort(short type)
+{
+	T temp;
+	
+	//vector<T> vec = EnterVector();
+	vector<T> vec = GenerateVector(type);
+	int size = vec.size();
+
+	cout << "\nСгенерированный вектор:\n";
+
+	for (auto i : vec)
+		cout << i << " ";
+
+	cout << endl << endl;
+
+	system("pause");
+
+	for (int i = 1; i < size; i++)
+	{
+		int j = 0;
+
+		while (j = i)
+		{
+			if (vec.at(i) < vec.at(j))
+			{
+				vec.insert()
+			}
+		}
+		//system("pause");
+	}
 }
 
 template <typename T>

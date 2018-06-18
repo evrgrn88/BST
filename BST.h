@@ -97,10 +97,17 @@ private:
 	// Генерация вектора заданной длины
 	vector<T> GenerateVector(short type);
 
+	// Ввод элементов вектора вручную
+	vector<T> EnterVector();
+
 	// Пузырьковая сортировка элементов вектора
 	void BubbleSort(short type);
 
-	vector<T> EnterVector();
+	// Сортировка выбором
+	void SelectionSort(short type);
+
+	// Сортировка вставками
+	void InsertionSort(short type);
 
 public:
 	BST();
