@@ -102,13 +102,13 @@ private:
 	vector<T> EnterVector();
 
 	// Пузырьковая сортировка элементов вектора
-	void BubbleSort(short type);
+	vector<T> BubbleSort(short type, vector<T> vec);
 
 	// Сортировка выбором
-	void SelectionSort(short type);
+	vector<T> SelectionSort(short type, vector<T> vec);
 
 	// Сортировка вставками
-	void InsertionSort(short type);
+	vector<T> InsertionSort(short type, vector<T> vec);
 
 public:
 	BST();
