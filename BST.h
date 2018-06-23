@@ -7,8 +7,7 @@ template <typename T> class BST
 {
 private:
 	
-	// Определение узла дерева
-	// ааа
+	// Defining node structure
 	struct node
     {
         T key;
@@ -16,8 +15,8 @@ private:
         node* right;
     };
 
-	// Структура для вывода результатов поиска
-	// Включает в себя указатель на узел-родитель и флаг положения искомого узла
+	// Search result structure
+	// Contains pointers for a found node and parent node, and node position flag
 	struct search
 	{
 		node* nodeptr;
@@ -25,89 +24,89 @@ private:
 		bool isLeft;
 	};
 
-	// Итератор для доступа к элементам дерева
+	// Iterator for vector element access
 	typename vector<T>::iterator iterator;
 
-    // Объявление корневой переменной
+    // Root node declaration
 	node* root;
 
-	// Глобальная переменная для передачи в функции типа данных дерева
+	// Global tree type variable
 	short type;
 
-	// Инициализация счетчика узлов
+	// Visited nodes counter initialization
 	int counter = 0;
 
-	// Заполнение дерева вручную
+	// Manual tree creation
     void FillTree();
 
-	// Очистка дерева
+	// Clears the tree
     void ClearTree(node* Ptr);
 
-	// Вывод размера
+	// Shows size of a tree
     void ShowSize();
 
-	// Проверка на пустоту
+	// Checks if a tree is empty
     void EmptyCheck(node* Ptr);
 
-	// Поиск по ключу
+	// Search for a specific key
 	search FindKey(T key);
 
-	// Текстовый интерфейс функции поиска
+	// Text interface for a search function
 	void FindKeyHelper(T searchKey);
 
-	// Создание узла дерева в куче
+	// Creates a new node in a heap
     node* CreateLeaf(T key);
 
-	// Добавление узла. Вывод - наличие совпадения в дереве для повторного создания
+	// Adds new element. Returns true if element exists
     bool AddLeaf(T key, node* Ptr);
 
-	// Текстовый интерфейс функции добавления узла вручную
+	// Text interface for manual node addition function
 	void AddNewLeaf();
 
-    // Удаление узла с замещением
+    // Node deletion with replacement
 	void DeleteLeaf(T key);
 
-	// Сортировка (инфиксный обход), вывод в вектор
+	// In-order sorting
 	vector<T> SortInOrder(node* Ptr);
 
-	// Печать инфикс-вектора
+	// Prints a sorted vector
 	void PrintInOrder();
 
-    // Постфиксный обход
+    // Post-order traversal
 	void PrintPostOrder(node* Ptr);
 
-	// Подготовка функции слияния
+	// Prepares for merging subtree
 	void MergePrepare();
 
-	// Функция рекурсивного слияния соседних поддеревъев
+	// Recursively merges nearby subtrees
 	node* MergeSubtree(node* Ptr, bool isLeft);
 
-	// Создание дерева из случайных элементов
+	// Generates a random tree
 	unsigned int GenerateTree(unsigned int size, short type);
 
-	// Отображение структуры дерева
+	// Shows tree structure
 	void DrawTree(node* Ptr, int space);
 
-	// Тестирование дерева от 10 до 100000 узлов.
-	// Среднее число посещённых узлов для операций вставки, поиска и удаления
+	// Testing trees from 10 to 100000 random elements
+	// Prints a median value for insert, search and delete operations
 	void TestTree(short type);
 
-	// Линейный поиск по вектору
+	// Linear search in a vector
 	bool LinearSearch(vector<T> v, T key);
 
-	// Генерация вектора заданной длины
+	// Generates a random vector of specific size
 	vector<T> GenerateVector(short type);
 
-	// Ввод элементов вектора вручную
+	// Create vector manually
 	vector<T> EnterVector();
 
-	// Пузырьковая сортировка элементов вектора
+	// Bubble sort the vector
 	vector<T> BubbleSort(short type, vector<T> vec);
 
-	// Сортировка выбором
+	// Selection sort the vector
 	vector<T> SelectionSort(short type, vector<T> vec);
 
-	// Сортировка вставками
+	// Insertion sort the vector
 	vector<T> InsertionSort(short type, vector<T> vec);
 
 public:

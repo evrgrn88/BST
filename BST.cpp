@@ -23,39 +23,39 @@ void BST<T>::MainMenu(short type)
 
 
 		if (type == 1)
-			cout << "���: ����� �����\n";
+			cout << "Type: Integer\n";
 		else if (type == 2)
-			cout << "���: ����� � ��������� ������\n";
+			cout << "Type: Float\n";
 		else if (type == 3)
-			cout << "���: ������\n";
+			cout << "Type: Character\n";
 
         short choice;
         cout << endl <<
 			
-			"��������:\n" <<
+			"Operations:\n" <<
 			"---------------------------------------------\n" <<
-			"1. ������� ����� ������.\n" <<
-			"2. ������� �������� �� �������.\n" <<
-			"3. �������� ����� ��������� ������.\n" <<
-			"4. �������� ������.\n" <<
-			"5. ��������� ������ �� �������.\n" <<
-			"6. ������ �������.\n" <<
-			"7. �������� ����� �������.\n" <<
-			"8. ������� �������.\n" <<
-			"9. ������������ ��������.\n" <<
-			"10. ����� Post-order (Lt -> Rt -> t).\n" <<
-			"11. ���������� ��� ���������.\n" <<
-			"12. ������������� ������.\n" <<
-			"13. ��������� ������������������ ������.\n" <<
-			"14. ����������� ����������.\n" <<
-			"15. ���������� �������.\n" <<
-			"16. ���������� ���������.\n\n" <<
+			"1. Create a new tree.\n" <<
+			"2. Print elements in order.\n" <<
+			"3. Show tree size.\n" <<
+			"4. Clear tree.\n" <<
+			"5. Check if the tree is empty.\n" <<
+			"6. Search element.\n" <<
+			"7. Add new element.\n" <<
+			"8. Delete element.\n" <<
+			"9. Iterator menu.\n" <<
+			"10. Post-order traverse (Lt -> Rt -> t).\n" <<
+			"11. Merge two subtrees.\n" <<
+			"12. Generate a random tree.\n" <<
+			"13. Run the tree operations test.\n" <<
+			"14. Bubble sorting.\n" <<
+			"15. Selection sorting.\n" <<
+			"16. Insertion sorting.\n\n" <<
 
 
 			
-			"0. �����.\n" <<
+			"0. Exit.\n" <<
 
-			"\n\n�������� ��������: ";
+			"\n\nChoose operation: ";
 
         cin >> choice;
         cout << endl;
@@ -89,7 +89,7 @@ void BST<T>::MainMenu(short type)
 		case 6:
 			T searchKey;
 
-			cout << "\n�����: ";
+			cout << "\nSearch: ";
 			cin >> searchKey;
 			cout << endl;
 
@@ -105,7 +105,7 @@ void BST<T>::MainMenu(short type)
 		case 8:
 			T deleteKey;
 
-			cout << "������� ����: ";
+			cout << "Choose key: ";
 			cin >> deleteKey;
 
 			DeleteLeaf(deleteKey);
@@ -133,13 +133,13 @@ void BST<T>::MainMenu(short type)
 		case 12:
 			unsigned int treeSize;
 
-			cout << "\n������� ����� ���������: \n";
+			cout << "\nEnter tree size: \n";
 
 			cin >> treeSize;
 
 			if (type == 3 && treeSize > 26)
 			{
-				cout << "\n��� ����������� ���� ������ ������ ������ ��������� 26 ���������� (����). ������� ����� ������: \n";
+				cout << "\nFor char type the size of a tree is limited to 26 (english alphabet size). Enter new size: \n";
 				cin >> treeSize;
 			}
 
@@ -156,15 +156,15 @@ void BST<T>::MainMenu(short type)
 			break;
 		
 		case 14:
-			BubbleSort(type);
+			BubbleSort(type, GenerateVector(type));
 			break;
 
 		case 15:
-			SelectionSort(type);
+			SelectionSort(type, GenerateVector(type));
 			break;
 
 		case 16:
-			InsertionSort(type);
+			InsertionSort(type, GenerateVector(type));
 			break;
 
 		case 0:
@@ -185,8 +185,8 @@ void BST<T>::IteratorMenu()
 {
 	if (root != NULL)
 	{
-		// ������ ��� ��������������� ������������������ ��-��� 
-		// ��� ����������������� �������� �� ���������
+		// Sorted elements of a tree are kept in a vector
+		// for a step-by-step iteration
 		vector<T> SortedKeys; 
 		short ch;
 		
@@ -198,15 +198,15 @@ void BST<T>::IteratorMenu()
 			system("cls");
 
 			cout << endl <<
-				"1. ���������� �������� �� ������ ������.\n" <<
-				"2. ��������� ����� ������.\n" <<
-				"3. ������� �������.\n" <<
-				"4. ��������� �� ����� �������.\n" <<
-				"5. ���������� �� ����� �������.\n" <<
+				"1. Place iterator on a root.\n" <<
+				"2. Go to the end.\n" <<
+				"3. Current element.\n" <<
+				"4. Next element.\n" <<
+				"5. Previous element.\n" <<
 
-				"\n6. ���������� ����.\n"
+				"\n6. Exit.\n"
 
-				"\n\n�������� ��������: ";
+				"\n\nChoose an operation: ";
 
 			cin >> ch;
 			cout << endl;
@@ -221,19 +221,19 @@ void BST<T>::IteratorMenu()
 					iterator++;
 				}
 
-				cout << "��������� �� ������ ������...\n����: " << *iterator << endl;
+				cout << "Going to the root...\nKey: " << *iterator << endl;
 
 				break;
 
 			case 2:
 				iterator = SortedKeys.end();
 
-				cout << "��������� �� ����� ������...\n����: " << *--iterator << endl;
+				cout << "Going to the end...\nKey: " << *--iterator << endl;
 
 				break;
 
 			case 3:
-				cout << "������� �������.\n����: " << *iterator << endl;
+				cout << "Current element.\nKey: " << *iterator << endl;
 								
 				break;
 				
@@ -242,11 +242,11 @@ void BST<T>::IteratorMenu()
 
 				if (iterator != SortedKeys.end())
 				{
-					cout << "������� �� ��������� �� ����� ������� ������...\n����: " << *iterator << endl;
+					cout << "Going to the next element...\nKey: " << *iterator << endl;
 				}
 				else
 				{
-					cout << "���� �����������!\n";
+					cout << "Key don't exist!\n";
 					--iterator;
 				}
 
@@ -256,11 +256,11 @@ void BST<T>::IteratorMenu()
 				if (iterator != SortedKeys.begin())
 				{
 					iterator--;
-					cout << "������� �� ���������� �� ����� ������� ������...\n����: " << *iterator << endl;
+					cout << "Going to the previous element...\nKey: " << *iterator << endl;
 				}
 				else
 				{
-					cout << "���� �����������!\n";
+					cout << "Key don't exist!\n";
 				}
 
 				break;
@@ -274,7 +274,7 @@ void BST<T>::IteratorMenu()
 	}
 	else
 	{
-		cout << "������ �����.\n";
+		cout << "The tree is empty.\n";
 	}
 }
 
@@ -284,7 +284,7 @@ void BST<T>::FillTree()
     ClearTree(root);
     int treeSize;
 
-    cout << "\n������� ����� ���������: \n";
+    cout << "\nEnter tree size: \n";
     cin >> treeSize;
     cout << endl;
 
@@ -294,13 +294,13 @@ void BST<T>::FillTree()
     }
 }
 
-// ��������� ����� ��� �������� ���������� �����
+// In-order traverses the tree, counting nodes
 template <typename T>
 void BST<T>::ShowSize()
 {
     if (root != NULL)
     {
-        // ���� ��� �������������� ��������
+        // Stack for a temporary storage
 		stack<node*> s;
         int i = 0;
         node* Ptr = root;
@@ -328,15 +328,15 @@ void BST<T>::ShowSize()
         }
         while (true);
 
-        cout << "���������� ���������: " << i;
+        cout << "Quantity: " << i;
     }
     else
     {
-        cout << "\n������ �����.\n";
+        cout << "\nThe tree is empty.\n";
     }
 }
 
-// ������������ �������� ����� � ������ �������� ����� � ����������
+// Deletes first the left, then the right subtree of root
 template <typename T>
 void BST<T>::ClearTree(node* Ptr)
 {
@@ -361,17 +361,17 @@ void BST<T>::EmptyCheck(node* Ptr)
 {
     if (Ptr == NULL)
     {
-        cout << "\n������ �����.\n";
+        cout << "\nThe tree is empty.\n";
     }
     else
     {
-        cout << "\n������ �� �����.\n";
+        cout << "\nThe tree is not empty.\n";
     }
 
     cout << endl;
 }
 
-// ����� ��������
+// Search by key
 template <typename T>
 typename BST<T>::search BST<T>::FindKey(T key)
 {
@@ -384,7 +384,7 @@ typename BST<T>::search BST<T>::FindKey(T key)
 		
 	while (result.nodeptr != NULL)
 	{
-		counter++; // ������� ������������� ����� ��� ������������
+		counter++; // Counter of visited nodes
 
 		if (key == result.nodeptr->key)
 		{			
@@ -416,12 +416,12 @@ void BST<T>::FindKeyHelper(T searchKey)
 		search result = FindKey(searchKey);
 		
 		if (result.nodeptr == NULL)
-			cout << "\n������� �� ������\n";
+			cout << "\nElement not found\n";
 		else if (result.nodeptr->key == searchKey)
-			cout << "\n������� ������\n";
+			cout << "\nElement found\n";
 	}
 	else
-		cout << "\n������ �����.\n";
+		cout << "\nThe tree is empty.\n";
 }
 
 template <typename T>
@@ -493,7 +493,7 @@ bool BST<T>::AddLeaf(T key, node* Ptr)
 	return false;
 }
 
-// ���������� ���� �������
+// Add new node
 template <typename T>
 void BST<T>::AddNewLeaf()
 {
@@ -502,25 +502,25 @@ void BST<T>::AddNewLeaf()
     
 	do
 	{
-		cout << "\n������� ����: \n";
+		cout << "\nValue: \n";
 		cin >> newKey;
 		exists = AddLeaf(newKey, root);
 
 		if (exists)
-			cout << "\n������� ��� ����������!";
+			cout << "\nElement already exist!";
 	}
-	while (exists); // �������� �� ������������� ����
+	while (exists); // Check if the value exists
 	
     cout << endl;
 }
 
-// �������� ����
+// Node deletion
 template <typename T>
 void BST<T>::DeleteLeaf(T key)
 {
     if (root != NULL)
     {		
-		// ����� ���� ��� ��������
+		// Find a node to delete
 		search result = FindKey(key);
 
 		node* Child = NULL;
@@ -529,7 +529,7 @@ void BST<T>::DeleteLeaf(T key)
 
 		if (result.nodeptr == NULL)
 		{
-			cout << "\n������� �� ������\n";
+			cout << "\nElement not found\n";
 			return;
 		}
 
@@ -537,9 +537,9 @@ void BST<T>::DeleteLeaf(T key)
         {
 			counter++;
 
-			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 ��������
+			if (result.nodeptr->left == NULL && result.nodeptr->right == NULL) // 0 children
             {
-                if (result.parent == NULL) // ���� �������� ��������
+                if (result.parent == NULL) // Node is a root
                 {
                     root = NULL;
                 }
@@ -559,7 +559,7 @@ void BST<T>::DeleteLeaf(T key)
 				return;
             }
 
-            if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 �������
+            if (result.nodeptr->left == NULL || result.nodeptr->right == NULL) // 1 child
             {
 				counter++;
 
@@ -572,13 +572,13 @@ void BST<T>::DeleteLeaf(T key)
                     Child = result.nodeptr->right;
                 }
 
-                if (result.parent == NULL) // ���� �������� ��������
+                if (result.parent == NULL) // Node is a root
                 {
                     delete result.nodeptr;
 					result.nodeptr = NULL;
                     root = Child;
                 }
-                else // �������� � ���������� ��������
+                else // Delete node, replace with child
                 {
                     if (result.isLeft)
                     {
@@ -596,22 +596,22 @@ void BST<T>::DeleteLeaf(T key)
 				return;
             }
 
-            if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 �������
+            if (result.nodeptr->left != NULL && result.nodeptr->right != NULL) // 2 children
             {
-                // ����� ����������� ���� (����������� �����)
+                // Find the replacement node (biggest to the left)
                 ParentReplacement = result.nodeptr;
                 NodeReplacement = result.nodeptr->left;
-				result.isLeft = true; // ���������� ���� �����
+				result.isLeft = true; // Replacement is left child
 
                 while (NodeReplacement->right != NULL)
                 {
 					counter++;
 					ParentReplacement = NodeReplacement;
                     NodeReplacement = NodeReplacement->right;
-					result.isLeft = 0; // ���������� ���� ������
+					result.isLeft = 0; // Replacement is right child
                 }
 
-				result.nodeptr->key = NodeReplacement->key; // ����������� ������
+				result.nodeptr->key = NodeReplacement->key; // Copying data
 
                 if (result.isLeft)
                 {
@@ -629,11 +629,11 @@ void BST<T>::DeleteLeaf(T key)
     }
     else
     {
-        cout << "\n������ �����.\n";
+        cout << "\nThe tree is empty.\n";
     }
 }
 
-// ��������� ���������� � ������� � ������
+// In-order sorting, returns vector
 template <typename T>
 vector<T> BST<T>::SortInOrder(node* Ptr)
 {	
@@ -673,7 +673,7 @@ void BST<T>::PrintInOrder()
     {	
 		vector<T> SortedKeys = SortInOrder(root);
 		
-		cout << "����� ��������� in-order (Lt -> T -> Rt):\n";
+		cout << "Printing elements in-order (Lt -> T -> Rt):\n";
 		
 		for (auto i : SortedKeys)
 		{
@@ -682,17 +682,17 @@ void BST<T>::PrintInOrder()
     }
     else
     {
-        cout << "\n������ �����.\n";
+        cout << "\nThe tree is empty.\n";
     }
 }
 
-// ����������� �����
+// Post-order traversal
 template <typename T>
 void BST<T>::PrintPostOrder(node* Ptr)
 {
 	if (root != NULL)
 	{
-		cout << "����� ��������� post-order (Lt -> Rt -> T):\n";
+		cout << "Printing elements post-order (Lt -> Rt -> T):\n";
 
 		stack<node*> s;
 
@@ -734,7 +734,7 @@ void BST<T>::PrintPostOrder(node* Ptr)
 	}
 	else
 	{
-		cout << "\n������ �����.\n";
+		cout << "\nThe tree is empty.\n";
 	}
 }
 
@@ -745,15 +745,15 @@ void BST<T>::MergePrepare()
 	{
 		T mergeKey;
 
-		cout << "������� ����-�������� ����������� ��� �����������: ";
+		cout << "Enter parent node for merging: ";
 		cin >> mergeKey;
 
 		node* Ptr;
-		search result = FindKey(mergeKey); // ����� ����-�������� ��� ����������� �����������
+		search result = FindKey(mergeKey); // Find parent node for merging
 
 		if (result.nodeptr != NULL)
 		{
-			if (result.parent == NULL) // �������� - ������
+			if (result.parent == NULL) // Parent is root
 			{
 				while (result.nodeptr->right != NULL)
 				{
@@ -767,7 +767,7 @@ void BST<T>::MergePrepare()
 					root = Ptr;
 				}
 			}
-			else if (result.isLeft == true) // ���� - ����� �� ��������
+			else if (result.isLeft == true) // Node is left from parent
 			{
 				while (result.nodeptr->right != NULL)
 				{
@@ -777,7 +777,7 @@ void BST<T>::MergePrepare()
 					result.parent = result.parent->left;
 				}
 			}
-			else if (result.isLeft == false) // ���� - ������ �� ��������
+			else if (result.isLeft == false) // Node is right from parent
 			{
 				while (result.nodeptr->left != NULL)
 				{
@@ -832,7 +832,7 @@ typename BST<T>::node* BST<T>::MergeSubtree(node* Ptr, bool isLeft)
 	return Ptr;
 }
 
-// ����������� ��������� ������
+// Display tree structure
 template<typename T>
 void BST<T>::DrawTree(node* Ptr, int space)
 {
@@ -841,13 +841,13 @@ void BST<T>::DrawTree(node* Ptr, int space)
 		if (Ptr == NULL)
 			return;
 		
-		// ��������� ����� ��������
+		// Increase distance between levels
 		space += 5;
 
-		// ��������� ������ ������� ������
+		// Process right child first
 		DrawTree(Ptr->right, space);
 
-		// ������ �������� ���� ����� �������
+		// Print current node after space
 		cout << endl;
 
 		for (int i = 5; i < space; i++)
@@ -855,38 +855,38 @@ void BST<T>::DrawTree(node* Ptr, int space)
 		
 		cout << Ptr->key;
 
-		// ��������� ����� �������
+		// Process left child
 		DrawTree(Ptr->left, space);
 
 		cout << endl << endl;
 	}
 	else
 	{
-		cout << "\n������ �����.\n";
+		cout << "\nThe tree is empty.\n";
 	}
 }
 
 template<typename T>
 unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 {
-	unsigned int insertCounter = 0; // ������� ��� ������������
+	unsigned int insertCounter = 0; // Counter for testing
 	
 	ClearTree(root);
 
 	T key = NULL;
 	bool exists;
 
-	srand((unsigned int)time(NULL)); // ������������� ���������� ��������� �������� (����)
+	srand((unsigned int)time(NULL)); // Random element generator initialization (clock)
 
 	for (unsigned int i = 0; i < size; i++)
 	{
 		do
 		{
-			if (type == 3) // ������ �� a �� z;
+			if (type == 3) // Symbol from a to z;
 				key = (rand() % 26) + 'a';
-			else if (type == 2) // ����� � ��������� ������
+			else if (type == 2) // Float point number
 				key = (T)(rand()) / (rand());
-			else if (type == 1) // ����� �����
+			else if (type == 1) // Integer
 				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
 
 			exists = AddLeaf(key, root);
@@ -898,7 +898,7 @@ unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 	return insertCounter;
 }
 
-// ������������ ���������
+// Tree testing
 template<typename T>
 void BST<T>::TestTree(short type)
 {	
@@ -909,23 +909,22 @@ void BST<T>::TestTree(short type)
 	unsigned int insertCounter = 0;
 	unsigned int deleteCounter = 0;
 
-	vector<T> v; // ������ ��� �������������� ��������
+	vector<T> v; // Vector for temporary storage
 
-	srand((unsigned int)time(NULL)); // ������������� ���������� ��������� �������� (����)
+	srand((unsigned int)time(NULL)); // Random element generator initialization (clock)
 
 	if (type != 3)
 	{
-		// ���������������� ��������� �������� �� 10 �� 100000 ���������, � ����� 10,
-		// ������� ������
+		// Testing trees from 10 to 100000 random elements with the step of 10
 		for (size = 10; size < 100001; size *= 10) 
 		{
-			cout << "\n\n������: " << size << " ���������.\n";
+			cout << "\n\nSize: " << size << " elements.\n";
 			
-			cout << "\n������� ����� ���������� �����:\n";
+			cout << "\nAverage number of processed nodes:\n";
 
 			counter = 0;
 
-			// ��������� ������ � ���������� ������������� �����
+			// Tree generation with a count
 			insertCounter = GenerateTree(size, type);
 
 			cout << "�������: " << insertCounter / size << endl;
@@ -1221,6 +1220,8 @@ vector<T> BST<T>::BubbleSort(short type, vector<T> vec)
 			}
 		}
 	} while (swaps);
+
+	return vec;
 }
 
 template<typename T>
@@ -1266,12 +1267,14 @@ vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
 
 		cout << endl;
 	}
+
+	return vec;
 }
 
 template<typename T>
 vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 {
-	T temp;
+	//T temp;
 	
 	//vector<T> vec = EnterVector();
 	//vector<T> vec = GenerateVector(type);
@@ -1302,6 +1305,8 @@ vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 		}
 		//system("pause");
 	}
+
+	return vec;
 }
 
 template <typename T>

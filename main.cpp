@@ -17,13 +17,13 @@ int main()
 
         cout << endl <<
 
-                "1. Целое число.\n" <<
-                "2. Число с плавающей точкой.\n" <<
-                "3. Символ.\n\n" <<
+                "1. Integer.\n" <<
+                "2. Float.\n" <<
+                "3. Character.\n\n" <<
 
-                "4. Выход.\n" <<
+                "4. Exit.\n" <<
 
-                "\n\nВыберите тип: ";
+                "\n\nChoose a type: ";
 
         cin >> choice;
         cout << endl;
