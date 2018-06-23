@@ -1178,10 +1178,10 @@ vector<T> BST<T>::EnterVector()
 }
 
 template<typename T>
-void BST<T>::BubbleSort(short type)
+vector<T> BST<T>::BubbleSort(short type, vector<T> vec)
 {	
 	//vector<T> vec = EnterVector();
-	vector<T> vec = GenerateVector(type);
+	//vector<T> vec = GenerateVector(type);
 
 	int size = vec.size();
 	bool swaps;
@@ -1224,13 +1224,13 @@ void BST<T>::BubbleSort(short type)
 }
 
 template<typename T>
-void BST<T>::SelectionSort(short type)
+vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
 {
 	int hold, step;
 	T temp;
 
 	//vector<T> vec = EnterVector();
-	vector<T> vec = GenerateVector(type);
+	//vector<T> vec = GenerateVector(type);
 	int size = vec.size();
 
 	cout << "\n��������������� ������:\n";
@@ -1269,11 +1269,11 @@ void BST<T>::SelectionSort(short type)
 }
 
 template<typename T>
-void BST<T>::InsertionSort(short type)
+vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 {
 	T temp;
 	
-	vector<T> vec = EnterVector();
+	//vector<T> vec = EnterVector();
 	//vector<T> vec = GenerateVector(type);
 	int size = vec.size();
 
@@ -1288,14 +1288,14 @@ void BST<T>::InsertionSort(short type)
 
 	for (int i = 1; i < size; i++)
 	{
-		vector<T>::iterator it = vec.begin();
+		typename vector<T>::iterator it = vec.begin();
 		//int j = 0;
 
 		while (*it != i)
 		{
 			if (vec.at(i) < *it)
 			{
-				vec.insert(it);
+				//vec.insert(it);
 			}
 			
 			it++;
