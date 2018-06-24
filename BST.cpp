@@ -3,7 +3,6 @@
 #include <stack>
 #include <iterator>
 #include <vector>
-#include <ctime>
 #include "BST.h"
 
 using namespace std;
@@ -876,8 +875,6 @@ unsigned int BST<T>::GenerateTree(unsigned int size, short type)
 	T key = NULL;
 	bool exists;
 
-	srand((unsigned int)time(NULL)); // Random element generator initialization (clock)
-
 	for (unsigned int i = 0; i < size; i++)
 	{
 		do
@@ -1131,9 +1128,7 @@ vector<T> BST<T>::GenerateVector(short type)
 	unsigned int size;
 	bool exists;
 
-	srand((unsigned int)time(NULL)); // ������������� ���������� ��������� �������� (����)
-
-	cout << "\n������� ������ �������: ";
+	cout << "\nSize: ";
 	cin >> size;
 
 	for (unsigned int i = 0; i < size; i++)
@@ -1144,8 +1139,8 @@ vector<T> BST<T>::GenerateVector(short type)
 				key = (rand() % 26) + 'a';
 			else if (type == 2) // ����� � ��������� ������
 				key = (T)(rand()) / (rand());
-			else if (type == 1) // ����� �����
-				key = ((rand() + 1) * (rand() + 1) / (rand() + 1));
+			else if (type == 1) // ����� ��
+				key = rand();
 
 			exists = LinearSearch(v, key);
 		} while (exists);
@@ -1164,7 +1159,7 @@ vector<T> BST<T>::EnterVector()
 	
 	int size;
 	
-	cout << "������� ������: ";
+	cout << "Size: ";
 	cin >> size;
 		
 	for (int i = 0; i < size; i++)
@@ -1234,7 +1229,7 @@ vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
 	//vector<T> vec = GenerateVector(type);
 	int size = vec.size();
 
-	cout << "\n��������������� ������:\n";
+	cout << "\nGenerated vector:\n";
 
 	for (auto i : vec)
 		cout << i << " ";
@@ -1266,6 +1261,7 @@ vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
 			cout << i << " ";
 
 		cout << endl;
+		cin.get();
 	}
 
 	return vec;
@@ -1280,14 +1276,15 @@ vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 	//vector<T> vec = GenerateVector(type);
 	int size = vec.size();
 
-	cout << "\n��������������� ������:\n";
+	cout << "\nGenerated vector:\n";
 
 	for (auto i : vec)
 		cout << i << " ";
 
 	cout << endl << endl;
 
-	system("pause");
+	//cin.get();
+	//system("pause");
 
 	for (int i = 1; i < size; i++)
 	{
@@ -1298,7 +1295,8 @@ vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 		{
 			if (vec.at(i) < *it)
 			{
-				//vec.insert(it);
+				vec.insert(it, vec.at(i));
+				vec.erase(vec.begin() + i);
 			}
 			
 			it++;
