@@ -1253,15 +1253,15 @@ vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
 
 		temp = vec.at(hold);
 		vec.at(hold) = vec.at(i);
-		vec.at(i) = temp;
+		vec.at(i++) = temp;
 
-		cout << endl << "[ " << ++i << " ]\n";
+		cout << endl;
 		
 		for (auto i : vec)
 			cout << i << " ";
 
 		cout << endl;
-		cin.get();
+		//cin.get();
 	}
 
 	return vec;
@@ -1284,23 +1284,34 @@ vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 	cout << endl << endl;
 
 	//cin.get();
-	//system("pause");
+	system("pause");
 
 	for (int i = 1; i < size; i++)
 	{
 		typename vector<T>::iterator it = vec.begin();
 		//int j = 0;
 
-		while (*it != i)
+		do
 		{
 			if (vec.at(i) < *it)
 			{
+				//cout << *it << endl;
+
+				//system("pause");
+
 				vec.insert(it, vec.at(i));
-				vec.erase(vec.begin() + i);
+				vec.erase(vec.begin() + i + 1);
+				break;
 			}
 			
 			it++;
-		}
+
+		} while (*it != vec.at(i));
+
+		for (auto i : vec)
+			cout << i << " ";
+
+		cout << endl;
 		//system("pause");
 	}
 
