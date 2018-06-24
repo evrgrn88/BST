@@ -1,5 +1,6 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cstdlib>
+#include <ctime>
 #include "BST.cpp"
 
 using namespace std;
@@ -8,6 +9,8 @@ using namespace std;
 int main()
 {
 	setlocale(0, "");
+	
+	srand((unsigned int)time(NULL)); // Random element generator initialization (clock)
 
 	while (true)
     {
