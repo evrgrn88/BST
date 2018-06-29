@@ -48,7 +48,8 @@ void BST<T>::MainMenu(short type)
 			"13. Run the tree operations test.\n" <<
 			"14. Bubble sorting.\n" <<
 			"15. Selection sorting.\n" <<
-			"16. Insertion sorting.\n\n" <<
+			"16. Insertion sorting.\n" <<
+			"17. Merge sorting.\n\n" <<
 
 
 			
@@ -165,6 +166,24 @@ void BST<T>::MainMenu(short type)
 		case 16:
 			InsertionSort(type, GenerateVector(type));
 			break;
+
+		case 17:
+		{
+			vector<T> vec = GenerateVector(type);
+
+			cout << "\nGenerated vector:\n";
+
+			for (auto i : vec)
+				cout << i << " ";
+
+			cout << endl << endl;
+
+			//cin.get();
+			system("pause");
+			
+			MergeSort(0, vec.size() - 1, vec);
+			break;
+		}
 
 		case 0:
 			return;
@@ -1316,6 +1335,31 @@ vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 	}
 
 	return vec;
+}
+
+template<typename T>
+void BST<T>::MergeSort(int left, int right, vector<T> vec)
+{
+	if (right > left)
+	{
+		int middle = (left + right) / 2;
+
+		MergeSort(left, middle, vec);
+		MergeSort(middle + 1, right, vec);
+		Merge(left, middle, right, vec);
+
+	}
+
+	//system("pause");
+
+	//return vec;
+}
+
+template<typename T>
+void BST<T>::Merge(int left, int middle, int right, vector<T> vec)
+{
+	T temp;
+	//return vec;
 }
 
 template <typename T>

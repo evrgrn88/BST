@@ -109,6 +109,12 @@ private:
 	// Insertion sort the vector
 	vector<T> InsertionSort(short type, vector<T> vec);
 
+	// Merge sort the vector
+	void MergeSort(int left, int right, vector<T> vec);
+
+	// Merge sort the vector
+	void Merge(int left, int middle, int right, vector<T> vec);
+
 public:
 	BST();
     ~BST();
