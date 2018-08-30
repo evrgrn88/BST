@@ -101,13 +101,13 @@ private:
 	vector<T> EnterVector();
 
 	// Bubble sort the vector
-	vector<T> BubbleSort(short type, vector<T> vec);
+	void BubbleSort(short type, vector<T> vec);
 
 	// Selection sort the vector
-	vector<T> SelectionSort(short type, vector<T> vec);
+	void SelectionSort(short type, vector<T> vec);
 
 	// Insertion sort the vector
-	vector<T> InsertionSort(short type, vector<T> vec);
+	void InsertionSort(short type, vector<T> vec);
 
 	// Merge sort the vector
 	void MergeSort(int left, int right, vector<T> vec);

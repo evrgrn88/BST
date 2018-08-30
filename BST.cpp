@@ -945,12 +945,12 @@ void BST<T>::TestTree(short type)
 
 			cout << "�������: " << insertCounter / size << endl;
 
-			// ��������� ��������� ������ � ������ �� �����������
+			// Placing elements in a sorted vector
 			v = SortInOrder(root);
 
 			counter = 0;
 			
-			// ���������������� ����� ���� ����� � ��������� ����������
+			// Ste
 			for (auto i : v)
 			{
 				FindKey(i);
@@ -1191,7 +1191,7 @@ vector<T> BST<T>::EnterVector()
 }
 
 template<typename T>
-vector<T> BST<T>::BubbleSort(short type, vector<T> vec)
+void BST<T>::BubbleSort(short type, vector<T> vec)
 {	
 	//vector<T> vec = EnterVector();
 	//vector<T> vec = GenerateVector(type);
@@ -1234,12 +1234,10 @@ vector<T> BST<T>::BubbleSort(short type, vector<T> vec)
 			}
 		}
 	} while (swaps);
-
-	return vec;
 }
 
 template<typename T>
-vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
+void BST<T>::SelectionSort(short type, vector<T> vec)
 {
 	int hold, step;
 	T temp;
@@ -1282,12 +1280,10 @@ vector<T> BST<T>::SelectionSort(short type, vector<T> vec)
 		cout << endl;
 		//cin.get();
 	}
-
-	return vec;
 }
 
 template<typename T>
-vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
+void BST<T>::InsertionSort(short type, vector<T> vec)
 {
 	//T temp;
 	
@@ -1333,8 +1329,6 @@ vector<T> BST<T>::InsertionSort(short type, vector<T> vec)
 		cout << endl;
 		//system("pause");
 	}
-
-	return vec;
 }
 
 template<typename T>
@@ -1358,7 +1352,7 @@ void BST<T>::MergeSort(int left, int right, vector<T> vec)
 template<typename T>
 void BST<T>::Merge(int left, int middle, int right, vector<T> vec)
 {
-	T temp;
+//	T temp;
 	//return vec;
 }
 
